@@ -1,3 +1,4 @@
+```
 zone non connecté:
 	recherches: (recherche pour trouver les tag/categories/posts)
 		prefixage: (non necessaire (optionnel))
@@ -28,3 +29,4 @@ zone admin:
 	gestion images:
 		suppression
 		modification des tags de l'image ("alt")
+```
