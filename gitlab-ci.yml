@@ -1,0 +1,19 @@
+image: node:latest
+
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - npm install -g gulp
+  - npm install
+
+stages:
+  - build_deploy
+
+build_&_deploy_app:
+  stage: build_deploy
+  only:
+    - master
+  script:
+    - gulp deploy
