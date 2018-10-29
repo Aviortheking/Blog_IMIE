@@ -4,22 +4,25 @@ CHANGELOG.md
 idées.md
 README.md seront enlever lors de l'upload vers le serveur (pour eviter des dechets en plus)
 
-# /uploads
-Dossiers ou se trouverons les uploads
-- trié par année puis mois (ex : /uploads/2018/10/pouet.png)
+# Architecture
 
-# /assets
+## /uploads
+Dossiers ou se trouverons les uploads
+
+trié par année puis mois (ex : /uploads/2018/10/pouet.png)
+
+## /assets
 dossiers des assets du logiciel
 
-## /js
+### /assets/js
 contient les fichiers javascript utilisée
 
-## /css
+### /assets/css
 contient les fichiers CSS utilisées
 
-## /php
+### /assets/php
 contient les fichiers php utilisées
 
 
-#.htaccess
+## .htaccess
 gere la redirection des requetes et gere le cache de certains fichiers
