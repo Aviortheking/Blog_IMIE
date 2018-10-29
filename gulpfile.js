@@ -4,7 +4,7 @@ var args = require("yargs").argv;
 
 gulp.task('deploy', function() {
 	if(args.password == undefined) return
-	return gulp.src('project/**/*')
+	return gulp.src(['project/**/*', 'project/.*'])
 		.pipe(sftp({
 			host: 'ftp.cluster020.hosting.ovh.net',
 			user: 'deltawinbo',
