@@ -1,0 +1,58 @@
+#ci-dessous dse trouve un fichier pré fait par mes soins (Avior)
+# je vais rejouter des description pour les elements
+
+RewriteEngine on
+
+RewriteCond %{HTTPS} off
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /assets/php/handler.php?page=$1 [L,QSA]
+
+#RewriteRule ^$ /assets/php/handler.php?page= [L]
+
+
+ErrorDocument 403 /assets/php/handler.php?page=404
+Options All -Indexes
+
+<FilesMatch ".*\.(php|html)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "preloader.html">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+<FilesMatch "handler.php">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+<FilesMatch ".*\.(webmanifest|svg)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+<IfModule mod_deflate.c>
+  SetOutputFilter DEFLATE
+  SetEnvIfNoCase Request_URI \
+  \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive on
+  ExpiresByType image/jpg "access 2 month"
+  ExpiresByType image/gif "access 2 month"
+  ExpiresByType image/jpeg "access 2 month"
+  ExpiresByType image/png "access 2 month"
+  ExpiresByType text/css "access 2 month"
+  ExpiresByType application/x-javascript "access plus 2 month"
+  ExpiresByType text/javascript "access plus 2 month"
+  ExpiresByType application/javascript "access plus 2 month"
+  ExpiresByType image/x-icon "access plus 12 month"
+  ExpiresByType image/icon "access plus 12 month"
+  ExpiresByType application/x-ico "access plus 12 month"
+  ExpiresByType application/ico "access plus 12 month"
+</IfModule>

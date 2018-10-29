@@ -1,0 +1,1 @@
+/* Fichier de fontions que nous utiliserons a travers les différents fichiers */

@@ -1,0 +1,1 @@
+/* Fichier qui va gerer la creation de la page et la redirection au cas ou */
