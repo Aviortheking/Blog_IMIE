@@ -25,35 +25,13 @@
         name: httpd
         state: started
      
-    #- name: Permissions apache2
-      #file:
-        #path: /etc/apache2
-        #owner: www-data
-        #group: www-data
-        #recurse: yes
-#
-    #- name: Permissions www
-      #file:
-        #path: /var/www
-        #owner: www-data
-        #group: www-data
-        #recurse: yes
-#
-    #- name: Start service httpd, if not started
-      #service:
-        #name: apache2
-        #state: started
-#
-    #- name: Enable service apache2, and not touch the state
-      #service:
-        #name: apache2
-        #enabled: yes
-        #
-    #- name: Enable mod_rewrite
-      #apache2_module:
-        #name: rewrite
-        #state: present
-   #
+    - name: Permissions httpd
+      file:
+        path: /var/www
+        owner: apache
+        group: apache
+        recurse: yes
+
     #- htpasswd: 
         #path: /etc/apache2/.htpasswd
         #name: hifive
@@ -67,11 +45,3 @@
         #src: virtualhost.j2
         #dest: /etc/apache2/sites-available/{{ domain }}.conf
         #force: yes
-#
-    #- name: a2ensite {{ domain }}
-      #command: a2ensite {{ domain }}
-#
-    #- name: Reload service apache2
-      #service:
-        #name: apache2
-        #state: reloaded
