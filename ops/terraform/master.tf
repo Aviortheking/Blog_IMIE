@@ -35,11 +35,12 @@ resource "aws_key_pair" "terraform_ec2_key" {
 ###########################
 
 resource "aws_instance" "webserver" {
-  ami = "ami-38a01045"
+  ami = "ami-969c2deb"
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.terraform_ec2_key.id}"
   vpc_security_group_ids = [
-    "${aws_security_group.allow_ssh.id}"
+    "${aws_security_group.allow_ssh.id}",
+    "${aws_security_group.allow_http.id}"
   ]
 
   tags {
