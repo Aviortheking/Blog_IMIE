@@ -1,5 +1,5 @@
 ###########################
-#SECURITY GROUP
+# SECURITY GROUP
 ###########################
 
 resource "aws_security_group" "allow_ssh" {
