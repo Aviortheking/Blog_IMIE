@@ -35,7 +35,7 @@ resource "aws_key_pair" "terraform_ec2_key" {
 ###########################
 
 resource "aws_instance" "webserver" {
-  ami = "ami-969c2deb"
+  ami = "ami-04992646d54c69ef4"
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.terraform_ec2_key.id}"
   vpc_security_group_ids = [
