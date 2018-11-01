@@ -2,8 +2,6 @@
 - hosts: hifive
   become: yes
   become_user: root
-  roles:
-    - { role: common }
 
   tasks:
     - name: Install amazon epel
@@ -19,12 +17,3 @@
         src: phpMyAdmin.j2
         dest: /etc/httpd/conf.d/phpMyAdmin.conf
         force: yes
-
-    #- name: Create .htaccess
-      #htpasswd:
-        #path: /usr/share/phpMyAdmin/.htaccess
-        #name: hifive
-        #password: hifive
-        #owner: root
-        #group: www-data
-        #mode: 0640
