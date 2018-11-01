@@ -1,4 +1,14 @@
 ###########################
+# PROVIDER
+###########################
+
+provider "aws" {
+  access_key = "${var.aws_access_key_id}"
+  secret_key = "${var.aws_secret_access_key}"
+  region = "${var.aws_region}"
+}
+
+###########################
 # ELASTIC IP
 ###########################
 
@@ -9,6 +19,15 @@ data "aws_eip" "webserver-ip" {
 resource "aws_eip_association" "webserver-eip" {
   instance_id   = "${aws_instance.webserver.id}"
   allocation_id = "${data.aws_eip.webserver-ip.id}"
+}
+
+###########################
+# ADD SSH KEY
+###########################
+
+resource "aws_key_pair" "terraform_ec2_key" {
+  key_name = "terraform_ec2_key"
+  public_key = "${var.aws_ssh_key}"
 }
 
 ###########################
