@@ -20,28 +20,40 @@
         enabled: yes
         masked: no
 
-    - name: Systemd start httpd
-      systemd:
-        name: httpd
-        state: started
-     
-    - name: Permissions httpd
+    - name: Permissions /etc/httpd
+      file:
+        path: /etc/httpd
+        owner: apache
+        group: apache
+        recurse: yes
+
+    - name: Permissions /var/www
       file:
         path: /var/www
         owner: apache
         group: apache
         recurse: yes
 
-    #- htpasswd: 
-        #path: /etc/apache2/.htpasswd
-        #name: hifive
-        #password: hifive
-        #owner: root
-        #group: www-data
-        #mode: 0640
-#
-    #- name: Create virtual host file
-      #template:
-        #src: virtualhost.j2
-        #dest: /etc/apache2/sites-available/{{ domain }}.conf
-        #force: yes
+    - name: Install python-passlib 
+      yum:
+        name: python-passlib
+        state: latest
+
+    - htpasswd: 
+        path: /etc/httpd/passwords
+        name: hifive
+        password: hifive
+        owner: apache
+        group: apache
+        mode: 0640
+
+    - name: Create httpd.conf
+      template:
+        src: httpd.j2
+        dest: /etc/httpd/conf/httpd.conf
+        force: yes
+
+    - name: Systemd start httpd
+      systemd:
+        name: httpd
+        state: started
