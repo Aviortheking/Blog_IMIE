@@ -34,7 +34,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "webserver" {
-  ami = "${data.aws_ami.ubuntu.id}"
+  ami = "ami-04992646d54c69ef4"
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.terraform_ec2_key.id}"
   vpc_security_group_ids = ["${aws_security_group.allow_ssh.id}"]

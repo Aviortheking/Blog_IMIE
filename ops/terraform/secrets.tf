@@ -3,11 +3,11 @@
 ###########################
 
 variable "aws_access_key_id" {
-  default = "AKIAIQG7G3XFFHYZRFWQ"
+  default = "AKIAIHBYYPCVUNGK7HCA"
 }
 
 variable "aws_secret_access_key" {
-  default = "KQpS1s4cJ3VrWYXWM/BlDJU9Z+UNgeQi8MdD4wNB"
+  default = "9QJsEbRzL46jhxYD2IIScNlTJhxqKftRImqQl8UK"
 }
 
 variable "aws_region" {
