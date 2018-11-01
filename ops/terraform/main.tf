@@ -11,33 +11,17 @@ resource "aws_eip_association" "webserver-eip" {
   allocation_id = "${data.aws_eip.webserver-ip.id}"
 }
 
-
 ###########################
-# INSTANCE WEBSERVER
+# INSTANCE
 ###########################
-
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"]
-  }
-  
-  filter {
-    name = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
-
-}
 
 resource "aws_instance" "webserver" {
-  ami = "ami-04992646d54c69ef4"
+  ami = "ami-38a01045"
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.terraform_ec2_key.id}"
-  vpc_security_group_ids = ["${aws_security_group.allow_ssh.id}"]
+  vpc_security_group_ids = [
+    "${aws_security_group.allow_ssh.id}"
+  ]
 
   tags {
   Name = "hifive-webserver"
