@@ -1,0 +1,58 @@
+images
+-
+id auto_incrmeent
+date date
+name varchar(32)
+alt varchar(128)
+post_id int FK >- post.id
+
+post
+-
+id auto_incrmeent PK
+title varchar(32)
+url varchar(32)
+content text
+author int FK - user.id
+
+post_categorie
+-
+post_id int FK >- post.id
+categorie int FK >- categorie.id
+
+post_tag
+-
+post_id int FK >- post.id
+categorie int FK >- tag.id
+
+
+categorie
+-
+id auto_increment PK
+url varchar(32)
+name varchar(32)
+
+tag
+-
+id auto_increment PK
+url varchar(32)
+name varchar(32)
+
+settings
+-
+blog_prefix varchar(32)
+post_jsp varchar(128)
+name varchar(64)
+slogan varchar(128)
+
+user
+-
+id PK auto_increment
+role int
+canComment bool
+username varchar(128)
+email varchar(128)
+password varchar(256)
+
+newsletter
+-
+email PK varchar(128)
