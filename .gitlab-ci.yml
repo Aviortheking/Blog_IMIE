@@ -1,7 +1,7 @@
-image: geerlingguy/docker-debian9-ansible
+image: jcpowermac/alpine-ansible-ssh
 
 before_script:
-  - which ssh-agent || ( apt-get update -qq -y  && apt-get install openssh-client -qq -y )
+  #- which ssh-agent || ( apt-get update -qq -y  && apt-get install openssh-client -qq -y )
 
   # Run ssh-agent (inside the build environment)
   - eval $(ssh-agent -s)
@@ -25,10 +25,7 @@ deploy_to_webserver:
    
  script:
    - echo -e "$HIFIVE" > /etc/ansible/hosts
-   - cat /etc/ansible/hosts
    - ansible-playbook ops/ansible/httpd-centos.yml
-   - find / -name ansible.cfg
-   - cat /root/ansible.cfg
 
  when: manual
 
