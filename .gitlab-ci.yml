@@ -18,6 +18,7 @@ before_script:
   - chmod 644 ~/.ssh/known_hosts
 
   #Create ansible folder in /etc
+  #Create ansible folder in /etc
   - mkdir /etc/ansible
 
 deploy_to_webserver:
