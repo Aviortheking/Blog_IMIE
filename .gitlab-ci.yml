@@ -1,0 +1,17 @@
+image: geerlingguy/docker-debian9-ansible:latest
+
+before_script:
+  - eval $(ssh-agent -s)
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+
+deploy_to_webserver:
+ stage: deploy
+ 
+ only:
+   - develop
+   
+ script:
+   - ansible-playbook .ansible-ci.yml
+
+ when: manual
+
