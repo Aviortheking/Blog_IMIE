@@ -1,12 +1,11 @@
-image: solita/ansible-ssh
+image: geerlingguy/docker-debian9-ansible
 
 before_script:
-  #- which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
+  - which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
   - eval $(ssh-agent -s)
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
   - mkdir -p ~/.ssh
   - chmod 700 ~/.ssh
-  #- ssh-keyscan 35.180.10.123 >> ~/.ssh/known_hosts
 
 deploy_to_webserver:
  stage: deploy
