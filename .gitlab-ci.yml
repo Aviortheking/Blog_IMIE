@@ -17,6 +17,7 @@ deploy_to_webserver:
    - ls -l ~/.ssh/
    - ls -l /etc/ansible/
    #- ansible-playbook .ansible-ci.yml
+   #- ansible-playbook .ansible-ci.yml
 
  when: manual
 
