@@ -1,5 +1,5 @@
 ---
-- hosts: hifive
+- hosts: 35.180.10.123
   become: yes
   become_user: root
 
