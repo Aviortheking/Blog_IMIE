@@ -14,7 +14,9 @@ deploy_to_webserver:
    - master
    
  script:
-   - ansible-playbook .ansible-ci.yml
+   - ls -l ~/.ssh/
+   - ls -l /etc/ansible/
+   #- ansible-playbook .ansible-ci.yml
 
  when: manual
 
