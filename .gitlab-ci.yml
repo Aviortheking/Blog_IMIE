@@ -1,4 +1,4 @@
-image: instrumentisto/rsync-ssh
+image: kwarc/ssh-rsync
 
 before_script:
   - eval $(ssh-agent -s)
