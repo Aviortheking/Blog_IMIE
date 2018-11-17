@@ -17,6 +17,8 @@ deploy_to_webserver:
  script:
    #- rsync -rpv --exclude='project/.htaccess' project/* $USER_WEBSERVER@$IP_WEBSERVER:/var/www/html
    - echo $HOME
+   - ls -l /root
+   - pwd
    - ls -l
 
 
