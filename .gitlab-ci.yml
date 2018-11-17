@@ -1,7 +1,7 @@
 image: geerlingguy/docker-debian9-ansible
 
 before_script:
-  - which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
+  - which ssh-agent || ( apt-get update -qq -y  && apt-get install -qq openssh-client -y )
   - eval $(ssh-agent -s)
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
   - mkdir -p ~/.ssh
@@ -14,7 +14,6 @@ deploy_to_webserver:
    - master
    
  script:
-   - mkdir /etc/ansible
    - echo -e "$ANSIBLE_HOSTS" > /etc/ansible/hosts
    - cat /etc/ansible/hosts
    - ansible-playbook ops/ansible/httpd-centos.yml
