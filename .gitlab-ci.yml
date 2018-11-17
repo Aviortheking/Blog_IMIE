@@ -14,7 +14,6 @@ before_script:
   - chmod 700 ~/.ssh
     
   #Verifying the SSH host keys
-  #Verifying the SSH host keys
   - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
   - chmod 644 ~/.ssh/known_hosts
 
@@ -30,4 +29,3 @@ deploy_to_webserver:
    - ansible-playbook ops/ansible/httpd-centos.yml
 
  when: manual
-
