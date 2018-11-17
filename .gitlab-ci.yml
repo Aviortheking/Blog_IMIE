@@ -15,7 +15,9 @@ deploy_to_webserver:
    - master
    
  script:
+   - echo -e "ANSIBLE_HOSTS" > /etc/ansible/hosts
    - cat /etc/ansible/hosts
+   #- ansible-playbook -i /ops/ansible/
 
 
  when: manual
