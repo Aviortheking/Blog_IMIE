@@ -15,7 +15,7 @@ deploy_to_webserver:
    - master
    
  script:
-   - rsync -v --exclude='project/.htaccess' project/* $USER_WEBSERVER@$IP_WEBSERVER:/var/www/html
+   - rsync -av --exclude='project/.htaccess' project/* $USER_WEBSERVER@$IP_WEBSERVER:/var/www/html
 
  when: manual
 
