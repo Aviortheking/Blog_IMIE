@@ -1,6 +1,7 @@
 image: dblaci/ubuntu-ssh-rsync
 
 before_script:
+  - which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
   - eval $(ssh-agent -s)
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
   - mkdir -p ~/.ssh
@@ -13,7 +14,8 @@ deploy_to_webserver:
    - master
    
  script:
-   - rsync -av --exclude='project/.htaccess' project/* gitlab@35.180.10.123:/var/www/html 
+   - rsync -av --exclude='project/.htaccess' project/* gitlab@35.180.10.123:/var/www/html
+
 
  when: manual
 
