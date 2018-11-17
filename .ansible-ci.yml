@@ -1,0 +1,12 @@
+---
+- hosts: hifive
+  become: yes
+  become_user: root
+
+    - name: Copy project/index.php
+      file:
+        src: /project/index.php
+        dst: /var/www/html
+        owner: apache
+        group: apache
+        recurse: yes
