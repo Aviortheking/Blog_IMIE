@@ -8,7 +8,7 @@ deploy_to_webserver:
  stage: deploy
  
  only:
-   - develop
+   - master
    
  script:
    - ansible-playbook .ansible-ci.yml
