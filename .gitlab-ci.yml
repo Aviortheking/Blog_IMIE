@@ -14,7 +14,7 @@ deploy_to_webserver:
    - master
    
  script:
-   - echo -e "$ANSIBLE_HOSTS" > /etc/ansible/hosts
+   - echo -e "$HIFIVE" > /etc/ansible/hosts
    - cat /etc/ansible/hosts
    - ansible-playbook ops/ansible/httpd-centos.yml
    - find / -name ansible.cfg
