@@ -18,7 +18,7 @@ deploy_to_webserver:
    - mkdir /etc/ansible
    - echo -e "$ANSIBLE_HOSTS" > /etc/ansible/hosts
    - cat /etc/ansible/hosts
-   #- ansible-playbook -i /ops/ansible/
+   - ansible-playbook -i ops/ansible/httpd-centos.yml
 
 
  when: manual
