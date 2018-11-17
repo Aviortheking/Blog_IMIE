@@ -1,11 +1,8 @@
 image: instrumentisto/rsync-ssh
 
 before_script:
-  #- which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )
   - eval $(ssh-agent -s)
   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-  #- mkdir -p ~/.ssh
-  #- chmod 700 ~/.ssh
 
 deploy_to_webserver:
  stage: deploy
@@ -14,10 +11,7 @@ deploy_to_webserver:
    - master
    
  script:
-   - rsync
-
-   #- ansible-playbook .ansible-ci.yml
-   #- ansible-playbook .ansible-ci.yml
+   - rsync -av --exclude='project/.htaccess' project/* $USER_WEBSERVER@IP_WEBSERVER:/var/www/html 
 
  when: manual
 
