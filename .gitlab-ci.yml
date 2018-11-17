@@ -15,8 +15,7 @@ deploy_to_webserver:
    - master
    
  script:
-   - rsync -av -e ssh --exclude='project/.htaccess' project/* gitlab@35.180.10.123:/var/www/html
-
+   - rsync -v --exclude='project/.htaccess' project/* $USER_WEBSERVER@$IP_WEBSERVER:/var/www/html
 
  when: manual
 
