@@ -3,10 +3,10 @@
   become: yes
   become_user: root
 
+  tasks:
     - name: Copy project/index.php
-      file:
-        src: /project/index.php
-        dst: /var/www/html
+      copy:
+        src: project/index.php
+        dest: /var/www/html
         owner: apache
         group: apache
-        recurse: yes
