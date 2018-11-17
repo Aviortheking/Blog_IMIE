@@ -17,10 +17,6 @@ before_script:
   - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
   - chmod 644 ~/.ssh/known_hosts
 
-  #Create ansible folder in /etc
-  #Create ansible folder in /etc
-  - mkdir /etc/ansible
-
 deploy_to_webserver:
  stage: deploy
  
@@ -28,6 +24,7 @@ deploy_to_webserver:
    - master
    
  script:
+   - mkdir /etc/ansible
    - echo -e "$ANSIBLE_HIFIVE_HOSTS" > /etc/ansible/hosts
    - ansible-playbook ops/ansible/httpd-centos.yml
 
