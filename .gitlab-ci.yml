@@ -1,4 +1,4 @@
-image: itscaro/debian-ssh
+image: dblaci/ubuntu-ssh-rsync
 
 before_script:
   - eval $(ssh-agent -s)
