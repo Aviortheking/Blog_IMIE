@@ -15,5 +15,5 @@
         path: /var/www/html
         owner: gitlab
         group: apache
-        mode: "u=rw,g=r,o=r"
+        mode: "u=rwx,g=r,o=r"
         recurse: yes
