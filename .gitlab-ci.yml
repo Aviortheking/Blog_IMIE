@@ -1,8 +1,6 @@
 image: ansible/centos7-ansible
 
 before_script:
-  #- which ssh-agent || ( apt-get update -qq -y  && apt-get -q -y -o Dpkg::Use-Pty=0 install openssh-client )
-
   # Run ssh-agent (inside the build environment)
   - eval $(ssh-agent -s)
 
@@ -19,13 +17,12 @@ before_script:
 
 deploy_to_webserver:
  stage: deploy
- 
+
  only:
    - master
    
  script:
-   #- mkdir /etc/ansible
    - echo -e "$ANSIBLE_HIFIVE_HOSTS" > /etc/ansible/hosts
-   - ansible-playbook ops/ansible/httpd-centos.yml
+   - ansible-playbook ansible-ci.yml
 
  when: manual

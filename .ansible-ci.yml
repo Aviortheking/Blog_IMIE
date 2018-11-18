@@ -1,0 +1,19 @@
+- hosts: hifive
+  become: yes
+  become_user: root
+
+  tasks:
+    - name: Copy all files to web server
+      synchronize:
+        src: /builds/aviortheking/blog_imie/project/
+        dest: /var/www/html
+        rsync_opts:
+          - --exclude=.htaccess
+
+    - name: Change file ownership, group and mode
+      file:
+        path: /var/www/html
+        owner: gitlab
+        group: apache
+        mode: "u=rw,g=r,o=r"
+        recurse: yes
