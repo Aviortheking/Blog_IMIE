@@ -20,19 +20,12 @@
         enabled: yes
         masked: no
 
-    - name: Permissions /etc/httpd
-      file:
-        path: /etc/httpd
-        owner: apache
-        group: apache
-        recurse: yes
-
     - name: Change file ownership, group and mode
       file:
         path: /var/www
-        owner: apache
+        owner: root
         group: apache
-        mode: "u=r,g=r,o=r"
+        mode: 0750
         recurse: yes
 
     - name: Install python-passlib 

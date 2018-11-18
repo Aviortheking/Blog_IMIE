@@ -2,7 +2,6 @@
 - hosts: hifive
   become: yes
   become_user: root
-  #become_user: root
 
   tasks:
     - name: Copy all files to web server
@@ -19,8 +18,8 @@
         group: apache
         recurse: yes
 
-    - name: return motd to registered var
+    - name: Change file chmod 640
       command: find /var/www/html -type f -exec chmod 640 {} \;
 
-    - name: return motd to registered var
+    - name: Change directory chmod 750
       command: find /var/www/html -type d -exec chmod 750 {} \;
