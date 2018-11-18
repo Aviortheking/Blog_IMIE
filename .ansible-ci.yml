@@ -6,9 +6,9 @@
   tasks:
 
     - name: Delete last deploy
-    file:
-      path: /var/www/html/
-      state: absent
+      file:
+        path: /var/www/html/
+        state: absent
       
     - name: Copy all files to web server
       synchronize:
