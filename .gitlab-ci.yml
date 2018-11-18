@@ -1,4 +1,4 @@
-image: solita/ansible-ssh
+image: geerlingguy/docker-debian9-ansible
 
 before_script:
   #- which ssh-agent || ( apt-get update -qq -y  && apt-get install openssh-client -qq -y )
