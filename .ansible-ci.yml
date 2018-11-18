@@ -4,6 +4,10 @@
   become_user: root
 
   tasks:
+
+    - name: Delete last deploy
+      command: rm -rf /var/www/html/*
+      
     - name: Copy all files to web server
       synchronize:
         src: /builds/aviortheking/blog_imie/project/
