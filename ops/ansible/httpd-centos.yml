@@ -23,7 +23,7 @@
     - name: Change file ownership, group and mode
       file:
         path: /var/www
-        owner: root
+        owner: apache
         group: apache
         mode: 0750
         recurse: yes

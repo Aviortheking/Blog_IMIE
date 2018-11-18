@@ -14,7 +14,7 @@
     - name: Change file ownership, group and mode
       file:
         path: /var/www/html
-        owner: root
+        owner: apache
         group: apache
         recurse: yes
 
