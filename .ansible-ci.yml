@@ -1,6 +1,6 @@
 - hosts: hifive
-  become: yes
-  become_user: root
+  #become: yes
+  #become_user: gitlab
 
   tasks:
     - name: Copy all files to web server
