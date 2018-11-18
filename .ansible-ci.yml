@@ -6,7 +6,9 @@
   tasks:
 
     - name: Delete last deploy
-      command: rm -rf /var/www/html/*
+    file:
+      path: /var/www/html/
+      state: absent
       
     - name: Copy all files to web server
       synchronize:
