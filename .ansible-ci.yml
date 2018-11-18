@@ -15,7 +15,7 @@
         rsync_opts:
           - --exclude=.htaccess
 
-    - name: Change file ownership, group and mode
+    - name: Change ownership and group 
       file:
         path: /var/www/html
         owner: apache
