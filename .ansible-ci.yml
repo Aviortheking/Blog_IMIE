@@ -1,6 +1,4 @@
 - hosts: hifive
-  #become: yes
-  #become_user: gitlab
 
   tasks:
     - name: Copy all files to web server
@@ -10,10 +8,10 @@
         rsync_opts:
           - --exclude=.htaccess
 
-    - name: Change file ownership, group and mode
-      file:
-        path: /var/www/html
-        owner: gitlab
-        group: apache
-        mode: "u=rwx,g=r,o=r"
-        recurse: yes
+    #- name: Change file ownership, group and mode
+    #  file:
+    #    path: /var/www/html
+    #    owner: gitlab
+    #    group: apache
+    #    mode: "u=rwx,g=r,o=r"
+    #    recurse: yes

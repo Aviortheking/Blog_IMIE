@@ -27,11 +27,12 @@
         group: apache
         recurse: yes
 
-    - name: Permissions /var/www
+    - name: Change file ownership, group and mode
       file:
         path: /var/www
-        owner: apache
+        owner: gitlab
         group: apache
+        mode: "u=rwx,g=rs,o=r"
         recurse: yes
 
     - name: Install python-passlib 
