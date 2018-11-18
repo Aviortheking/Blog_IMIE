@@ -1,3 +1,4 @@
+---
 - hosts: hifive
   become: yes
   become_user: root
