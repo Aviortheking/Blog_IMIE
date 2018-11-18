@@ -24,7 +24,7 @@ deploy_to_webserver:
    - master
    
  script:
-   - mkdir /etc/ansible
+   #- mkdir /etc/ansible
    - echo -e "$ANSIBLE_HIFIVE_HOSTS" > /etc/ansible/hosts
    - ansible-playbook ops/ansible/httpd-centos.yml
 
