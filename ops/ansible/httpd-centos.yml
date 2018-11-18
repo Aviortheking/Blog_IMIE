@@ -30,9 +30,9 @@
     - name: Change file ownership, group and mode
       file:
         path: /var/www
-        owner: gitlab
+        owner: apache
         group: apache
-        mode: "u=rwx,g=rs,o=r"
+        mode: "u=r,g=r,o=r"
         recurse: yes
 
     - name: Install python-passlib 

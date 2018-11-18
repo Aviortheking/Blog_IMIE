@@ -8,10 +8,15 @@
         rsync_opts:
           - --exclude=.htaccess
 
-    #- name: Change file ownership, group and mode
-    #  file:
-    #    path: /var/www/html
-    #    owner: gitlab
-    #    group: apache
-    #    mode: "u=rwx,g=r,o=r"
-    #    recurse: yes
+    - name: Change file ownership, group and mode
+      file:
+        path: /var/www/html
+        owner: root
+        group: apache
+        recurse: yes
+
+    - name: return motd to registered var
+      command: find /var/www/html -type f -exec chmod 640 {} \;
+
+    - name: return motd to registered var
+      command: find /var/www/html -type d -exec chmod 750 {} \;
