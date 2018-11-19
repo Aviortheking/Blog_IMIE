@@ -1,0 +1,29 @@
+body{
+	margin: 0;
+}
+
+.nav_imie{
+	height: 40px;
+	background-color: black;
+}
+
+.item_nav_imie{
+	display: inline-block;
+	padding-left: 20px;
+	padding-top: 10px;
+	color: white;
+	float: right;
+	font-family: "Zona Black", sans-serif;
+	font-size: 1.9vh;
+}
+
+@media screen and (max-width: 640px) {
+  .nav_imie {
+    height: 0;
+  }
+}
+
+@font-face {
+    font-family: "Zona Black";
+    src: url('Zona_Black.ttf');
+}  
