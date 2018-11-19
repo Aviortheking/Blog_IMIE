@@ -4,47 +4,97 @@
  */
 class tag {
 
-	private $DOM = "<div>Please, edit it !</div>";
-	private $attr = array();
+	private $DOM;
+	private $doc;
 	
-	public function __construct(array $attributes = array(), String $DOMContent= "") {
-		$this->attr = array_merge($this->attr, $attributes);
+	public function __construct(DOMDocument $doc, DOMElement $DOMContent) {
+		$this->doc = $doc;
 		$this->DOM = $DOMContent;
+		
 	}
-
-	private function process() {
+	
+	public function getDoc() {
+		return $this->doc;
+	}
+	
+	public function getDOM() {
 		return $this->DOM;
 	}
 
 	public function render() {
-		return $this->process();
+		return $this->DOM;
 	}
 }
 
+$post = array(
+	'title'=> "test",
+	'url'=> "pokemon",
+	'content'=> "<p>pouet</p>"
+);
 
+$posts = array(
+	$post,
+	$post,
+	$post,
+	$post,
+);
 
-
-
-class loop extends tag {
-	private function process() {
-		return "<div>pokemon</div>";
+class bold extends tag {
+	public function render() {
+		//recuperation de la balise de base (<tag type="bold">pouet</tag>)
+		$pok = $this->getDOM();
+		//recuperation du document (necessaire a la création de balises
+		$doc = $this->getDoc();
+		//creation de la balise "div"
+		$res = $doc->createElement("div");
+		//creation du texte et assignation du texte se trouvant dans la balise de base
+		$text = $doc->createTextNode($pok->textContent);
+		//on rajoute a notre balise div notre texte
+		$res->appendChild($text);
+		//on rajoute a la balise div du style pour le mettre en gras
+		$res->setAttribute("style", "font-weight: bold");
+		//on retourne la div
+		return $res;
 	}
 }
-$tag = new tag();
-$loop = new loop();
-echo $tag->render();
-echo $loop->render();
+
+class article extends tag {
+	public function render() {
+		$pok = $this->getDOM();
+		
+		$doc = $this->getDoc();
+		
+		var_dump($pok->getElementsByTagName("test"));
+	}
+}
+//testing purpose
+$content = file_get_contents("./test.html");
+
+function loadTags($ctnt) {
+	$dom = new DOMDocument();
+	libxml_use_internal_errors(true);
+	$dom->loadHTML($ctnt);
+	libxml_clear_errors();
+	$list = $dom->getElementsByTagName("tag");
+	
+	
+	//list compoenents and load content
+	foreach($list as $lst) {
+		$tgs = $lst->getAttribute("type");
+		//echo $tgs;
+		$tg =  new $tgs($dom, $lst);
+		//add to parent the result
+		$lst->parentNode->appendChild($tg->render());		
+	}
+	
+	
+	//remove all tag components
+	while($list->length >= 1) {
+		$list[0]->parentNode->removeChild($list[0]);
+	}
+	$res = $dom->saveHTML();
+	echo $res;
+}
+
+loadTags($content);
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Page Title</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-	<tag type="tag"></tag>
-	<tag type="loop"></tag>
-</body>
-</html>
