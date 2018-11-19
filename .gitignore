@@ -4,3 +4,4 @@ package-lock.json
 .vscode/
 build/
 ops/terraform/secrets.tf
+.DS_Store
