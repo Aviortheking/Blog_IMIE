@@ -144,9 +144,7 @@ class includes extends tag {
 		$attr = $el->getAttribute("file");
 		$t = $doc->createDocumentFragment();
 		$p = file_get_contents("../html/includes/".$attr.".html");
-		$t->appendXML($p);
-
-		$el->parentNode->appendChild($t);
+		appendHTML($el->parentNode, $p);
 
 	}
 }
@@ -230,31 +228,15 @@ class loop extends tag {
 
 function appendHTML(DOMNode $parent, $source) {
 	$tmpDoc = new DOMDocument();
-	$tmpDoc->loadHTML ($source);
+	$html = "<html><body>";
+	$html .= $source;
+	$html .= "</body></html>";
+	$tmpDoc->loadHTML ($html);
 	foreach ($tmpDoc->getElementsByTagName('body')->item(0)->childNodes as $node) {
 		$importedNode = $parent->ownerDocument->importNode ($node, true);
-		$parent->parentNode->replaceChild ($importedNode, $parent);
+		$parent->appendChild($importedNode);
 	}
 }
-
-function renameTag( DOMElement $oldTag, $newTagName ) {
-	$oldTag = $oldTag->parentNode->appendChild($oldTag);
-	$document = $oldTag->ownerDocument;
-
-	$newTag = $document->createElement($newTagName);
-	$oldTag->parentNode->replaceChild($newTag, $oldTag);
-
-	foreach ($oldTag->attributes as $attribute) {
-		$newTag->setAttribute($attribute->name, $attribute->value);
-	}
-	foreach (iterator_to_array($oldTag->childNodes) as $child) {
-		$newTag->appendChild($oldTag->removeChild($child));
-	}
-	return $newTag;
-}
-
-
-
 
 //testing purpose
 //$content = file_get_contents("./test.html");

@@ -1,0 +1,2 @@
+<tag type="bold">bold text</tag>
+ne pas utiliser c'est juste pour montrer les possibilité
