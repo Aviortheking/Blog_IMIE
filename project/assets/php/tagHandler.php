@@ -145,7 +145,9 @@ class includes extends tag {
 		$t = $doc->createDocumentFragment();
 		$p = file_get_contents("../html/includes/".$attr.".html");
 		$t->appendXML($p);
+
 		$el->parentNode->appendChild($t);
+
 	}
 }
 
