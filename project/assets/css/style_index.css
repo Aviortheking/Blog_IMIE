@@ -4,7 +4,7 @@ body{
 
 .nav_imie{
 	height: 40px;
-	background-color: black;
+	background-color: #1c1c1c;
 }
 
 .item_nav_imie{
@@ -14,7 +14,7 @@ body{
 	color: white;
 	float: right;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: 600;
 }
 
