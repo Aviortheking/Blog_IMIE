@@ -8,14 +8,14 @@ RewriteEngine on
 
 # Condition de redirection
 # si https est off ou si le protocol n'est pas en HTTPS
-RewriteCond %{HTTPS} off
+#RewriteCond %{HTTPS} off
 
 # lieux de redirection
 # on redirige vers https
 # entre [] se sont des Flags
 # R=302 indique une redirection visible en indiquant le code 302
 # L finit le processus et n'aplique plus rien de se qui se trouve en dessous
-RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=302,L]
+#RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=302,L]
 
 # condition si il n'y a pas de fichier a l'endroit ciblé
 # (ou si le fichier n'est pas accésible par l'utilisateur)

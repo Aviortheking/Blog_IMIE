@@ -137,6 +137,18 @@ class author extends tag {
 	}
 }
 
+class includes extends tag {
+	public function render() {
+		$el = $this->getDOM();
+		$doc = $this->getDoc();
+		$attr = $el->getAttribute("file");
+		$t = $doc->createDocumentFragment();
+		$p = file_get_contents("../html/includes/".$attr.".html");
+		$t->appendXML($p);
+		$el->parentNode->appendChild($t);
+	}
+}
+
 
 /**
  * input <tag type="loop" for="(table)" limit="(nombre-max généré)">
@@ -243,7 +255,7 @@ function renameTag( DOMElement $oldTag, $newTagName ) {
 
 
 //testing purpose
-$content = file_get_contents("./test.html");
+//$content = file_get_contents("./test.html");
 
 
 function loadTags($ctnt, $debug) {
@@ -252,7 +264,14 @@ function loadTags($ctnt, $debug) {
 	$dom->loadHTML($ctnt);
 	libxml_clear_errors();
 	$list = $dom->getElementsByTagName("tag");
-	
+
+
+	$head = $dom->getElementsByTagName("head");
+	$t = $dom->createDocumentFragment();
+	$p = file_get_contents("../html/includes/head.html");
+	$t->appendXML($p);
+	$head->item(0)->appendChild($t);
+
 	for ($i=0; $i < $list->count(); $i++) {
 		$lst = $list->item($i);
 		$tgs = $lst->getAttribute("type");
@@ -270,5 +289,3 @@ function loadTags($ctnt, $debug) {
 	$res = $dom->saveHTML();
 	echo $res;
 }
-
-loadTags($content, $debug);
