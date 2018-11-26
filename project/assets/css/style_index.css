@@ -13,8 +13,9 @@ body{
 	padding-top: 10px;
 	color: white;
 	float: right;
-	font-family: "Zona Black", sans-serif;
-	font-size: 1.9vh;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 @media screen and (max-width: 640px) {
@@ -22,8 +23,3 @@ body{
     height: 0;
   }
 }
-
-@font-face {
-    font-family: "Zona Black";
-    src: url('polices/Zona_Black.ttf');
-}  
