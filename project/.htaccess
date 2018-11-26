@@ -1,0 +1,79 @@
+#ci-dessous dse trouve un fichier pré fait par mes soins (Avior)
+# je vais rejouter des description pour les elements
+
+
+# Indique le démarrage de la redirection des requetes
+# cette redirection est invisible pour l'utilisateur dans la majorité des cas
+RewriteEngine on
+
+# Condition de redirection
+# si https est off ou si le protocol n'est pas en HTTPS
+RewriteCond %{HTTPS} off
+
+# lieux de redirection
+# on redirige vers https
+# entre [] se sont des Flags
+# R=302 indique une redirection visible en indiquant le code 302
+# L finit le processus et n'aplique plus rien de se qui se trouve en dessous
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=302,L]
+
+# condition si il n'y a pas de fichier a l'endroit ciblé
+# (ou si le fichier n'est pas accésible par l'utilisateur)
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# on redirige vers le fichier handler.php avec $1 qui est la page entré (ex: blog/1/2)
+# le L con connait déjà, QSA va mettre toutes les requetes a la suite
+# (ex : blog.delta-wings.net/flag?p=5 va devenir de notre coté -> blog.delta-wings.net/assets/php/handler.php?page=flag&p=5)
+RewriteRule ^(.*)$ /assets/php/handler.php?page=$1 [L,QSA]
+
+# indique unr redirection lorque on obtient une page d'erreur 403 (interdiction d'accès (permet de "cacher" les fichiers critiques))
+# on redirige vars note handler pour qu'il afficher la page 404
+ErrorDocument 403 /assets/php/handler.php?page=404
+
+# on retire l'indexage de tout nos fichier (enleve l'interface grapique de navigation dans les fichiers (voir files.delta-wings.net pour un exemple))
+Options All -Indexes
+
+
+# lorsque qu'une url va correspondre a un fichier finissant par .php ou .html on interdit l'acces (retourne une erreur 403 (ensuite geré par notre ligne plus haut))
+<FilesMatch ".*\.(php|html)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# on donne l'autorisation d'acceder au fichier handler.php (sinon le site ne sera pas foncitonnel)
+<FilesMatch "handler.php">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# on donne acces au fichiers webmanifest et svg
+<FilesMatch ".*\.(webmanifest|svg)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# si le serveur apache a le module mod_deflate.c
+# on va indiquer que le serveur prend en charge a compression GZIP (compression pour les photos (gif, jpeg, png))
+<IfModule mod_deflate.c>
+  SetOutputFilter DEFLATE
+  SetEnvIfNoCase Request_URI \
+  \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+</IfModule>
+
+# si le module mod_expires.c existe
+# on donne un temps de mise en cache navigateur au fichiers si dessous
+<IfModule mod_expires.c>
+  ExpiresActive on
+  ExpiresByType image/jpg "access 2 month"
+  ExpiresByType image/gif "access 2 month"
+  ExpiresByType image/jpeg "access 2 month"
+  ExpiresByType image/png "access 2 month"
+  ExpiresByType text/css "access 2 month"
+  ExpiresByType application/x-javascript "access plus 2 month"
+  ExpiresByType text/javascript "access plus 2 month"
+  ExpiresByType application/javascript "access plus 2 month"
+  ExpiresByType image/x-icon "access plus 12 month"
+  ExpiresByType image/icon "access plus 12 month"
+  ExpiresByType application/x-ico "access plus 12 month"
+  ExpiresByType application/ico "access plus 12 month"
+</IfModule>
