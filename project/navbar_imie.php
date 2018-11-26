@@ -7,8 +7,8 @@
 						<a><li class="item_nav_imie" >Accès Net-Yparéo</li></a>
 						<a><li class="item_nav_imie" >IMIE Drones & Data</li></a>
 						<a><li class="item_nav_imie" >IMIE Numérique</li></a>
-						<a><li class="item_nav_imie" ><img src="img/twitter.png" width="18" height="18"></li></a>
-						<a><li class="item_nav_imie" ><img src="img/facebook.png" width="9" height="18"></li></a>
+						<a><li class="item_nav_imie" ><img src="assets/img/twitter.png" width="18" height="18"></li></a>
+						<a><li class="item_nav_imie" ><img src="assets/img/facebook.png" width="9" height="18"></li></a>
 					</ul>
 				</div>			
 			</div>
