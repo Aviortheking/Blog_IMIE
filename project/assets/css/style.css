@@ -12,7 +12,7 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
+article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
@@ -55,6 +55,10 @@ table {
 body{
 	margin: 0;
 }
+.test{
+	height: 300vh;
+	background-color: #eeeeee;
+}
 
 .nav_imie{
 	height: 40px;
@@ -64,6 +68,7 @@ body{
 .nav_blog{
 	height: 80px;
 	background-color: white;
+
 }
 
 .item_nav_imie{
@@ -86,11 +91,20 @@ body{
 }
 
 .item_nav_blog_droite{
-	padding-top: 20px;
+	padding-top: 30px;
+	padding-right: 60px;
 	display: inline-block;
 	color: black;
 	float: right;
 }
+
+.item_nav_blog_droite_icon{
+	padding-top: 30px;
+	display: inline-block;
+	color: black;
+	float: right;
+}
+
 #twi{
 	height: 18px;
 	width: 18px;
