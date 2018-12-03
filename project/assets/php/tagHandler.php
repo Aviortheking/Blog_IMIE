@@ -93,6 +93,9 @@ class article extends tag {
 	}
 }
 
+/**
+ *  return element is user
+ */
 class isLoggedIn extends tag {
 	public function render() {
 		
@@ -222,7 +225,6 @@ class loop extends tag {
 		while ($loop->length >= 1 && !$this->isDebugging()) {
 			$loop[0]->parentNode->removeChild($loop[0]);
 		}
-
 	}
 }
 
@@ -231,9 +233,9 @@ function appendHTML(DOMNode $parent, $source) {
 	$html = "<html><body>";
 	$html .= $source;
 	$html .= "</body></html>";
-	$tmpDoc->loadHTML ($html);
+	$tmpDoc->loadHTML($html);
 	foreach ($tmpDoc->getElementsByTagName('body')->item(0)->childNodes as $node) {
-		$importedNode = $parent->ownerDocument->importNode ($node, true);
+		$importedNode = $parent->ownerDocument->importNode($node, true);
 		$parent->appendChild($importedNode);
 	}
 }
@@ -245,7 +247,7 @@ function appendHTML(DOMNode $parent, $source) {
 function loadTags($ctnt, $debug) {
 	$dom = new DOMDocument();
 	libxml_use_internal_errors(true);
-	$dom->loadHTML($ctnt);
+	$dom->loadHTMLFile($ctnt);
 	libxml_clear_errors();
 	$list = $dom->getElementsByTagName("tag");
 
