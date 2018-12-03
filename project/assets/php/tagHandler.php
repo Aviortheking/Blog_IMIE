@@ -3,12 +3,11 @@
  * <tag type="pokemon" arg="pokemongo"><div class="pokemon-item"></div></tag>
  */
 
-ini_set('display_errors', 'On');
 
 $debug = false;
 
 
-class tag {
+class Tag {
 
 	private $DOM;
 	private $doc;
@@ -38,7 +37,7 @@ class tag {
 //input <tag type="bold">test</tag>
 
 //result <span style="font-weight: bold">test</span>
-class bold extends tag {
+class Bold extends Tag {
 	public function render() {
 		//recuperation de la balise de base (<tag type="bold">pouet</tag>)
 		$pok = $this->getDOM();
@@ -56,12 +55,11 @@ class bold extends tag {
 
 		//enfin on met la div final dans le fichier
 		$pok->parentNode->insertBefore($res, $pok);
-
 	}
 }
 //inputs <tag type="article" column="(voir les collones de la table post)
 //return #text
-class article extends tag {
+class Article extends Tag {
 	public function render() {
 
 		$post = array( //testing purpose
@@ -87,16 +85,13 @@ class article extends tag {
 			$txt = $doc->createTextNode($post[$attr]);
 			$pok->parentNode->insertBefore($txt, $pok);
 		}
-
-		
-
 	}
 }
 
 /**
  *  return element is user
  */
-class isLoggedIn extends tag {
+class IsLoggedIn extends Tag {
 	public function render() {
 		
 		$el = $this->getDOM();
@@ -104,20 +99,19 @@ class isLoggedIn extends tag {
 		//debugging purpose
 		$loggedin = false;
 
-			foreach ($el->getElementsByTagName("if") as $element) {
-				if($element->hasAttribute("true") && $loggedin){
-					$r = $element->childNodes->item(1);
-					$el->parentNode->insertBefore($r, $el);
-				} elseif ($element->hasAttribute("false")) {
-					$r = $element->childNodes->item(1);
-					$el->parentNode->insertBefore($r, $el);
-				}
+		foreach ($el->getElementsByTagName("if") as $element) {
+			if($element->hasAttribute("true") && $loggedin) {
+				$r = $element->childNodes->item(1);
+				$el->parentNode->insertBefore($r, $el);
+			} elseif ($element->hasAttribute("false")) {
+				$r = $element->childNodes->item(1);
+				$el->parentNode->insertBefore($r, $el);
 			}
-
+		}
 	}
 }
 
-class author extends tag {
+class Author extends Tag {
 	public function render() {
 
 		$post = array( //testing purpose
@@ -136,11 +130,10 @@ class author extends tag {
 		$txt = $doc->createTextNode($post[$attr]);
 
 		$pok->parentNode->insertBefore($txt, $pok);
-
 	}
 }
 
-class includes extends tag {
+class Includes extends Tag {
 	public function render() {
 		$el = $this->getDOM();
 		$doc = $this->getDoc();
@@ -148,7 +141,6 @@ class includes extends tag {
 		$t = $doc->createDocumentFragment();
 		$p = file_get_contents("../html/includes/".$attr.".html");
 		appendHTML($el->parentNode, $p);
-
 	}
 }
 
@@ -156,7 +148,7 @@ class includes extends tag {
 /**
  * input <tag type="loop" for="(table)" limit="(nombre-max généré)">
  */
-class loop extends tag {
+class Loop extends Tag {
 	public function render() {
 		$el = $this->getDOM();
 
@@ -210,7 +202,6 @@ class loop extends tag {
 			$elements = $pok->getElementsByTagName("loop");
 
 			foreach ($elements as $ele) {
-
 				if($ele->getAttribute("column") == "content") {
 					appendHTML($ele, $posts[$i][$ele->getAttribute("column")]);
 				} else {
@@ -260,7 +251,7 @@ function loadTags($ctnt, $debug) {
 
 	for ($i=0; $i < $list->count(); $i++) {
 		$lst = $list->item($i);
-		$tgs = $lst->getAttribute("type");
+		$tgs = ucfirst($lst->getAttribute("type"));
 
 		$tg =  new $tgs($dom, $lst, $debug);
 
