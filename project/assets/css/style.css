@@ -62,10 +62,10 @@ body{
 .test1{
 	float: left;
 	text-align: center;
-	margin-top: 133px;
+	margin-top: 40px;
 }
 .test2{
-	margin-top: 166px;
+	margin-top: 70px;
 	float: right;
 	font-family: 'Open Sans', sans-serif;
 }
@@ -115,9 +115,10 @@ body{
 }
 .bloc_principal{
 	width: 100%;
-	height: 650px;
+	height: 440px;
 	margin-top: 100px;
 	background-color: white;
+	box-shadow: 1px 1px 30px 1px lightgrey;
 }
 .bloc_principal_titre{
 	text-align: center;
@@ -140,6 +141,7 @@ body{
 }
 .p-home {
 	padding-top: 20px;
+	margin-right: 50px;
 	color: grey;
 }
 #twi{
@@ -189,16 +191,20 @@ body{
 		width: 250px;
 	}
 	.test1{
-		margin-top: 20px;
+		margin-top: 30px;
 	}
 	.test2{
-		margin-top: 20px;
+		margin-top:30px;
 	}
 	#titre-home{
 		padding-bottom: 10px;
 	}
 	.p-home{
 		padding-top: 7px;
+		margin: 0;
+	}
+	.bloc_principal{
+		height: 630px;
 	}
 }
 
@@ -226,5 +232,8 @@ body{
 	}
 	.bloc_principal_titre{
 		font-size: 20px;
+	}
+	.bloc_principal{
+		height: 650px;
 	}
 }
