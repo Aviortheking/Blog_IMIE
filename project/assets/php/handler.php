@@ -1,10 +1,10 @@
 <?php
-/* Fichier qui va gerer la creation de la page et la redirection au cas ou */
 
 ini_set('display_errors', 'On');
 
 // var_dump($_SERVER);
 
+//renvoie vers le fichier css si il est demandé
 if(endsWith($_GET["page"], ".css")) {
 	echo file_get_contents("../css/style.css");
 	die;
@@ -16,6 +16,11 @@ if(endsWith($_GET["page"], ".js")) {
 	echo file_get_contents("../js/script.js");
 	die;
 }
+
+//va cherche l'image uploader
+if(false) {
+}
+
 
 //rajout d'un / a la fin (parceque c'est jolie)
 if($_GET["page"] != "" && !endsWith($_GET["page"], "/")) {
@@ -29,11 +34,12 @@ if($_GET['page'] == '') {
 	$_GET['page'] = 'index';
 }
 
-// é
-
-// var_dump($_POST);
-// var_dump($_GET);
 // die;
+
+if($_GET["page"] == "test") {
+	include_once "test.php";
+	die;
+}
 
 include_once "tagHandler.php";
 $pokemon = loadTags("../html/".$_GET["page"].".html", false);
