@@ -156,13 +156,47 @@ body{
 	margin: auto;
 }
 .contenue-home{
-	padding-left: 11px;
-	padding-top: 15px;
+	padding-left: 22px;
+	padding-top: 22px;
+	padding-right: 10px;
 }
 .cat-home{
+	margin-top: 10px;
 	height: 20px;
 	width: 50px;
-	background-color: yellow;
+	background-color: #f2d761;
+	text-align: center;
+	display: inline-block;
+}
+.cat-home-name{
+	padding-top: 3px;
+	color: white;
+}
+.date-home{
+	margin-top: 10px;
+	height: 20px;
+	width: 100px;
+	background-color: lightgrey;
+	text-align: center;
+	display: inline-block;
+}
+.date-home-name{
+	padding-top: 3px;
+	color: white;
+}
+.etiquettes{
+	display: block;
+}
+.p-home-article{
+	padding-top: 10px;
+	color:#848484;
+}
+.footer-article-home{
+	width:300px;
+	height: 5px;
+	background-color: #f2d761;
+	position: absolute;
+	bottom: 0;
 }
 #titre-article-home{
 	font-weight:bold;
