@@ -2,8 +2,6 @@
 
 ini_set('display_errors', 'On');
 
-// var_dump($_SERVER);
-
 //renvoie vers le fichier css si il est demandé
 if(endsWith($_GET["page"], ".css")) {
 	echo file_get_contents("../css/style.css");
@@ -94,7 +92,7 @@ function endsWith($haystack, $needle)
  * isLoaded: boolean
  * 
  * functions:
- * __construct(id, title, regex)
+ * abstract __construct()
  * absract loadPage()
  * 
  */
