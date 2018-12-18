@@ -139,11 +139,25 @@ class Includes extends Tag {
 		$doc = $this->getDoc();
 		$attr = $el->getAttribute("file");
 		$t = $doc->createDocumentFragment();
+		// var_dump($attr);
+		// var_dump(file_get_contents("../html/includes/".$attr.".html"));
 		$p = file_get_contents("../html/includes/".$attr.".html");
+		// var_dump($p);
 		appendHTML($el->parentNode, $p);
+		$el->setAttribute("style", $el->getAttribute("style"));
 	}
 }
 
+class Svg extends Tag {
+	public function render() {
+		$el = $this->getDOM();
+		$attr = $el->getAttribute("file");
+		$t = $this->getDoc()->createDocumentFragment();
+		$p = file_get_contents("../img/".$attr.".svg");
+		appendHTML($el->parentNode, $p);
+		$el->nextSibling->setAttribute("style", $el->getAttribute("style"));
+	}
+}
 
 /**
  * input <tag type="loop" for="(table)" limit="(nombre-max généré)">
@@ -191,7 +205,7 @@ class Loop extends Tag {
 		);
 
 		//if($limit == 0) $limit = count($posts);
-
+		
 		$parent = $el->parentNode;
 		//var_dump($parent);
 		for ($i=0; $i < $limit; $i++) {
@@ -234,35 +248,35 @@ function appendHTML(DOMNode $parent, $source) {
 //testing purpose
 //$content = file_get_contents("./test.html");
 
-
 function loadTags($ctnt, $debug) {
 	$dom = new DOMDocument();
 	libxml_use_internal_errors(true);
 	$dom->loadHTMLFile($ctnt);
 	libxml_clear_errors();
-	$list = $dom->getElementsByTagName("tag");
 
+	$list = $dom->getElementsByTagName("tag");
 
 	$head = $dom->getElementsByTagName("head");
 	$t = $dom->createDocumentFragment();
 	$p = file_get_contents("../html/includes/head.html");
 	$t->appendXML($p);
 	$head->item(0)->appendChild($t);
-
-	for ($i=0; $i < $list->count(); $i++) {
-		$lst = $list->item($i);
+	
+	//remove all tag components
+	while($list->length >= 1) {
+		
+		$lst = $list->item(0);
 		$tgs = ucfirst($lst->getAttribute("type"));
-
+		// var_dump($tgs);
 		$tg =  new $tgs($dom, $lst, $debug);
 
 		$tg->render();
-	}
-	
-	
-	//remove all tag components
-	while($list->length >= 1 && !$debug) {
-		$list[0]->parentNode->removeChild($list[0]);
+		
+				$list[0]->parentNode->removeChild($list[0]);
+
+		$list = $dom->getElementsByTagName("tag");
 	}
 	$res = $dom->saveHTML();
-	echo $res;
+	
+	return $res;
 }
