@@ -50,7 +50,9 @@ table {
 /******************************
  * Fin reset.css
  *****************************/
-
+header {
+	box-shadow: 1px 1px 30px 1px lightgrey;
+}
 
 body{
 	margin: 0;
@@ -110,12 +112,16 @@ body{
 	padding-right: 60px;
 	display: inline-block;
 	float: right;
+	font-weight: bold;
 }
 
 .item_nav_blog_droite_icon{
 	padding-top: 27px;
 	display: inline-block;
 	float: right;
+	color: rgba(0, 0, 0, .5);
+	padding-bottom: 10px;
+	border-bottom: rgba(0, 0, 0, .1) solid 1px;
 }
 .bloc_principal{
 	width: 100%;
@@ -138,7 +144,7 @@ body{
 	height: 50px;
 	background-color: #fdee5a;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 22px;
+	font-size: 20px;
 }
 
 .content-homediv{
@@ -156,6 +162,7 @@ body{
 	width: 120px;
 	height: 25px;
 	background-color: #fdee5a;
+	padding: 10px 15px;
 }
 .p-home {
 	padding-top: 20px;
@@ -263,7 +270,6 @@ input {outline: none}
 	background-color: transparent;
 	border: none;
 	width: 180px;
-	border-bottom: #848484 solid 1px;
 }
 
 #glass{
@@ -279,6 +285,7 @@ input {outline: none}
 	color: white;
 	padding-bottom: 20px;
 	font-size: 20px;
+	font-weight: bold;
 }
 #titre-between{
 	margin-top: 80px;
