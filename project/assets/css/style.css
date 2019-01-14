@@ -108,11 +108,34 @@ body{
 .item_nav_blog_droite{
 	color: #848484;
 	font-family: 'Open Sans', sans-serif;
-	padding-top: 30px;
-	padding-right: 60px;
+	margin-top: 30px;
+	margin-right: 60px;
 	display: inline-block;
 	float: right;
 	font-weight: bold;
+}
+
+.item_nav_blog_droite:hover{
+	cursor: pointer;
+	-webkit-transition: 400ms;
+    -o-transition: 400ms;
+    transition: 400ms;
+}
+
+.item_nav_blog_droite.dev:hover{
+	color: #f2d761;
+}
+
+.item_nav_blog_droite.digi:hover{
+	color: #6bb194;
+}
+
+.item_nav_blog_droite.ops:hover{
+	color: #64bdea;
+}
+
+.item_nav_blog_droite.devops:hover{
+	color: #9142b7;
 }
 
 .item_nav_blog_droite_icon{
@@ -139,7 +162,7 @@ body{
 }
 .bloc_principal_titre{
 	text-align: center;
-	padding-top: 13px;
+	padding-top: 14px;
 	width: 100%;
 	height: 50px;
 	background-color: #fdee5a;
@@ -159,10 +182,12 @@ body{
 .bloc-plus{
 	margin-top: 40px;
 	float: right;
-	width: 120px;
-	height: 25px;
 	background-color: #fdee5a;
 	padding: 10px 15px;
+}
+.bloc-plus:hover{
+	background-color: #fcf3a8;
+	cursor: pointer;
 }
 .p-home {
 	padding-top: 20px;
@@ -234,7 +259,6 @@ input {outline: none}
 .article.digi .cat {
 	background-color: #6bb194;
 }
-
 .article.dev .cat {
 	background-color: #f2d761;
 }
@@ -253,6 +277,31 @@ input {outline: none}
 	color:#848484;
 	font-size: 15px;
 	line-height: 20px;
+}
+
+/* -----------------------------------------------------
+ * 						Posts
+ * ----------------------------------------------------- */
+
+ .bloc-post{
+	width: 72%;
+	height: 500px;
+	margin-top: 70px;
+	background-color: white;
+	background-position: center;
+	background-size: cover;
+	box-shadow: 1px 1px 30px 1px lightgrey;
+	display: inline-block;
+}
+
+.bloc-filter{
+	width: 22%;
+	height: 500px;
+	margin-top: 70px;
+	background-color: white;
+	background-size: cover;
+	box-shadow: 1px 1px 30px 1px lightgrey;
+	float: right;
 }
 
 #twi{
