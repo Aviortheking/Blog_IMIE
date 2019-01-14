@@ -2,119 +2,65 @@
 
 ini_set('display_errors', 'On');
 
-//renvoie vers le fichier css si il est demandÃ©
+//renvoie vers le fichier css si il est demandé
 if(endsWith($_GET["page"], ".css")) {
 	echo file_get_contents("../css/style.css");
 	die;
 }
 
-
-//si on cherche un fichier js
+//renvoie vers le fichier js si demandé
 if(endsWith($_GET["page"], ".js")) {
 	echo file_get_contents("../js/script.js");
 	die;
 }
 
-//va cherche l'image uploader
-if(false) {
-}
+// var_dump(sizeof($_GET));
 
-
-//rajout d'un / a la fin (parceque c'est jolie)
-if($_GET["page"] != "" && !endsWith($_GET["page"], "/")) {
+// si page non / & finit pas par / at pas de ?
+if($_GET["page"] != "" && !endsWith($_GET["page"], "/") && sizeof($_GET) <= 1) {
 	header("Location: /".$_GET["page"]."/");
 	die;
 }
 
+//enleve les / du début & fin
 $_GET['page'] = trim($_GET['page'], '/');
-$_GET['page'] = explode('/', $_GET['page'])[0];
-if($_GET['page'] == '') {
-	$_GET['page'] = 'index';
+
+// si taille supérieur à 1 $_getpost = element
+if(sizeof(explode("/", $_GET["page"])) > 1) {
+	$_GET["post"] = explode("/", $_GET["page"])[1];
 }
 
-// die;
+// $_get[page] = $_get[page][0]
+$_GET['page'] = "/" . explode('/', $_GET['page'])[0];
 
+// si len $_get[page] > 1 (mot ou autre) on rajoute le slash de fin
+if(strlen($_GET['page']) > 1) {
+	$_GET['page'] = $_GET["page"] . "/";
+}
+
+// var_dump($_GET["page"]);
+
+//page de test pour des functions
+// A ENLEVER LORS DES COMMITS DE FIN
 if($_GET["page"] == "test") {
 	include_once "test.php";
 	die;
 }
 
-include_once "tagHandler.php";
-$pokemon = loadTags("../html/".$_GET["page"].".html", false);
-// var_dump(mb_detect_encoding($pokemon));
+/**
+ * Démarrage du routage du contenu
+ */
 
+include_once "router.php";
+$router = new Router();
+include_once "pages.php";
+
+
+//chargement des tags contenu sur la page
+include_once "tagHandler.php";
+$pokemon = loadTags($router->search($_GET["page"])(), false);
+
+//TODO trouver pourquoi il y a un pb avec l'UTF-8
+//(actuellement forcer des compiler en "Windows 1252")
 $pokemon = htmlspecialchars_decode($pokemon, ENT_HTML5);
 echo $pokemon;
-// var_dump(mb_detect_encoding($pokemon));
-function endsWith($haystack, $needle)
-{
-    $length = strlen($needle);
-    if ($length == 0) {
-        return true;
-    }
-
-    return (substr($haystack, -$length) === $needle);
-}
-
-/**
- * classe Pages
- * a constructor to load additionnal pages and initialize the whole class and load the pages
- */
-
-/**
- * Class Pages
- * 
- * attributes
- * pageList : Array
- * 
- * functions
- * 
- * __construct($pages = array())
- * # load the pages list from db and static files (index/search)
- * loadPage($url)
- * # return a class of type Page (see below)
- */
-
-/**
- * class Page
- * contain the Page to load (on init only a light version but when using loadPage the whole page is in the class)
- * here it contains three extended classes (Index/Search/Post where we will add functions to the loadPage)
- */
-
-/**
- * abstract Class Page
- * 
- * attributes
- * id
- * title
- * regex
- * content
- * isLoaded: boolean
- * 
- * functions:
- * abstract __construct()
- * absract loadPage()
- * 
- */
-
-/**
- * class Post
- * contains a post
- * with basics informations at first and when loadPost is launche the whole class will be usable
- */
-
-/**
- * class Post
- * 
- * attributes
- * id
- * authorName
- * authorLinkedin
- * content
- * isloaded: false
- * 
- * __construct(id);
- * 
- * loadPost()
- * 
- */

@@ -1,11 +1,4 @@
 <?php
-/**
- * <tag type="pokemon" arg="pokemongo"><div class="pokemon-item"></div></tag>
- */
-
-
-$debug = false;
-
 
 class Tag {
 
@@ -34,41 +27,40 @@ class Tag {
 	public function render() {}
 }
 //ce tag est juste la pour donner les possibilit√© de mon composant
-//input <tag type="bold">test</tag>
-
-//result <span style="font-weight: bold">test</span>
+/**
+ * input <tag type="bold">test</tag>
+ * result <span style="font-weight: bold">test</span>
+ */
 class Bold extends Tag {
 	public function render() {
 		//recuperation de la balise de base (<tag type="bold">pouet</tag>)
 		$pok = $this->getDOM();
-		//recuperation du document (necessaire a la cr√©ation de balises
+		//recuperation du document (necessaire a la crÈation de balises
 		$doc = $this->getDoc();
-		//creation de la balise "div"
+		//creation de la balise "span"
 		$res = $doc->createElement("span");
 		//creation du texte et assignation du texte se trouvant dans la balise de base
 		$text = $doc->createTextNode($pok->textContent);
-		//on rajoute a notre balise div notre texte
+		//rajout dans la balise span notre texte
 		$res->appendChild($text);
-		//on rajoute a la balise div du style pour le mettre en gras
+		//on rajoute a la balise span du style pour le mettre en gras
 		$res->setAttribute("style", "font-weight: bold");
-		//on retourne la div
-
 		//enfin on met la div final dans le fichier
 		$pok->parentNode->insertBefore($res, $pok);
 	}
 }
-//inputs <tag type="article" column="(voir les collones de la table post)
-//return #text
+/**
+ * inputs <tag type="article" column="(voir les collones de la table post)/>
+ * return text
+ */
 class Article extends Tag {
 	public function render() {
 
 		$post = array( //testing purpose
 			'title'=> "test",
-			'url'=> "pokemon",
+			'url'=> "pokemongo",
 			'content'=> "<p>azerthjjhhdsqmlkjhgfd</p>"
 		);
-
-
 
 		$pok = $this->getDOM();
 		$attr = $pok->getAttribute("column");
@@ -89,7 +81,15 @@ class Article extends Tag {
 }
 
 /**
- *  return element is user
+ * input
+ * <tag type="isloggedin">
+ *     <if true>
+ *
+ *     </if>
+ *     <if false>
+ *
+ *     </if>
+ * </tag>
  */
 class IsLoggedIn extends Tag {
 	public function render() {
@@ -111,6 +111,10 @@ class IsLoggedIn extends Tag {
 	}
 }
 
+/**
+ * input <tag type="author" column="(column name)"/>
+ * return text
+ */
 class Author extends Tag {
 	public function render() {
 
@@ -133,6 +137,10 @@ class Author extends Tag {
 	}
 }
 
+/**
+ * input <tag type="includes" file="(html file in includes folder)"/>
+ * return the content of the file
+ */
 class Includes extends Tag {
 	public function render() {
 		$el = $this->getDOM();
@@ -148,6 +156,9 @@ class Includes extends Tag {
 	}
 }
 
+/**
+ *  input <tag type="svg" style="color: white; width: 18px; height: 18px""/>
+ */
 class Svg extends Tag {
 	public function render() {
 		$el = $this->getDOM();
@@ -160,7 +171,8 @@ class Svg extends Tag {
 }
 
 /**
- * input <tag type="loop" for="(table)" limit="(nombre-max g√©n√©r√©)">
+ * input <tag type="loop" for="(table)" limit="(nombre-max gÈnÈrÈ)" />
+ * return something
  */
 class Loop extends Tag {
 	public function render() {
@@ -233,6 +245,7 @@ class Loop extends Tag {
 	}
 }
 
+//function qui ajoute du html dans la node
 function appendHTML(DOMNode $parent, $source) {
 	$tmpDoc = new DOMDocument();
 	$html = "<html><body>";
@@ -245,13 +258,11 @@ function appendHTML(DOMNode $parent, $source) {
 	}
 }
 
-//testing purpose
-//$content = file_get_contents("./test.html");
-
-function loadTags($ctnt, $debug) {
+// function de gestion
+function loadTags($ctnt) {
 	$dom = new DOMDocument();
 	libxml_use_internal_errors(true);
-	$dom->loadHTMLFile($ctnt);
+	$dom->loadHTML($ctnt);
 	libxml_clear_errors();
 
 	$list = $dom->getElementsByTagName("tag");
@@ -262,17 +273,15 @@ function loadTags($ctnt, $debug) {
 	$t->appendXML($p);
 	$head->item(0)->appendChild($t);
 	
-	//remove all tag components
+	//charge et supprimme les tags
 	while($list->length >= 1) {
-		
 		$lst = $list->item(0);
 		$tgs = ucfirst($lst->getAttribute("type"));
-		// var_dump($tgs);
-		$tg =  new $tgs($dom, $lst, $debug);
+		$tg =  new $tgs($dom, $lst, false);
 
 		$tg->render();
 		
-				$list[0]->parentNode->removeChild($list[0]);
+		$list[0]->parentNode->removeChild($list[0]);
 
 		$list = $dom->getElementsByTagName("tag");
 	}
