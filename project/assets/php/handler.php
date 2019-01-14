@@ -27,20 +27,27 @@ if($_GET["page"] != "" && !endsWith($_GET["page"], "/")) {
 }
 
 $_GET['page'] = trim($_GET['page'], '/');
-$_GET['page'] = explode('/', $_GET['page'])[0];
-if($_GET['page'] == '') {
-	$_GET['page'] = 'index';
+$_GET['page'] = "/" . explode('/', $_GET['page'])[0];
+
+if(strlen($_GET['page']) > 1) {
+	$_GET['page'] = $_GET["page"] . "/";
 }
 
-// die;
+// var_dump($_GET["page"]);
 
 if($_GET["page"] == "test") {
 	include_once "test.php";
 	die;
 }
 
+include_once "router.php";
+$router = new Router();
+include_once "pages.php";
+
+
+
 include_once "tagHandler.php";
-$pokemon = loadTags("../html/".$_GET["page"].".html", false);
+$pokemon = loadTags($router->search($_GET["page"])(), false);
 // var_dump(mb_detect_encoding($pokemon));
 
 $pokemon = htmlspecialchars_decode($pokemon, ENT_HTML5);

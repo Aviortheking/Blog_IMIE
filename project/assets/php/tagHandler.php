@@ -57,8 +57,10 @@ class Bold extends Tag {
 		$pok->parentNode->insertBefore($res, $pok);
 	}
 }
-//inputs <tag type="article" column="(voir les collones de la table post)
-//return #text
+/**
+ * inputs <tag type="article" column="(voir les collones de la table post)/>
+ *
+ */
 class Article extends Tag {
 	public function render() {
 
@@ -147,7 +149,9 @@ class Includes extends Tag {
 		$el->setAttribute("style", $el->getAttribute("style"));
 	}
 }
-
+/**
+ *  input <tag type="svg" style="color: white; width: 18px; height: 18px""/>
+ */
 class Svg extends Tag {
 	public function render() {
 		$el = $this->getDOM();
@@ -160,7 +164,7 @@ class Svg extends Tag {
 }
 
 /**
- * input <tag type="loop" for="(table)" limit="(nombre-max gÃ©nÃ©rÃ©)">
+ * input <tag type="loop" for="(table)" limit="(nombre-max généré)">
  */
 class Loop extends Tag {
 	public function render() {
@@ -251,7 +255,7 @@ function appendHTML(DOMNode $parent, $source) {
 function loadTags($ctnt, $debug) {
 	$dom = new DOMDocument();
 	libxml_use_internal_errors(true);
-	$dom->loadHTMLFile($ctnt);
+	$dom->loadHTML($ctnt);
 	libxml_clear_errors();
 
 	$list = $dom->getElementsByTagName("tag");
