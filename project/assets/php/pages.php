@@ -1,66 +1,26 @@
 <?php
-
-// abstract class Page {
-// 	private $id;
-// 	private $title;
-// 	private $regex;
-// 	private $content;
-// 	private $isLoaded = false;
-
-// 	abstract function loadPage();
-// }
-
-// interface Page {
-// 	public function __construct();
-// 	public function loadPage();
-// 	public function getId();
-// 	public function getTitle();
-// 	public function getRegex();
-// }
-
-
-
-// class Post {
-// 	private $id;
-// 	private $authorName;
-// 	private $authorLinkedin;
-// 	private $content;
-// 	private $isLoaded = false;
-
-// 	public function __construct($id) {
-// 		$this->id = $id;
-// 	}
-
-// 	public function loadPost() {
-
-// 	}
-
-// }
-
-
-// class Posts implements Page {
-// 	public function __construct() {}
-	
-// }
-
 include_once "router.php";
 
+//recupération du router
 $router = Router::getRouter();
 
-$home = function() {
+//page d'accueil
+$home = function () {
 	return file_get_contents("../html/index.html");
 };
 
-$router->addRoute("/^\/$/", $home);
+$router->addRoute("/^\/$/", $home); // route : "/"
 
-$post = function() {
+//page de post
+$post = function () {
 	return file_get_contents("../html/post.html");
 };
 
-$router->addRoute("/^\/post\/$/", $post);
+$router->addRoute("/^\/post\/$/", $post); // route "/post/*"
 
-$search = function() {
+//page de recherche
+$search = function () {
 	return file_get_contents("../html/search.html");
 };
 
-$router->addRoute("/^\/search\/$/", $search);
+$router->addRoute("/^\/search\/$/", $search); // route "/search/*"
