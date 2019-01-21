@@ -1,14 +1,14 @@
 <?php
-
+require_once "functions.php";
 ini_set('display_errors', 'On');
 
-//renvoie vers le fichier css si il est demandé
+//renvoie vers le fichier css si il est demandï¿½
 if(endsWith($_GET["page"], ".css")) {
 	echo file_get_contents("../css/style.css");
 	die;
 }
 
-//renvoie vers le fichier js si demandé
+//renvoie vers le fichier js si demandï¿½
 if(endsWith($_GET["page"], ".js")) {
 	echo file_get_contents("../js/script.js");
 	die;
@@ -22,10 +22,10 @@ if($_GET["page"] != "" && !endsWith($_GET["page"], "/") && sizeof($_GET) <= 1) {
 	die;
 }
 
-//enleve les / du début & fin
+//enleve les / du dï¿½but & fin
 $_GET['page'] = trim($_GET['page'], '/');
 
-// si taille supérieur à 1 $_getpost = element
+// si taille supï¿½rieur ï¿½ 1 $_getpost = element
 if(sizeof(explode("/", $_GET["page"])) > 1) {
 	$_GET["post"] = explode("/", $_GET["page"])[1];
 }
@@ -48,7 +48,7 @@ if($_GET["page"] == "test") {
 }
 
 /**
- * Démarrage du routage du contenu
+ * Dï¿½marrage du routage du contenu
  */
 
 include_once "router.php";
