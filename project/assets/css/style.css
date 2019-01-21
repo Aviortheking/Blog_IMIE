@@ -83,7 +83,7 @@ body{
 
 .nav_blog{
 	height: 80px;
-	background-color: white;
+	background-color: #110230;
 }
 
 .item_nav_imie{
@@ -106,7 +106,7 @@ body{
 }
 
 .item_nav_blog_droite{
-	color: #848484;
+	color: #fff;
 	font-family: 'Open Sans', sans-serif;
 	margin-top: 30px;
 	margin-right: 60px;
@@ -162,12 +162,13 @@ body{
 }
 .bloc_principal_titre{
 	text-align: center;
-	padding-top: 14px;
+	padding-top: 15px;
 	width: 100%;
 	height: 50px;
-	background-color: #fdee5a;
+	background-color: #150032;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 20px;
+    color: white;
 }
 
 .content-homediv{
@@ -182,11 +183,12 @@ body{
 .bloc-plus{
 	margin-top: 40px;
 	float: right;
-	background-color: #fdee5a;
+	background-color: #190034;;
 	padding: 10px 15px;
+	color: white;
 }
 .bloc-plus:hover{
-	background-color: #fcf3a8;
+	background-color: #42027e;
 	cursor: pointer;
 }
 .p-home {
@@ -253,18 +255,18 @@ input {outline: none}
 }
 
 .article.ops .cat {
-	background-color: #64bdea;
+	background-color: #2ea3f2;
 }
 
 .article.digi .cat {
-	background-color: #6bb194;
+	background-color: #74d3ac;
 }
 .article.dev .cat {
-	background-color: #f2d761;
+	background-color: #ffd75f;
 }
 
 .article.devops .cat {
-	background-color: #9142b7;
+	background-color: #ff1c4a;
 }
 
 .article .title {
