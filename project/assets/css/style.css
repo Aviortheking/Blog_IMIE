@@ -59,10 +59,10 @@ body{
 	background-color: #eee;
 }
 
-.test{
-	height: 300vh;
+.contenue{
+	height: 285vh;
 }
-.test2{
+.articleHome{
 	margin: auto;
 	text-align: center;
 	margin-top: 100px;
@@ -71,7 +71,7 @@ body{
 	padding-right: 2%;
 }
 @media only screen and (min-width: 992px) {
-	.test2 {
+	.articleHome {
 		padding-right: 10%;
 		padding-left: 10%;
 	}
@@ -306,6 +306,22 @@ input {outline: none}
 	float: right;
 }
 
+.fullFooter{
+	height: 220px;
+	background-color: grey;
+}
+.iconFooter{
+	height: 160px;
+	background-color: lightgray;
+	text-align: center;
+}
+
+.iconOnFooter{
+	padding-top:125px;
+	display: inline-block;
+	color: black;
+
+}
 #twi{
 	height: 18px;
 	width: 18px;
@@ -366,7 +382,7 @@ input {outline: none}
 	.test1{
 		margin-top: 30px;
 	}
-	.test2{
+	.articleHome2{
 		margin-top:30px;
 	}
 	#titre-home{
@@ -394,7 +410,7 @@ input {outline: none}
 	.test1{
 		margin-top: 20px;
 	}
-	.test2{
+	.articleHome{
 		margin-top: 20px;
 	}
 	#titre-home{
