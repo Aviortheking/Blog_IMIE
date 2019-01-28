@@ -12,11 +12,11 @@ class Router {
 
 	//definit le router
 	public function __construct() {
-		//TODO faire que si un router existe dajà retourner le routeur existant
+		//TODO faire que si un router existe dÃ©jÃ  retourner le routeur existant
 		Router::$router = $this;
 	}
 
-	//fonction static pour recuperer un router déjà créé
+	//fonction static pour recuperer un router dÃ©jÃ  crÃ©e
 	public static function getRouter() {
 		return Router::$router;
 	}

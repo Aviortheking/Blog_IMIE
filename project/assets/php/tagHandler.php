@@ -35,7 +35,7 @@ class Bold extends Tag {
 	public function render() {
 		//recuperation de la balise de base (<tag type="bold">pouet</tag>)
 		$pok = $this->getDOM();
-		//recuperation du document (necessaire a la création de balises
+		//recuperation du document (necessaire a la crï¿½ation de balises
 		$doc = $this->getDoc();
 		//creation de la balise "span"
 		$res = $doc->createElement("span");
@@ -150,6 +150,7 @@ class Includes extends Tag {
 		// var_dump($attr);
 		// var_dump(file_get_contents("../html/includes/".$attr.".html"));
 		$p = file_get_contents("../html/includes/".$attr.".html");
+
 		// var_dump($p);
 		appendHTML($el->parentNode, $p);
 		$el->setAttribute("style", $el->getAttribute("style"));
@@ -171,7 +172,10 @@ class Svg extends Tag {
 }
 
 /**
- * input <tag type="loop" for="(table)" limit="(nombre-max généré)" />
+ * input
+ * <tag type="loop" for="(table)" limit="(nombre-max gï¿½nï¿½rï¿½)">
+ * <loop column="element"/>
+ * </tag>
  * return something
  */
 class Loop extends Tag {
@@ -182,59 +186,40 @@ class Loop extends Tag {
 
 		$limit = (int) $el->getAttribute("limit");
 
-		//testing purpose variable
-		$posts = array(
-			array(
-				'title'=> "a",
-				'url'=> "e",
-				'content'=> "<p>i</p>",
-				'date'=> "2018-09-20"
-			),
-			array(
-				'title'=> "b",
-				'url'=> "f",
-				'content'=> "<p>j</p>",
-				'date'=> "2018-09-21"
-			),
-			array(
-				'title'=> "c",
-				'url'=> "g",
-				'content'=> "<p>k</p>",
-				'date'=> "2018-09-22"
-			),
-			array(
-				'title'=> "d",
-				'url'=> "h",
-				'content'=> "<p>l</p>",
-				'date'=> "2018-09-23"
-			),
-			array(
-				'title'=> "z",
-				'url'=> "z",
-				'content'=> "<p>z</p>",
-				'date'=> "2018-10-23"
-			),
-		);
+		require_once 'functions.php';
 
-		//if($limit == 0) $limit = count($posts);
+		$pdo = connect();
+		$query = $pdo->query("SELECT title, categories.name as categorie, dt as date, short as content
+		FROM posts
+		INNER JOIN categories ON categories.id=posts.categorie
+		ORDER BY date DESC
+		LIMIT 6;");
+		$posts = $query->fetchAll();
 		
 		$parent = $el->parentNode;
 		//var_dump($parent);
 		for ($i=0; $i < $limit; $i++) {
 			//var_dump($i);
-			$pok = $el->childNodes->item(1)->cloneNode(true);
+			$pok = $el->childNodes->item(0)->cloneNode(true);
+
 			$parent->insertBefore($pok, $el);
 
 			$elements = $pok->getElementsByTagName("loop");
 
 			foreach ($elements as $ele) {
 				if($ele->getAttribute("column") == "content") {
-					appendHTML($ele, $posts[$i][$ele->getAttribute("column")]);
+					appendHTML($ele->parentNode, $posts[$i]["content"]);
 				} else {
 					$txt = $doc->createTextNode($posts[$i][$ele->getAttribute("column")]);
 					$ele->parentNode->insertBefore($txt, $ele);
 				}
 			}
+
+			$finder = new DomXPath($doc);
+			$nodes = $finder->query("//*[contains(@class, 'column-cat')]");
+			// var_dump($nodes);
+			if(sizeof($nodes) >= 1) $nodes[0]->setAttribute("class", str_replace("column-categorie", $posts[$i]["categorie"], $nodes[0]->getAttribute("class")));
+
 		}
 
 		$loop = $parent->getElementsByTagName("loop");
@@ -251,7 +236,13 @@ function appendHTML(DOMNode $parent, $source) {
 	$html = "<html><body>";
 	$html .= $source;
 	$html .= "</body></html>";
-	$tmpDoc->loadHTML($html);
+	$tmpDoc->loadHTML('<?xml encoding="UTF-8">'.$html);
+
+	foreach ($tmpDoc->childNodes as $item)
+	if ($item->nodeType == XML_PI_NODE)
+		$tmpDoc->removeChild($item);
+	$tmpDoc->encoding = 'UTF-8';
+	
 	foreach ($tmpDoc->getElementsByTagName('body')->item(0)->childNodes as $node) {
 		$importedNode = $parent->ownerDocument->importNode($node, true);
 		$parent->appendChild($importedNode);
@@ -262,8 +253,14 @@ function appendHTML(DOMNode $parent, $source) {
 function loadTags($ctnt) {
 	$dom = new DOMDocument();
 	libxml_use_internal_errors(true);
-	$dom->loadHTML($ctnt);
+	$dom->loadHTML('<?xml encoding="UTF-8">'.$ctnt);
 	libxml_clear_errors();
+
+	// fix UTF-8 problem
+	foreach ($dom->childNodes as $item)
+	if ($item->nodeType == XML_PI_NODE)
+		$dom->removeChild($item);
+	$dom->encoding = 'UTF-8';
 
 	$list = $dom->getElementsByTagName("tag");
 

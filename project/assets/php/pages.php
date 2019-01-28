@@ -1,7 +1,7 @@
 <?php
 include_once "router.php";
 
-//recupération du router
+//recupÃ©ration du router
 $router = Router::getRouter();
 
 //page d'accueil

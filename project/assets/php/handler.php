@@ -2,13 +2,13 @@
 require_once "functions.php";
 ini_set('display_errors', 'On');
 
-//renvoie vers le fichier css si il est demandï¿½
+//renvoie vers le fichier css si il est demandé
 if(endsWith($_GET["page"], ".css")) {
 	echo file_get_contents("../css/style.css");
 	die;
 }
 
-//renvoie vers le fichier js si demandï¿½
+//renvoie vers le fichier js si demandé
 if(endsWith($_GET["page"], ".js")) {
 	echo file_get_contents("../js/script.js");
 	die;
@@ -22,10 +22,10 @@ if($_GET["page"] != "" && !endsWith($_GET["page"], "/") && sizeof($_GET) <= 1) {
 	die;
 }
 
-//enleve les / du dï¿½but & fin
+//enleve les / du début & fin
 $_GET['page'] = trim($_GET['page'], '/');
 
-// si taille supï¿½rieur ï¿½ 1 $_getpost = element
+// si taille supérieur à 1 $_getpost = element
 if(sizeof(explode("/", $_GET["page"])) > 1) {
 	$_GET["post"] = explode("/", $_GET["page"])[1];
 }
@@ -42,13 +42,14 @@ if(strlen($_GET['page']) > 1) {
 
 //page de test pour des functions
 // A ENLEVER LORS DES COMMITS DE FIN
-if($_GET["page"] == "test") {
+// var_dump($_GET);
+if($_GET["page"] == "/test/") {
 	include_once "test.php";
 	die;
 }
 
 /**
- * Dï¿½marrage du routage du contenu
+ * Démarrage du routage du contenu
  */
 
 include_once "router.php";
@@ -60,7 +61,4 @@ include_once "pages.php";
 include_once "tagHandler.php";
 $pokemon = loadTags($router->search($_GET["page"])(), false);
 
-//TODO trouver pourquoi il y a un pb avec l'UTF-8
-//(actuellement forcer des compiler en "Windows 1252")
-$pokemon = htmlspecialchars_decode($pokemon, ENT_HTML5);
 echo $pokemon;
