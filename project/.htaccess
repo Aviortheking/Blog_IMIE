@@ -36,26 +36,26 @@ Options All -Indexes
 
 # lorsque qu'une url va correspondre a un fichier finissant par .php ou .html on interdit l'acces (retourne une erreur 403 (ensuite geré par notre ligne plus haut))
 <FilesMatch ".*\.(php|html)$">
-    # Order Allow,Deny
-    # Deny from all
+    Order Allow,Deny
+    Deny from all
 
-    Require all denied
+   # Require all denied
 </FilesMatch>
 
 # on donne l'autorisation d'acceder au fichier handler.php (sinon le site ne sera pas foncitonnel)
 <FilesMatch "handler.php">
-    # Order Allow,Deny
-    # Allow from all
+    Order Allow,Deny
+    Allow from all
 
-    Require all granted
+   # Require all granted
 </FilesMatch>
 
 # on donne acces au fichiers webmanifest et svg
 <FilesMatch ".*\.(webmanifest|svg)$">
-    # Order Allow,Deny
-    # Allow from all
+    Order Allow,Deny
+    Allow from all
 
-    Require all granted
+    # Require all granted
 </FilesMatch>
 
 # si le serveur apache a le module mod_deflate.c

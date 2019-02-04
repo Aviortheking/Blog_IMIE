@@ -289,16 +289,17 @@ input {outline: none}
 /* -----------------------------------------------------
  * 						Posts
  * ----------------------------------------------------- */
-
  .bloc-post{
 	width: 69%;
-	height: 500px;
 	margin-top: 70px;
-	background-color: white;
+	box-shadow: 1px 1px 30px 1px lightgrey;
 	background-position: center;
 	background-size: cover;
-	box-shadow: 1px 1px 30px 1px lightgrey;
 	display: inline-block;
+ }
+ .container-post{
+	/* height: 500px; */
+	background-color: white;
 	padding: 45px;
 }
 
@@ -319,6 +320,8 @@ input {outline: none}
 }
 .credit{
 	background-color: #110230;
+	color:white;
+	padding: 45px;
 }
 
 .fullFooter{
