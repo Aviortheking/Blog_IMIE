@@ -291,11 +291,13 @@ input {outline: none}
  * ----------------------------------------------------- */
  .bloc-post{
 	width: 69%;
-	margin-top: 70px;
+	margin-top: 30px;
 	box-shadow: 1px 1px 30px 1px lightgrey;
 	background-position: center;
 	background-size: cover;
 	display: inline-block;
+	border-bottom: 5px solid  #2ea3f2;
+	border-radius: 5px;
  }
  .container-post{
 	/* height: 500px; */
@@ -306,7 +308,7 @@ input {outline: none}
 .bloc-filter{
 	width: 25%;
 	height: 500px;
-	margin-top: 70px;
+	margin-top: 30px;
 	background-color: white;
 	background-size: cover;
 	box-shadow: 1px 1px 30px 1px lightgrey;
@@ -355,6 +357,31 @@ input {outline: none}
 
 .pad{
 	padding:0;
+}
+
+.contenue-recent{
+	height: 29px;
+	width: 110px;
+	padding-top: 7px;
+	padding-left: 15px;
+	background-color: white;
+	display: inline-block;
+	float:right;
+}
+
+.bloc-recent{
+	width: 69%;
+	margin-top: 50px;
+	float: left;
+}
+.titre-recent{
+	float: left;
+	color: #848484;
+}
+
+.icon-recent{
+	padding-right: 18px;
+	float: right;
 }
 
 .phraseFooter{
