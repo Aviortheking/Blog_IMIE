@@ -18,7 +18,7 @@ $post = function () {
 	return file_get_contents("../html/post.html");
 };
 
-$router->addRoute("/^\/post\/" + $postCharacters + "+\/*$/", $post); // route "/post/*"
+$router->addRoute("/^\/post\/" . $postCharacters . "+\/*$/", $post); // route "/post/*"
 
 //page de recherche
 $search = function () {
@@ -31,4 +31,4 @@ $post = function() {
 	var_dump("tst");
 };
 
-$router->addRoute("/^\/post\/" + $postCharacters + "+\/edit\/*$/", $post);
+$router->addRoute("/^\/post\/" . $postCharacters . "+\/edit\/*$/", $post);

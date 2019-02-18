@@ -283,21 +283,21 @@ while($lst = $list->item(0)) {
 	$tg = new $tgs($dom, $lst, false);
 
 	$tg->render();
-	var_dump("--------- 1 ---------");
-	for ($i=0; $i < $list->count(); $i++) {
-		var_dump($list->item($i)->getAttribute("type"));
-	}
-	echo (htmlspecialchars($dom->saveHTML()));
+	// var_dump("--------- 1 ---------");
+	// for ($i=0; $i < $list->count(); $i++) {
+	// 	var_dump($list->item($i)->getAttribute("type"));
+	// }
+	// echo (htmlspecialchars($dom->saveHTML()));
 
 	// var_dump($list[0]->parentNode->nodeName);
 
 	$lst->parentNode->removeChild($lst);
 
-	var_dump("--------- 2 ---------");
-	for ($i=0; $i < $list->count(); $i++) {
-		var_dump($list->item($i)->getAttribute("type"));
-	}
-	echo (htmlspecialchars($dom->saveHTML()));
+	// var_dump("--------- 2 ---------");
+	// for ($i=0; $i < $list->count(); $i++) {
+	// 	var_dump($list->item($i)->getAttribute("type"));
+	// }
+	// echo (htmlspecialchars($dom->saveHTML()));
 
 	$list = $dom->getElementsByTagName("tag");
 }

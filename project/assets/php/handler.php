@@ -31,7 +31,7 @@ if(sizeof(explode("/", $_GET["page"])) > 1) {
 }
 
 // $_get[page] = $_get[page][0]
-$_GET['page'] = "/" . explode('/', $_GET['page'])[0];
+$_GET['page'] = "/" . $_GET['page'];
 
 // si len $_get[page] > 1 (mot ou autre) on rajoute le slash de fin
 if(strlen($_GET['page']) > 1) {
