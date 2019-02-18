@@ -64,7 +64,7 @@ Options All -Indexes
 	</IfVersion>
 	<IfVersion >= 2.4>
 		Require all granted
-	</IfVersion/>
+	</IfVersion>
 </FilesMatch>
 
 # si le serveur apache a le module mod_deflate.c
