@@ -42,7 +42,7 @@ Options All -Indexes
 	</IfVersion>
 	<IfVersion >= 2.4>
 		Require all denied
-	</IfVersion/>
+	</IfVersion>
 </FilesMatch>
 
 # on donne l'autorisation d'acceder au fichier handler.php (sinon le site ne sera pas foncitonnel)
