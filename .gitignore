@@ -6,3 +6,4 @@ build/
 ops/terraform/secrets.tf
 .DS_Store
 **/.idea
+yarn.lock

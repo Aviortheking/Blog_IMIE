@@ -5,17 +5,17 @@ class Tag {
 	private $DOM;
 	private $doc;
 	private $debug;
-	
+
 	public function __construct(DOMDocument $doc, DOMElement $DOMContent, bool $debug) {
 		$this->doc = $doc;
 		$this->DOM = $DOMContent;
 		$this->debug = $debug;
 	}
-	
+
 	public function getDoc() {
 		return $this->doc;
 	}
-	
+
 	public function getDOM() {
 		return $this->DOM;
 	}
@@ -64,12 +64,12 @@ class Article extends Tag {
 
 		$pok = $this->getDOM();
 		$attr = $pok->getAttribute("column");
-		
+
 		$doc = $this->getDoc();
 
 		$parent = $pok->parentNode;
 
-		
+
 
 		if($attr == "content") {
 			appendHTML($pok->parentNode, $post[$attr]);
@@ -93,7 +93,7 @@ class Article extends Tag {
  */
 class IsLoggedIn extends Tag {
 	public function render() {
-		
+
 		$el = $this->getDOM();
 
 		//debugging purpose
@@ -128,7 +128,7 @@ class Author extends Tag {
 
 		$pok = $this->getDOM();
 		$attr = $pok->getAttribute("column");
-		
+
 		$doc = $this->getDoc();
 
 		$txt = $doc->createTextNode($post[$attr]);
@@ -144,16 +144,12 @@ class Author extends Tag {
 class Includes extends Tag {
 	public function render() {
 		$el = $this->getDOM();
-		$doc = $this->getDoc();
 		$attr = $el->getAttribute("file");
-		$t = $doc->createDocumentFragment();
-		// var_dump($attr);
-		// var_dump(file_get_contents("../html/includes/".$attr.".html"));
+
 		$p = file_get_contents("../html/includes/".$attr.".html");
 
 		// var_dump($p);
 		appendHTML($el->parentNode, $p);
-		$el->setAttribute("style", $el->getAttribute("style"));
 	}
 }
 
@@ -195,9 +191,13 @@ class Loop extends Tag {
 		ORDER BY date DESC
 		LIMIT 6;");
 		$posts = $query->fetchAll();
-		
+
 		$parent = $el->parentNode;
 		//var_dump($parent);
+
+
+		$limit = $limit > sizeof($posts) ? sizeof($posts) : $limit;
+
 		for ($i=0; $i < $limit; $i++) {
 			//var_dump($i);
 			$pok = $el->childNodes->item(0)->cloneNode(true);
@@ -220,12 +220,13 @@ class Loop extends Tag {
 			// var_dump($nodes);
 			if(sizeof($nodes) >= 1) $nodes[0]->setAttribute("class", str_replace("column-categorie", $posts[$i]["categorie"], $nodes[0]->getAttribute("class")));
 
-		}
+			$loop = $pok->getElementsByTagName("loop");
 
-		$loop = $parent->getElementsByTagName("loop");
+			while ($loop->count() >= 1) {
+				$loop->item(0)->parentNode->removeChild($loop->item(0));
+			}
 
-		while ($loop->length >= 1 && !$this->isDebugging()) {
-			$loop[0]->parentNode->removeChild($loop[0]);
+
 		}
 	}
 }
@@ -242,7 +243,7 @@ function appendHTML(DOMNode $parent, $source) {
 	if ($item->nodeType == XML_PI_NODE)
 		$tmpDoc->removeChild($item);
 	$tmpDoc->encoding = 'UTF-8';
-	
+
 	foreach ($tmpDoc->getElementsByTagName('body')->item(0)->childNodes as $node) {
 		$importedNode = $parent->ownerDocument->importNode($node, true);
 		$parent->appendChild($importedNode);
@@ -262,27 +263,46 @@ function loadTags($ctnt) {
 		$dom->removeChild($item);
 	$dom->encoding = 'UTF-8';
 
-	$list = $dom->getElementsByTagName("tag");
+
 
 	$head = $dom->getElementsByTagName("head");
 	$t = $dom->createDocumentFragment();
 	$p = file_get_contents("../html/includes/head.html");
 	$t->appendXML($p);
 	$head->item(0)->appendChild($t);
-	
-	//charge et supprimme les tags
-	while($list->length >= 1) {
-		$lst = $list->item(0);
-		$tgs = ucfirst($lst->getAttribute("type"));
-		$tg =  new $tgs($dom, $lst, false);
 
-		$tg->render();
-		
-		$list[0]->parentNode->removeChild($list[0]);
+	$test = array();
 
-		$list = $dom->getElementsByTagName("tag");
+$list = $dom->getElementsByTagName("tag");
+
+//charge et supprimme les tags
+while($lst = $list->item(0)) {
+
+	$tgs = ucfirst($lst->getAttribute("type"));
+	array_push($test, $tgs);
+	$tg = new $tgs($dom, $lst, false);
+
+	$tg->render();
+	var_dump("--------- 1 ---------");
+	for ($i=0; $i < $list->count(); $i++) {
+		var_dump($list->item($i)->getAttribute("type"));
 	}
+	echo (htmlspecialchars($dom->saveHTML()));
+
+	// var_dump($list[0]->parentNode->nodeName);
+
+	$lst->parentNode->removeChild($lst);
+
+	var_dump("--------- 2 ---------");
+	for ($i=0; $i < $list->count(); $i++) {
+		var_dump($list->item($i)->getAttribute("type"));
+	}
+	echo (htmlspecialchars($dom->saveHTML()));
+
+	$list = $dom->getElementsByTagName("tag");
+}
+
 	$res = $dom->saveHTML();
-	
+
 	return $res;
 }

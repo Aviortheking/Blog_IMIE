@@ -8,12 +8,14 @@
  */
 class Router {
 	//variable static pour stocker le router
-	private static $router;
+	private static $router = null;
 
 	//definit le router
 	public function __construct() {
 		//TODO faire que si un router existe déjà retourner le routeur existant
-		Router::$router = $this;
+		if(Router::$router != null) {
+			return Router::$router;
+		} else Router::$router = $this;
 	}
 
 	//fonction static pour recuperer un router déjà crée
@@ -41,5 +43,11 @@ class Router {
 		return function () {
 			return file_get_contents("../html/404.html");
 		};
+	}
+
+	public function redirecter($source, $redirectPage) {
+		$this->addRoute($source, function() {
+			header("Location: " . $redirectPage);
+		});
 	}
 }
