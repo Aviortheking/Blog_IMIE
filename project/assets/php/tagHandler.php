@@ -5,17 +5,17 @@ class Tag {
 	private $DOM;
 	private $doc;
 	private $debug;
-	
+
 	public function __construct(DOMDocument $doc, DOMElement $DOMContent, bool $debug) {
 		$this->doc = $doc;
 		$this->DOM = $DOMContent;
 		$this->debug = $debug;
 	}
-	
+
 	public function getDoc() {
 		return $this->doc;
 	}
-	
+
 	public function getDOM() {
 		return $this->DOM;
 	}
@@ -64,12 +64,12 @@ class Article extends Tag {
 
 		$pok = $this->getDOM();
 		$attr = $pok->getAttribute("column");
-		
+
 		$doc = $this->getDoc();
 
 		$parent = $pok->parentNode;
 
-		
+
 
 		if($attr == "content") {
 			appendHTML($pok->parentNode, $post[$attr]);
@@ -93,7 +93,7 @@ class Article extends Tag {
  */
 class IsLoggedIn extends Tag {
 	public function render() {
-		
+
 		$el = $this->getDOM();
 
 		//debugging purpose
@@ -128,7 +128,7 @@ class Author extends Tag {
 
 		$pok = $this->getDOM();
 		$attr = $pok->getAttribute("column");
-		
+
 		$doc = $this->getDoc();
 
 		$txt = $doc->createTextNode($post[$attr]);
@@ -195,9 +195,13 @@ class Loop extends Tag {
 		ORDER BY date DESC
 		LIMIT 6;");
 		$posts = $query->fetchAll();
-		
+
 		$parent = $el->parentNode;
 		//var_dump($parent);
+
+
+		$limit = $limit > sizeof($posts) ? sizeof($posts) : $limit;
+
 		for ($i=0; $i < $limit; $i++) {
 			//var_dump($i);
 			$pok = $el->childNodes->item(0)->cloneNode(true);
@@ -242,7 +246,7 @@ function appendHTML(DOMNode $parent, $source) {
 	if ($item->nodeType == XML_PI_NODE)
 		$tmpDoc->removeChild($item);
 	$tmpDoc->encoding = 'UTF-8';
-	
+
 	foreach ($tmpDoc->getElementsByTagName('body')->item(0)->childNodes as $node) {
 		$importedNode = $parent->ownerDocument->importNode($node, true);
 		$parent->appendChild($importedNode);
@@ -269,7 +273,7 @@ function loadTags($ctnt) {
 	$p = file_get_contents("../html/includes/head.html");
 	$t->appendXML($p);
 	$head->item(0)->appendChild($t);
-	
+
 	//charge et supprimme les tags
 	while($list->length >= 1) {
 		$lst = $list->item(0);
@@ -277,12 +281,12 @@ function loadTags($ctnt) {
 		$tg =  new $tgs($dom, $lst, false);
 
 		$tg->render();
-		
+
 		$list[0]->parentNode->removeChild($list[0]);
 
 		$list = $dom->getElementsByTagName("tag");
 	}
 	$res = $dom->saveHTML();
-	
+
 	return $res;
 }
