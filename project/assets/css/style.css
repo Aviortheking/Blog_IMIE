@@ -63,6 +63,10 @@ h2{
 	font-weight: 600;
     font-size: 17px;
 }
+.title-second{
+	font-weight: 400;
+	font-size: 17px;
+}
 
 .contenue{
 	height: 285vh;
@@ -304,7 +308,21 @@ input {outline: none}
 	background-color: white;
 	padding: 45px;
 }
-
+.author{
+	margin-top: 25px;
+	display: flex;
+	flex-flow: row wrap;
+}
+.by{
+	margin-left: 20px;
+	margin-top: 12px;
+}
+.name{
+	margin-bottom: 6px;
+}
+.job{
+	font-size: 12px;
+}
 .bloc-filter{
 	width: 25%;
 	height: 500px;
@@ -313,6 +331,7 @@ input {outline: none}
 	background-size: cover;
 	box-shadow: 1px 1px 30px 1px lightgrey;
 	float: right;
+	padding: 45px;
 }
 .post .text{
 	font-size: 14px;
