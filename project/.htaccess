@@ -53,7 +53,7 @@ Options All -Indexes
 	</IfVersion>
 	<IfVersion >= 2.4>
 		Require all granted
-	</IfVersion/>
+	</IfVersion>
 </FilesMatch>
 
 # on donne acces au fichiers webmanifest et svg
