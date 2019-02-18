@@ -144,16 +144,12 @@ class Author extends Tag {
 class Includes extends Tag {
 	public function render() {
 		$el = $this->getDOM();
-		$doc = $this->getDoc();
 		$attr = $el->getAttribute("file");
-		$t = $doc->createDocumentFragment();
-		// var_dump($attr);
-		// var_dump(file_get_contents("../html/includes/".$attr.".html"));
+
 		$p = file_get_contents("../html/includes/".$attr.".html");
 
 		// var_dump($p);
 		appendHTML($el->parentNode, $p);
-		$el->setAttribute("style", $el->getAttribute("style"));
 	}
 }
 
@@ -224,12 +220,13 @@ class Loop extends Tag {
 			// var_dump($nodes);
 			if(sizeof($nodes) >= 1) $nodes[0]->setAttribute("class", str_replace("column-categorie", $posts[$i]["categorie"], $nodes[0]->getAttribute("class")));
 
-		}
+			$loop = $pok->getElementsByTagName("loop");
 
-		$loop = $parent->getElementsByTagName("loop");
+			while ($loop->count() >= 1) {
+				$loop->item(0)->parentNode->removeChild($loop->item(0));
+			}
 
-		while ($loop->length >= 1 && !$this->isDebugging()) {
-			$loop[0]->parentNode->removeChild($loop[0]);
+
 		}
 	}
 }
@@ -266,7 +263,7 @@ function loadTags($ctnt) {
 		$dom->removeChild($item);
 	$dom->encoding = 'UTF-8';
 
-	$list = $dom->getElementsByTagName("tag");
+
 
 	$head = $dom->getElementsByTagName("head");
 	$t = $dom->createDocumentFragment();
@@ -274,18 +271,37 @@ function loadTags($ctnt) {
 	$t->appendXML($p);
 	$head->item(0)->appendChild($t);
 
-	//charge et supprimme les tags
-	while($list->length >= 1) {
-		$lst = $list->item(0);
-		$tgs = ucfirst($lst->getAttribute("type"));
-		$tg =  new $tgs($dom, $lst, false);
+	$test = array();
 
-		$tg->render();
+$list = $dom->getElementsByTagName("tag");
 
-		$list[0]->parentNode->removeChild($list[0]);
+//charge et supprimme les tags
+while($lst = $list->item(0)) {
 
-		$list = $dom->getElementsByTagName("tag");
+	$tgs = ucfirst($lst->getAttribute("type"));
+	array_push($test, $tgs);
+	$tg = new $tgs($dom, $lst, false);
+
+	$tg->render();
+	var_dump("--------- 1 ---------");
+	for ($i=0; $i < $list->count(); $i++) {
+		var_dump($list->item($i)->getAttribute("type"));
 	}
+	echo (htmlspecialchars($dom->saveHTML()));
+
+	// var_dump($list[0]->parentNode->nodeName);
+
+	$lst->parentNode->removeChild($lst);
+
+	var_dump("--------- 2 ---------");
+	for ($i=0; $i < $list->count(); $i++) {
+		var_dump($list->item($i)->getAttribute("type"));
+	}
+	echo (htmlspecialchars($dom->saveHTML()));
+
+	$list = $dom->getElementsByTagName("tag");
+}
+
 	$res = $dom->saveHTML();
 
 	return $res;

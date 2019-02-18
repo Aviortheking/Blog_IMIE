@@ -1,8 +1,10 @@
 <?php
 include_once "router.php";
 
-//recupÃ©ration du router
+//recupération du router
 $router = Router::getRouter();
+
+$postCharacters = "[a-z0-9-]";
 
 //page d'accueil
 $home = function () {
@@ -16,7 +18,7 @@ $post = function () {
 	return file_get_contents("../html/post.html");
 };
 
-$router->addRoute("/^\/post\/$/", $post); // route "/post/*"
+$router->addRoute("/^\/post\/" + $postCharacters + "+\/*$/", $post); // route "/post/*"
 
 //page de recherche
 $search = function () {
@@ -24,3 +26,9 @@ $search = function () {
 };
 
 $router->addRoute("/^\/search\/$/", $search); // route "/search/*"
+
+$post = function() {
+	var_dump("tst");
+};
+
+$router->addRoute("/^\/post\/" + $postCharacters + "+\/edit\/*$/", $post);
