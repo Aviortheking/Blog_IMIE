@@ -67,7 +67,6 @@ h2{
 	font-weight: 400;
 	font-size: 17px;
 }
-
 .contenue{
 	height: 285vh;
 }
@@ -89,11 +88,20 @@ h2{
 	height: 40px;
 	background-color: #1c1c1c;
 }
-
 .nav_blog{
 	height: 80px;
 	background-color: #110230;
 }
+.item_nav_imie{
+	font-size: 0;
+}
+.item_nav_imie a{
+	text-decoration: none;
+	color: white;
+}
+	.item_nav_imie a:hover{
+		color: #6e6e6e;
+	}
 
 .item_nav_imie{
 	display: inline-block;
@@ -179,7 +187,12 @@ h2{
 	font-size: 20px;
     color: white;
 }
-
+.test2{
+	padding-left: 27px;
+	padding-right: 27px;
+	margin-top: 100px;
+	text-align: center;
+}
 .content-homediv{
 	padding: 0;
 }
@@ -295,16 +308,18 @@ input {outline: none}
  * ----------------------------------------------------- */
  .bloc-post{
 	width: 69%;
-	margin-top: 30px;
+	margin-top: 70px;
 	box-shadow: 1px 1px 30px 1px lightgrey;
 	background-position: center;
 	background-size: cover;
 	display: inline-block;
-	border-bottom: 5px solid  #2ea3f2;
 	border-radius: 5px;
  }
+ 	.search{
+		border-bottom: 5px solid  #2ea3f2;
+	 }
+
  .container-post{
-	/* height: 500px; */
 	background-color: white;
 	padding: 45px;
 }
@@ -326,7 +341,7 @@ input {outline: none}
 .bloc-filter{
 	width: 25%;
 	height: 500px;
-	margin-top: 30px;
+	margin-top: 70px;
 	background-color: white;
 	background-size: cover;
 	box-shadow: 1px 1px 30px 1px lightgrey;
@@ -377,20 +392,37 @@ input {outline: none}
 .pad{
 	padding:0;
 }
-
 .contenue-recent{
-	height: 29px;
-	width: 110px;
-	padding-top: 7px;
-	padding-left: 15px;
+	padding: 14px;
 	background-color: white;
 	display: inline-block;
-	float:right;
+	margin-top: 20px;
 }
-
+	.next{
+		float : right;
+	}
+.filtre{
+	width: 100%;
+	padding: 6px 10px 6px 10px;
+	color:white;
+	text-transform: uppercase;
+	font-size: 14px;
+	margin-top: 15px;
+}
+	.dev-color{
+		background-color: #fccb3a;
+	}
+	.digi-color{
+		background-color: #6bb194;
+	}
+	.ops-color{
+		background-color: #2ea3f2;
+	}
+	.devops-color{
+		background-color: #ff1c4a;
+	}
 .bloc-recent{
 	width: 69%;
-	margin-top: 50px;
 	float: left;
 }
 .titre-recent{
@@ -452,9 +484,6 @@ input {outline: none}
     .nav_imie {
     	height: 0;
   }
-	.item_nav_imie{
-		font-size: 0;
-	}
 	#twi{
 		height: 0;
 		width: 0;
@@ -469,6 +498,7 @@ input {outline: none}
 	.test1{
 		margin-top: 30px;
 	}
+
 	.articleHome2{
 		margin-top:30px;
 	}
