@@ -356,7 +356,6 @@ input {outline: none}
 }
 .bloc-filter{
 	width: 25%;
-	height: 120px;
 	margin-top: 70px;
 	background-color: white;
 	background-size: cover;
@@ -410,12 +409,10 @@ input {outline: none}
 }
 .contenue-recent{
 	box-shadow: 1px 1px 30px 1px lightgrey;
-	float: right;
 	padding: 14px;
 	background-color: white;
 	display: inline-block;
 	margin-top: 20px;
-	width: 120px;
 }
 	.next{
 		float : right;
@@ -450,6 +447,16 @@ input {outline: none}
 	padding-left:8px;
 	float: left;
 	color: #848484;
+}
+.tag{
+	color: white;
+	background-color: #cccccc;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 14px;
+    padding: 7px 12px;
+	border-radius: 18px;
+	margin-top: 12px;
 }
 
 .icon-recent{
