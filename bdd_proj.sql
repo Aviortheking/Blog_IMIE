@@ -12,7 +12,7 @@ CREATE TABLE posts (
 	url VARCHAR(32),
 	content TEXT,
 	short varchar(256),
-	dt DATETIME DEFAULT CURRENT_TIMESTAMP,
+	dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	categorie INT,
 	author INT
 );
@@ -83,8 +83,8 @@ FROM post
 INNER JOIN users BY post.author=user.id
 LIMIT 1;
 
--- requette 3 : comme la 1 sauf uniquement les 6 posts les plus récents
--- requete lancée lors sur la page d'accueil
+-- requette 3 : comme la 1 sauf uniquement les 6 posts les plus rï¿½cents
+-- requete lancï¿½e lors sur la page d'accueil
 SELECT title, categories.name as categorie, dt as date, short as content
 FROM posts
 INNER JOIN categories ON categories.id=posts.categorie
