@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 </head>
 	<body>
@@ -24,15 +25,25 @@
 							post Nepotiani exitium, saeviens per urbem aeternam urebat cuncta Bellona, ex primordiis
 						</p>
 				</div>
-				<div class="credit">
-						<h3>Auteur</h3>
-							<div class="author">
-								<a><tag type="svg" file="avatar" style="color: white; height: 64px"/></a>
-								<div class="by">
-									<h3 class="name">Adrien Huchet</h3>
-									<h3 class="job">Apprenant IT START</h3>
-								</div>
-							</div>
+				<p class="post text">Dum apud Persas, ut supra narravimus, perfidia regis motus agitat insperatos,
+					et in eois tractibus bella rediviva consurgunt, anno sexto decimo et eo diutius
+					post Nepotiani exitium, saeviens per urbem aeternam urebat cuncta Bellona, ex primordiis
+					<br>
+					<br>
+					Dum apud Persas, ut supra narravimus, perfidia regis motus agitat insperatos,
+					et in eois tractibus bella rediviva consurgunt, anno sexto decimo et eo diutius
+					post Nepotiani exitium, saeviens per urbem aeternam urebat cuncta Bellona, ex primordiis
+				</p>
+			</div>
+			<div class="credit">
+				<h3>Auteur</h3>
+				<div class="author">
+					<a>
+						<tag type="svg" file="avatar" style="color: white; height: 64px" /></a>
+					<div class="by">
+						<h3 class="name">Adrien Huchet</h3>
+						<h3 class="job">Apprenant IT START</h3>
+					</div>
 				</div>
 			</div>
 
@@ -43,28 +54,46 @@
 				<div class="filtre ops-color">ops</div>
 				<div class="filtre devops-color">devops</div>
 			</div>
+		</div>
 
-			<div class="contenue-recent previous">Précédent</div>
-			<div class="contenue-recent next">Suivant</div>
+		<div class="bloc-filter">
+			<h3>Plus d'articles</h3>
+				<p class="title-small">Catégories</p>
+					<div class="filtre dev-color">dev</div>
+					<div class="filtre digi-color">digi</div>
+					<div class="filtre ops-color">ops</div>
+					<div class="filtre devops-color">devops</div>
+				<p class="title-small">Tags</p>
+					<div class="tag">html</div>
+					<div class="tag">js</div>
+					<div class="tag">css</div>
+					<div class="tag">html</div>
+					<div class="tag">php</div>
+		</div>
 
-			<h3 id="titre-between">Dans le même thème</h3>
-			<div class="row articles">
-				<tag type="loop" for="posts" limit="6">
-					<div class="col-12 col-md-6 col-lg-4">
-						<div class="article column-categorie">
-							<h4 class="title">
-								<loop column="title" />
-							</h4>
-							<div class="etiquettes">
-								<span class="cat">
-									<loop column="categorie" />
-								</span>
-								<span class="date">
-									<loop column="date" />
-								</span>
-							</div>
-							<div class="text">
-								<loop column="content" />
+		<div class="bloc-recent">
+			<div class="contenue-recent">Article précédent</div>
+			<div class="contenue-recent next">Article suivant</div>
+		</div>
+
+		<h3 id="titre-between">Dans le même thème</h3>
+		<div class="row articles">
+			<tag type="loop" for="posts" limit="6">
+				<div class="col-12 col-md-6 col-lg-4">
+					<div class="article column-categorie">
+						<h4 class="title">
+							<loop column="title" />
+						</h4>
+						<div class="etiquettes">
+							<span class="cat">
+								<loop column="categorie" />
+							</span>
+							<span class="date">
+								<loop column="date" />
+							</span>
+						</div>
+						<div class="text">
+							<loop column="content" />
 							</p>
 						</div>
 					</div>

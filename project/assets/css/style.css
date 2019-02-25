@@ -63,9 +63,14 @@ h2{
 	font-weight: 600;
 	font-size: 17px;
 }
-.title-second{
+h3{
 	font-weight: 400;
 	font-size: 17px;
+}
+.title-small{
+	font-weight: 200;
+	font-size: 15px;
+	margin-top: 30px;
 }
 .contenue{
 	height: 285vh;
@@ -193,6 +198,7 @@ h2{
 	font-family: 'Open Sans', sans-serif;
 	font-size: 20px;
 	color: white;
+	font-weight: 600;
 }
 .cover-text {
 	padding: 0px 90px;
@@ -324,6 +330,7 @@ input {outline: none}
 	background-size: cover;
 	display: inline-block;
 	border-radius: 5px;
+	margin-bottom: 40px;
  }
  	.search{
 		border-bottom: 5px solid  #2ea3f2;
@@ -344,13 +351,13 @@ input {outline: none}
 }
 .name{
 	margin-bottom: 6px;
+	font-weight: 600;
 }
 .job{
 	font-size: 12px;
 }
 .bloc-filter{
 	width: 25%;
-	height: 500px;
 	margin-top: 70px;
 	background-color: white;
 	background-size: cover;
@@ -374,12 +381,12 @@ input {outline: none}
 	font-family: 'Open Sans', sans-serif;
 	width: 100%;
 	height: 220px;
-	background-color: #190034;
+	background-color: #1c1c1c;
 	font-weight: bold;
 }
 .upFooter{
 	height: 160px;
-	background-color: #26004a;
+	background-color: #150032;
 	text-align: center;
 }
 .lowFooter{
@@ -403,10 +410,10 @@ input {outline: none}
 	padding:0;
 }
 .contenue-recent{
+	box-shadow: 1px 1px 30px 1px lightgrey;
 	padding: 14px;
 	background-color: white;
 	display: inline-block;
-	margin-top: 20px;
 }
 	.next{
 		float : right;
@@ -431,24 +438,38 @@ input {outline: none}
 	.devops-color{
 		background-color: #ff1c4a;
 	}
+
 .bloc-recent{
 	width: 69%;
 	float: left;
 }
+
 .titre-recent{
+	padding-left:8px;
 	float: left;
 	color: #848484;
 }
+.tag{
+	color: white;
+	background-color: #cccccc;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 14px;
+    padding: 7px 12px;
+	border-radius: 18px;
+	margin-top: 12px;
+}
 
 .icon-recent{
-	padding-right: 18px;
+	padding-right: 16px;
 	float: right;
 }
 
 .phraseFooter{
-	font-size: 18px;
+	font-size: 17px;
 	padding-top:10px;
 	color: white;
+	font-weight: 400;
 }
 
 #twi{
@@ -484,7 +505,7 @@ input {outline: none}
 	font-weight: bold;
 }
 #titre-between{
-	margin-top: 80px;
+	margin-top: 130px;
 	margin-bottom: 30px;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 22px;
