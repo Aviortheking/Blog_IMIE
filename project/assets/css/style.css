@@ -70,7 +70,7 @@ h3{
 .title-small{
 	font-weight: 200;
 	font-size: 15px;
-	margin-top: 15px;
+	margin-top: 30px;
 }
 .contenue{
 	height: 285vh;
@@ -351,6 +351,7 @@ input {outline: none}
 }
 .name{
 	margin-bottom: 6px;
+	font-weight: 600;
 }
 .job{
 	font-size: 12px;
@@ -413,7 +414,6 @@ input {outline: none}
 	padding: 14px;
 	background-color: white;
 	display: inline-block;
-	margin-top: 20px;
 }
 	.next{
 		float : right;
