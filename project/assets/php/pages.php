@@ -27,7 +27,7 @@ $search = function () {
 
 $router->addRoute("/^\/search\/$/", $search); // route "/search/*"
 
-$post = function() {
+$edit = function() {
 	$_POST = array_merge($_POST, $_GET); //debug uniquement
 	var_dump($_POST);
 	/*
@@ -78,4 +78,4 @@ $post = function() {
 	$prepared->execute();
 };
 
-$router->addRoute("/^\/post\/" . $postCharacters . "+\/edit\/*$/", $post);
+$router->addRoute("/^\/post\/" . $postCharacters . "+\/edit\/*$/", $edit);
