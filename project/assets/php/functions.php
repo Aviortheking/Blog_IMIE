@@ -13,8 +13,8 @@ function endsWith($haystack, $needle) {
 function connect() {
     $host = "localhost";
     $db = "blog";
-    $user = "blog";
-    $pass = "blog";
+    $user = "root";
+    $pass = "root";
     $charset="utf8mb4";
     
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -24,4 +24,8 @@ function connect() {
         throw new \PDOException($e->getMessage(), (int)$e->getCode());
     }
     return $pdo;
+}
+
+function getBDD() {
+
 }
