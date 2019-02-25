@@ -1,5 +1,7 @@
 <?php
 require_once "functions.php";
+
+error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
 //renvoie vers le fichier css si il est demandé

@@ -11,7 +11,7 @@ function endsWith($haystack, $needle) {
 }
 
 function connect() {
-    $host = "localhost";
+    $host = "127.0.0.1";
     $db = "blog";
     $user = "blog";
     $pass = "blog";
@@ -24,8 +24,4 @@ function connect() {
         throw new \PDOException($e->getMessage(), (int)$e->getCode());
     }
     return $pdo;
-}
-
-function getBDD() {
-
 }
