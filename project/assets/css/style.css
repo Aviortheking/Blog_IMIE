@@ -330,6 +330,7 @@ input {outline: none}
 	background-size: cover;
 	display: inline-block;
 	border-radius: 5px;
+	margin-bottom: 40px;
  }
  	.search{
 		border-bottom: 5px solid  #2ea3f2;
@@ -411,7 +412,11 @@ input {outline: none}
 .contenue-recent{
 	box-shadow: 1px 1px 30px 1px lightgrey;
 	float: right;
-	padding: 14px;
+	height: 30px;
+	/* padding: 6px; */
+	padding-top:6px;
+	padding-left: 13px;
+	padding-right: 9px;
 	background-color: white;
 	display: inline-block;
 	margin-top: 20px;
@@ -451,7 +456,6 @@ input {outline: none}
 	float: left;
 	color: #848484;
 }
-
 .icon-recent{
 	padding-right: 16px;
 	float: right;
