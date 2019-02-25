@@ -273,17 +273,33 @@ function loadTags($ctnt) {
 		$head->item(0)->appendChild($t);
 	}
 
+	$test = array();
+
 	$list = $dom->getElementsByTagName("tag");
 
 	//charge et supprimme les tags
 	while($lst = $list->item(0)) {
 
 		$tgs = ucfirst($lst->getAttribute("type"));
+		array_push($test, $tgs);
 		$tg = new $tgs($dom, $lst, false);
 
 		$tg->render();
+		// var_dump("--------- 1 ---------");
+		// for ($i=0; $i < $list->count(); $i++) {
+		// 	var_dump($list->item($i)->getAttribute("type"));
+		// }
+		// echo (htmlspecialchars($dom->saveHTML()));
+
+		// var_dump($list[0]->parentNode->nodeName);
 
 		$lst->parentNode->removeChild($lst);
+
+		// var_dump("--------- 2 ---------");
+		// for ($i=0; $i < $list->count(); $i++) {
+		// 	var_dump($list->item($i)->getAttribute("type"));
+		// }
+		// echo (htmlspecialchars($dom->saveHTML()));
 
 		$list = $dom->getElementsByTagName("tag");
 	}
