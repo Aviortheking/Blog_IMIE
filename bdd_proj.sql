@@ -1,9 +1,9 @@
 CREATE TABLE images (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	date DATETIME, 
+	date DATETIME,
 	name VARCHAR(32),
 	alt VARCHAR(128),
-	post_id INT 
+	post_id INT
 );
 
 CREATE TABLE posts (
@@ -12,7 +12,7 @@ CREATE TABLE posts (
 	url VARCHAR(32),
 	content TEXT,
 	short varchar(256),
-	dt DATETIME DEFAULT CURRENT_TIMESTAMP,
+	dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	categorie INT,
 	author INT
 );
@@ -70,7 +70,7 @@ INSERT INTO users (username, linkedin) VALUES ('Florian Bouillon', NULL), ('Adri
 INSERT INTO categories (name) VALUES ('devops'), ('ops'), ('dev'), ('digi');
 
 -- requete 1 :
--- recuperer 10 posts avec la categorie associé la date du post  et les 256 premiers  mots du contenu
+-- recuperer 10 posts avec la categorie associÃ© la date du post  et les 256 premiers  mots du contenu
 
 SELECT title, short, categorie, url FROM posts
 LIMIT 10;
@@ -83,8 +83,8 @@ FROM post
 INNER JOIN users BY post.author=user.id
 LIMIT 1;
 
--- requette 3 : comme la 1 sauf uniquement les 6 posts les plus r�cents
--- requete lanc�e lors sur la page d'accueil
+-- requette 3 : comme la 1 sauf uniquement les 6 posts les plus récents
+-- requete lancée lors sur la page d'accueil
 SELECT title, categories.name as categorie, dt as date, short as content
 FROM posts
 INNER JOIN categories ON categories.id=posts.categorie
