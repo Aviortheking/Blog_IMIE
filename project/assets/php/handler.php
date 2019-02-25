@@ -1,17 +1,21 @@
 <?php
-require_once "functions.php";
-
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
+require_once "../../../vendor/autoload.php";
+
+use App\Router;
+use App\Functions;
+use App\Tags\Tag;
+
 //renvoie vers le fichier css si il est demandé
-if(endsWith($_GET["page"], ".css")) {
+if(Functions::endsWith($_GET["page"], ".css")) {
 	echo file_get_contents("../css/style.css");
 	die;
 }
 
 //renvoie vers le fichier js si demandé
-if(endsWith($_GET["page"], ".js")) {
+if(Functions::endsWith($_GET["page"], ".js")) {
 	echo file_get_contents("../js/script.js");
 	die;
 }
@@ -19,7 +23,7 @@ if(endsWith($_GET["page"], ".js")) {
 // var_dump(sizeof($_GET));
 
 // si page non / & finit pas par / at pas de ?
-if($_GET["page"] != "" && !endsWith($_GET["page"], "/") && sizeof($_GET) <= 1) {
+if($_GET["page"] != "" && !Functions::endsWith($_GET["page"], "/") && count($_GET) <= 1) {
 	header("Location: /".$_GET["page"]."/");
 	die;
 }
@@ -28,7 +32,7 @@ if($_GET["page"] != "" && !endsWith($_GET["page"], "/") && sizeof($_GET) <= 1) {
 $_GET['page'] = trim($_GET['page'], '/');
 
 // si taille supérieur à 1 $_getpost = element
-if(sizeof(explode("/", $_GET["page"])) > 1) {
+if(count(explode("/", $_GET["page"])) > 1) {
 	$_GET["post"] = explode("/", $_GET["page"])[1];
 }
 
@@ -46,7 +50,7 @@ if(strlen($_GET['page']) > 1) {
 // A ENLEVER LORS DES COMMITS DE FIN
 // var_dump($_GET);
 if($_GET["page"] == "/test/") {
-	include_once "test.php";
+	require_once "test.php";
 	die;
 }
 
@@ -54,13 +58,14 @@ if($_GET["page"] == "/test/") {
  * Démarrage du routage du contenu
  */
 
-include_once "router.php";
 $router = new Router();
-include_once "pages.php";
+
+Functions::loadRoutes();
+
 
 
 //chargement des tags contenu sur la page
-include_once "tagHandler.php";
-$pokemon = loadTags($router->search($_GET["page"])(), false);
+
+$pokemon = Tag::loadTags($router->search($_GET["page"])(), false);
 
 echo $pokemon;

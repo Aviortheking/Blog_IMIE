@@ -61,7 +61,7 @@ body{
 }
 h2{
 	font-weight: 600;
-    font-size: 17px;
+	font-size: 17px;
 }
 .title-second{
 	font-weight: 400;
@@ -99,8 +99,8 @@ h2{
 	text-decoration: none;
 	color: white;
 	-webkit-transition: 400ms;
-    -o-transition: 400ms;
-    transition: 400ms;
+	-o-transition: 400ms;
+	transition: 400ms;
 }
 	.item_nav_imie a:hover{
 		color: #a5a5a5;
@@ -138,8 +138,8 @@ h2{
 	float: right;
 	font-weight: bold;
 	-webkit-transition: 400ms;
-    -o-transition: 400ms;
-    transition: 400ms;
+	-o-transition: 400ms;
+	transition: 400ms;
 }
 
 .item_nav_blog_droite:hover{
@@ -192,9 +192,9 @@ h2{
 	background-color: #150032;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 20px;
-    color: white;
+	color: white;
 }
-.test2{
+.cover-text {
 	padding: 0px 90px;
 	margin-top: 100px;
 	text-align: center;
@@ -215,9 +215,9 @@ h2{
 	padding: 10px 15px;
 	color: white;
 	-webkit-transition: 300ms;
-    -o-transition: 300ms;
-    transition: 300ms;
-	
+	-o-transition: 300ms;
+	transition: 300ms;
+
 }
 .bloc-plus:hover{
 	background-color: #42027e;
@@ -360,7 +360,7 @@ input {outline: none}
 }
 .post .text{
 	font-size: 14px;
-    color: #737272ee;
+	color: #737272ee;
 	line-height: 1.5;
 	margin-top: 28px;
 }
@@ -491,8 +491,8 @@ input {outline: none}
 
 }
 @media screen and (max-width: 640px) {
-    .nav_imie {
-    	height: 0;
+	.nav_imie {
+		height: 0;
   }
 	#twi{
 		height: 0;

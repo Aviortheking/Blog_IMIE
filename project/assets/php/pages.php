@@ -1,81 +1,83 @@
 <?php
-include_once "router.php";
+// // include_once "router.php";
 
-//recupération du router
-$router = Router::getRouter();
+// use App\Router;
 
-$postCharacters = "[a-z0-9-]";
+// //recupération du router
+// $router = Router::getRouter();
 
-//page d'accueil
-$home = function () {
-	return file_get_contents("../html/index.html");
-};
+// $postCharacters = "[a-z0-9-]";
 
-$router->addRoute("/^\/$/", $home); // route : "/"
+// //page d'accueil
+// $home = function () {
+// 	return file_get_contents("../html/index.html");
+// };
 
-//page de post
-$post = function () {
-	return file_get_contents("../html/post.html");
-};
+// $router->addRoute("/^\/$/", $home); // route : "/"
 
-$router->addRoute("/^\/post\/" . $postCharacters . "+\/*$/", $post); // route "/post/*"
+// //page de post
+// $post = function () {
+// 	return file_get_contents("../html/post.html");
+// };
 
-//page de recherche
-$search = function () {
-	return file_get_contents("../html/search.html");
-};
+// $router->addRoute("/^\/post\/" . $postCharacters . "+\/*$/", $post); // route "/post/*"
 
-$router->addRoute("/^\/search\/$/", $search); // route "/search/*"
+// //page de recherche
+// $search = function () {
+// 	return file_get_contents("../html/search.html");
+// };
 
-$edit = function() {
-	$_POST = array_merge($_POST, $_GET); //debug uniquement
-	var_dump($_POST);
-	/*
-	$_POST should contain
-	post :
-	id
-	title
-	content
-	category
-	author
+// $router->addRoute("/^\/search\/$/", $search); // route "/search/*"
 
-	UPDATE posts
-	SET
-	title = title,
-	url = strtolower(preg_replace(["/\ /", '/[\'\/~`\!@#\$%\^&\*\(\)\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/'], ["_", ""], title));
-	content = content,
-	short = substr(content, 0, 253) . "...";
-	category = categoryId
-	author = authorId
-	WHERE id = id
-	*/
+// $edit = function() {
+// 	$_POST = array_merge($_POST, $_GET); //debug uniquement
+// 	var_dump($_POST);
+// 	/*
+// 	$_POST should contain
+// 	post :
+// 	id
+// 	title
+// 	content
+// 	category
+// 	author
 
-	require_once "functions.php";
+// 	UPDATE posts
+// 	SET
+// 	title = title,
+// 	url = strtolower(preg_replace(["/\ /", '/[\'\/~`\!@#\$%\^&\*\(\)\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/'], ["_", ""], title));
+// 	content = content,
+// 	short = substr(content, 0, 253) . "...";
+// 	category = categoryId
+// 	author = authorId
+// 	WHERE id = id
+// 	*/
 
-
-	$request = "UPDATE posts SET `title`=:title, `url`=:url, `content`=:content, `short`=:short, `category`=:category, `author`=:author, WHERE `id`=:id";
-
-	$title = $_POST["title"];
-	$url = strtolower(preg_replace(["/\ /", '/[\'\/~`\!@#\$%\^&\*\(\)\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/'], ["_", ""], $title));
-	$content = $_POST["content"];
-	$short = substr($content, 0, 253) . "...";
-	$category = intval($_POST["category"]);
-	$author = intval($_POST["author"]);
-
-	$id = intval($_POST["id"]);
+// 	require_once "functions.php";
 
 
-	$pdo = connect();
-	$prepared = $pdo->prepare($request);
-	$prepared->bindParam(":title", $title);
-	$prepared->bindParam(":url", $url);
-	$prepared->bindParam(":content", $content);
-	$prepared->bindParam(":short", $short);
-	$prepared->bindParam(":category", $category, PDO::PARAM_INT);
-	$prepared->bindParam(":author", $author, PDO::PARAM_INT);
-	$prepared->bindParam(":id", $id, PDO::PARAM_INT);
+// 	$request = "UPDATE posts SET `title`=:title, `url`=:url, `content`=:content, `short`=:short, `category`=:category, `author`=:author, WHERE `id`=:id";
 
-	$prepared->execute();
-};
+// 	$title = $_POST["title"];
+// 	$url = strtolower(preg_replace(["/\ /", '/[\'\/~`\!@#\$%\^&\*\(\)\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/'], ["_", ""], $title));
+// 	$content = $_POST["content"];
+// 	$short = substr($content, 0, 253) . "...";
+// 	$category = intval($_POST["category"]);
+// 	$author = intval($_POST["author"]);
 
-$router->addRoute("/^\/post\/" . $postCharacters . "+\/edit\/*$/", $edit);
+// 	$id = intval($_POST["id"]);
+
+
+// 	$pdo = connect();
+// 	$prepared = $pdo->prepare($request);
+// 	$prepared->bindParam(":title", $title);
+// 	$prepared->bindParam(":url", $url);
+// 	$prepared->bindParam(":content", $content);
+// 	$prepared->bindParam(":short", $short);
+// 	$prepared->bindParam(":category", $category, PDO::PARAM_INT);
+// 	$prepared->bindParam(":author", $author, PDO::PARAM_INT);
+// 	$prepared->bindParam(":id", $id, PDO::PARAM_INT);
+
+// 	$prepared->execute();
+// };
+
+// $router->addRoute("/^\/post\/" . $postCharacters . "+\/edit\/*$/", $edit);

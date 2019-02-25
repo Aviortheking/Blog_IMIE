@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 /**
  * classe pour gerer le routage des pages
  * la variable static $router sert a utiliser le router dans plusieurs fichier
@@ -43,11 +45,5 @@ class Router {
 		return function () {
 			return file_get_contents("../html/404.html");
 		};
-	}
-
-	public function redirecter($source, $redirectPage) {
-		$this->addRoute($source, function() {
-			header("Location: " . $redirectPage);
-		});
 	}
 }
