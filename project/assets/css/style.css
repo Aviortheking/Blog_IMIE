@@ -295,7 +295,7 @@ input {outline: none}
  * ----------------------------------------------------- */
  .bloc-post{
 	width: 69%;
-	margin-top: 30px;
+	margin-top: 70px;
 	box-shadow: 1px 1px 30px 1px lightgrey;
 	background-position: center;
 	background-size: cover;
@@ -326,7 +326,7 @@ input {outline: none}
 .bloc-filter{
 	width: 25%;
 	height: 500px;
-	margin-top: 30px;
+	margin-top: 70px;
 	background-color: white;
 	background-size: cover;
 	box-shadow: 1px 1px 30px 1px lightgrey;
@@ -387,10 +387,28 @@ input {outline: none}
 	display: inline-block;
 	float:right;
 }
-
+.filtre{
+	width: 100%;
+	padding: 6px 10px 6px 10px;
+	color:white;
+	text-transform: uppercase;
+	font-size: 14px;
+	margin-top: 15px;
+}
+	.dev-color{
+		background-color: #fccb3a;
+	}
+	.digi-color{
+		background-color: #6bb194;
+	}
+	.ops-color{
+		background-color: #2ea3f2;
+	}
+	.devops-color{
+		background-color: #ff1c4a;
+	}
 .bloc-recent{
 	width: 69%;
-	margin-top: 50px;
 	float: left;
 }
 .titre-recent{

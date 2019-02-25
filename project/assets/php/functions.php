@@ -11,7 +11,7 @@ function endsWith($haystack, $needle) {
 }
 
 function connect() {
-    $host = "127.0.0.1";
+    $host = "localhost";
     $db = "blog";
     $user = "blog";
     $pass = "blog";

@@ -38,8 +38,43 @@
 
             <div class="bloc-filter">
 				<p class="title-second">Plus d'articles</p>
-            </div>
+				<div class="filtre dev-color">dev</div>
+				<div class="filtre digi-color">digi</div>
+				<div class="filtre ops-color">ops</div>
+				<div class="filtre devops-color">devops</div>
+			</div>
+
+			<div class="contenue-recent">Précédent</div>
+			<div class="contenue-recent">Suivant</div>
+
+			<h3 id="titre-between">Dans le même thème</h3>
+			<div class="row articles">
+				<tag type="loop" for="posts" limit="6">
+					<div class="col-12 col-md-6 col-lg-4">
+						<div class="article column-categorie">
+							<h4 class="title">
+								<loop column="title" />
+							</h4>
+							<div class="etiquettes">
+								<span class="cat">
+									<loop column="categorie" />
+								</span>
+								<span class="date">
+									<loop column="date" />
+								</span>
+							</div>
+							<div class="text">
+								<loop column="content" />
+							</p>
+						</div>
+					</div>
+				</tag>
+			</div>
 			</main>
+			<body>
+				<footer>
+					<tag type="includes" file="footer" />
+				</fotter>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	</body>
 </html>

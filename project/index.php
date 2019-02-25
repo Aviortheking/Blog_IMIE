@@ -4,10 +4,10 @@ ini_set('display_errors', 1);
 
 require_once "assets/php/functions.php";
 
-$host = "127.0.0.1";
+$host = "localhost";
 $db = "blog";
-$user = "root";
-$pass = "root";
+$user = "blog";
+$pass = "blog";
 $charset="utf8mb4";
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
