@@ -13,8 +13,8 @@ function endsWith($haystack, $needle) {
 function connect() {
     $host = "localhost";
     $db = "blog";
-    $user = "root";
-    $pass = "root";
+    $user = "blog";
+    $pass = "blog";
     $charset="utf8mb4";
     
     $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
