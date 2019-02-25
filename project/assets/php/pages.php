@@ -28,7 +28,54 @@ $search = function () {
 $router->addRoute("/^\/search\/$/", $search); // route "/search/*"
 
 $post = function() {
-	var_dump("tst");
+	$_POST = array_merge($_POST, $_GET); //debug uniquement
+	var_dump($_POST);
+	/*
+	$_POST should contain
+	post :
+	id
+	title
+	content
+	category
+	author
+
+	UPDATE posts
+	SET
+	title = title,
+	url = strtolower(preg_replace(["/\ /", '/[\'\/~`\!@#\$%\^&\*\(\)\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/'], ["_", ""], title));
+	content = content,
+	short = substr(content, 0, 253) . "...";
+	category = categoryId
+	author = authorId
+	WHERE id = id
+	*/
+
+	require_once "functions.php";
+
+
+	$request = "UPDATE posts SET `title`=:title, `url`=:url, `content`=:content, `short`=:short, `category`=:category, `author`=:author, WHERE `id`=:id";
+
+	$title = $_POST["title"];
+	$url = strtolower(preg_replace(["/\ /", '/[\'\/~`\!@#\$%\^&\*\(\)\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/'], ["_", ""], $title));
+	$content = $_POST["content"];
+	$short = substr($content, 0, 253) . "...";
+	$category = intval($_POST["category"]);
+	$author = intval($_POST["author"]);
+
+	$id = intval($_POST["id"]);
+
+
+	$pdo = connect();
+	$prepared = $pdo->prepare($request);
+	$prepared->bindParam(":title", $title);
+	$prepared->bindParam(":url", $url);
+	$prepared->bindParam(":content", $content);
+	$prepared->bindParam(":short", $short);
+	$prepared->bindParam(":category", $category, PDO::PARAM_INT);
+	$prepared->bindParam(":author", $author, PDO::PARAM_INT);
+	$prepared->bindParam(":id", $id, PDO::PARAM_INT);
+
+	$prepared->execute();
 };
 
 $router->addRoute("/^\/post\/" . $postCharacters . "+\/edit\/*$/", $post);
