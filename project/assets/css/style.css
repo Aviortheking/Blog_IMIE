@@ -67,7 +67,6 @@ h2{
 	font-weight: 400;
 	font-size: 17px;
 }
-
 .contenue{
 	height: 285vh;
 }
@@ -89,11 +88,20 @@ h2{
 	height: 40px;
 	background-color: #1c1c1c;
 }
-
 .nav_blog{
 	height: 80px;
 	background-color: #110230;
 }
+.item_nav_imie{
+	font-size: 0;
+}
+.item_nav_imie a{
+	text-decoration: none;
+	color: white;
+}
+	.item_nav_imie a:hover{
+		color: #6e6e6e;
+	}
 
 .item_nav_imie{
 	display: inline-block;
@@ -305,11 +313,13 @@ input {outline: none}
 	background-position: center;
 	background-size: cover;
 	display: inline-block;
-	border-bottom: 5px solid  #2ea3f2;
 	border-radius: 5px;
  }
+ 	.search{
+		border-bottom: 5px solid  #2ea3f2;
+	 }
+
  .container-post{
-	/* height: 500px; */
 	background-color: white;
 	padding: 45px;
 }
@@ -382,16 +392,15 @@ input {outline: none}
 .pad{
 	padding:0;
 }
-
 .contenue-recent{
-	height: 29px;
-	width: 110px;
-	padding-top: 7px;
-	padding-left: 15px;
+	padding: 14px;
 	background-color: white;
 	display: inline-block;
-	float:right;
+	margin-top: 20px;
 }
+	.next{
+		float : right;
+	}
 .filtre{
 	width: 100%;
 	padding: 6px 10px 6px 10px;
@@ -475,9 +484,6 @@ input {outline: none}
     .nav_imie {
     	height: 0;
   }
-	.item_nav_imie{
-		font-size: 0;
-	}
 	#twi{
 		height: 0;
 		width: 0;
