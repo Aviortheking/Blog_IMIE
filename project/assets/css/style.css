@@ -115,10 +115,10 @@ h2{
 	font-weight: 600;
 }
 .social{
-	padding: 11px 0px 0px 20px;
+	padding: 9px 0px 0px 20px;
 }
 .link{
-	padding: 9px 0px 0px 20px;
+	padding: 11px 0px 0px 20px;
 }
 
 .item_nav_blog_gauche{
@@ -379,7 +379,7 @@ input {outline: none}
 }
 .upFooter{
 	height: 160px;
-	background-color: #42027e;
+	background-color: #26004a;
 	text-align: center;
 }
 .lowFooter{
