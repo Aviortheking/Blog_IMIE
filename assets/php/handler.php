@@ -2,19 +2,19 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-require_once "../../../vendor/autoload.php";
+require_once "../../vendor/autoload.php";
 
 use App\Router;
 use App\Functions;
 use App\Tags\Tag;
 
-//renvoie vers le fichier css si il est demandé
+//renvoie vers le fichier css si il est demandï¿½
 if(Functions::endsWith($_GET["page"], ".css")) {
 	echo file_get_contents("../css/style.css");
 	die;
 }
 
-//renvoie vers le fichier js si demandé
+//renvoie vers le fichier js si demandï¿½
 if(Functions::endsWith($_GET["page"], ".js")) {
 	echo file_get_contents("../js/script.js");
 	die;
@@ -28,10 +28,10 @@ if($_GET["page"] != "" && !Functions::endsWith($_GET["page"], "/") && count($_GE
 	die;
 }
 
-//enleve les / du début & fin
+//enleve les / du dï¿½but & fin
 $_GET['page'] = trim($_GET['page'], '/');
 
-// si taille supérieur à 1 $_getpost = element
+// si taille supï¿½rieur ï¿½ 1 $_getpost = element
 if(count(explode("/", $_GET["page"])) > 1) {
 	$_GET["post"] = explode("/", $_GET["page"])[1];
 }
@@ -55,7 +55,7 @@ if($_GET["page"] == "/test/") {
 }
 
 /**
- * Démarrage du routage du contenu
+ * Dï¿½marrage du routage du contenu
  */
 
 $router = new Router();

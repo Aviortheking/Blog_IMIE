@@ -14,7 +14,7 @@
     },
     "autoload": {
         "classmap": [
-            "project/assets/php/"
+            "assets/php/"
         ]
     }
 }
