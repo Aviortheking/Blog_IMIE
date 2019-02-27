@@ -8,7 +8,7 @@ use PDO;
 
 /**
  * @author Avior <florian.bouillon@delta-wings.net>
- * @author Clément Fourrier
+ * @author ClÃ©ment Fourrier
  */
 class Functions {
 	public static function endsWith($haystack, $needle) {
@@ -51,13 +51,13 @@ class Functions {
 		$html = "<html><body>";
 		$html .= $source;
 		$html .= "</body></html>";
-		$tmpDoc->loadHTML($html);
-		// $tmpDoc->loadHTML('<?xml encoding="UTF-8">'.$html);
+		$tmpDoc->loadHTML('<?xml encoding="UTF-8">'.$html);
 
-		// foreach ($tmpDoc->childNodes as $item)
-		// if ($item->nodeType == XML_PI_NODE)
-		// $tmpDoc->removeChild($item);
-		// $tmpDoc->encoding = 'UTF-8';
+		/** @var DOMNode $item */
+		foreach ($tmpDoc->childNodes as $item)
+		if ($item->nodeType == XML_PI_NODE)
+		$tmpDoc->removeChild($item);
+		$tmpDoc->encoding = 'UTF-8';
 
 		/** @var DOMNode $node */
 		foreach($tmpDoc->getElementsByTagName('body')->item(0)->childNodes as $node) {
@@ -67,7 +67,7 @@ class Functions {
 	}
 
 	public static function loadRoutes() {
-		//recupération du router
+		//recupÃ©ration du router
 		$router = Router::getRouter();
 
 		$postCharacters = "[a-z0-9-]";
