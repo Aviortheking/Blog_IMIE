@@ -6,11 +6,6 @@ use DOMDocument;
 use DOMElement;
 use DOMNode;
 
-/**
- * @author Avior <florian.bouillon@delta-wings.net>
- *
- * @version 1.0.0
- */
 class Tag {
 
 	/** @var DOMDocument */

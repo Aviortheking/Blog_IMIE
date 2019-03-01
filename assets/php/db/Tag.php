@@ -31,7 +31,7 @@ class Tag {
 	 */
 	public static function list($recent = true, $limit = 100) {
 		$sort = $recent ? "DESC" : "ASC";
-		$query = "SELECT * FROM tag ORDER BY " . $sort . " LIMIT " . $limit;
+		$query = "SELECT * FROM tag ORDER BY name " . $sort . " LIMIT " . $limit;
 
 		$pdo = Functions::connect();
 		$cats = $pdo->query($query)->fetchAll();
