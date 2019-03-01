@@ -6,6 +6,7 @@ use App\Tags\Tag;
 use DomXPath;
 use App\Functions;
 use App\DB\Post;
+use App\DB\Category;
 
 /**
  * input
@@ -21,15 +22,18 @@ class Loop extends Tag {
 
 		$limit = (int) $el->getAttribute("limit");
 
-		$posts = Post::list($limit);
+		if($el->getAttribute("category") !== null) {
+			$posts = Post::listByCategory(Post::get($_GET["post"])->getCategory()->getId(), true, 6);
+			$postsList = array();
+			foreach ($posts as $post) {
+				if($post->getId() != $_GET["post"]) $postsList[] = $post;
+			}
+			$posts = $postsList;
+		} else {
+			$posts = Post::list(true, 6);
 
-		$pdo = Functions::connect();
-		$query = $pdo->query("SELECT title, categories.name as categorie, dt as date, short as content
-		FROM posts
-		INNER JOIN categories ON categories.id=posts.categorie
-		ORDER BY date DESC
-		LIMIT 6;");
-		$posts = $query->fetchAll();
+		}
+
 
 		$parent = $el->parentNode;
 		//var_dump($parent);
@@ -46,9 +50,13 @@ class Loop extends Tag {
 
 			foreach ($elements as $ele) {
 				if($ele->getAttribute("column") == "content") {
-					Functions::appendHTML($ele->parentNode, $posts[$i]["content"]);
+					Functions::appendHTML($ele->parentNode, $posts[$i]->getShort());
+				} elseif($ele->getAttribute("column") == "category") {
+					$txt = $doc->createTextNode($posts[$i]->getCategory()->getName());
+					$ele->parentNode->insertBefore($txt, $ele);
 				} else {
-					$txt = $doc->createTextNode($posts[$i][$ele->getAttribute("column")]);
+					$col = 'get' . ucfirst($ele->getAttribute("column"));
+					$txt = $doc->createTextNode($posts[$i]->$col());
 					$ele->parentNode->insertBefore($txt, $ele);
 				}
 			}
@@ -56,7 +64,13 @@ class Loop extends Tag {
 			$finder = new DomXPath($doc);
 			$nodes = $finder->query("//*[contains(@class, 'column-cat')]");
 
-			if(count($nodes) >= 1) $nodes[0]->setAttribute("class", str_replace("column-categorie", $posts[$i]["categorie"], $nodes[0]->getAttribute("class")));
+			if(count($nodes) >= 1) $nodes[0]->setAttribute("class", str_replace("column-category", $posts[$i]->getCategory()->getName() , $nodes[0]->getAttribute("class")));
+
+			$nodes = $finder->query("//*[contains(@class, 'column-link')]");
+
+			if(count($nodes) >= 1) $nodes[0]->setAttribute("href", "/post/".$posts[$i]->getId());
+			if(count($nodes) >= 1) $nodes[0]->setAttribute("class", str_replace("column-link", "", $nodes[0]->getAttribute("class")));
+
 
 			$loop = $pok->getElementsByTagName("loop");
 

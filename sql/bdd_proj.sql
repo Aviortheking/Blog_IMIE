@@ -12,8 +12,8 @@ CREATE TABLE posts (
 	url VARCHAR(32),
 	content TEXT,
 	short varchar(256),
-	dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	categorie INT,
+	dt VARCHAR(100),
+	category INT,
 	author INT
 );
 
@@ -40,8 +40,9 @@ CREATE TABLE categories (
 
 CREATE TABLE users (
 	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	password varchar(500),
 	username VARCHAR(128),
-	linkedin VARCHAR(560)
+	job VARCHAR(560)
 );
 
 
@@ -64,7 +65,7 @@ VALUES ('pokemon', 'pokemon', 'cacacacacacacacacacacacaca\r\ncacacacacacacacacac
 ('Pokemon Go', 'pokemon-go', 'I PLAY POKEMON GO EVERYDAY', 'I PLAY POKEMON GO', 2, 1);
 
 -- users
-INSERT INTO users (username, linkedin) VALUES ('Florian Bouillon', NULL), ('Adrien huchet', 'adrienhuchet');
+INSERT INTO users (username, job) VALUES ('Florian Bouillon', 'HTML King'), ('Adrien huchet', 'HTML Noob');
 
 -- categories
 INSERT INTO categories (name) VALUES ('devops'), ('ops'), ('dev'), ('digi');

@@ -33,17 +33,17 @@
 		<h3 id="titre-between">Articles récents</h3>
 		<div class="row articles">
 			<tag type="loop" for="posts" limit="6">
-				<div class="col-12 col-md-6 col-lg-4">
-					<div class="article column-categorie">
+				<a class="col-12 col-md-6 col-lg-4 column-link">
+					<div class="article column-category">
 						<h4 class="title">
 							<loop column="title" />
 						</h4>
 						<div class="etiquettes">
 							<span class="cat">
-								<loop column="categorie" />
+								<loop column="category" />
 							</span>
 							<span class="date">
-								<loop column="date" />
+								<loop column="dateTime" />
 							</span>
 						</div>
 						<div class="text">
@@ -51,7 +51,7 @@
 							</p>
 						</div>
 					</div>
-				</div>
+				</a>
 			</tag>
 		</div>
 	</main>

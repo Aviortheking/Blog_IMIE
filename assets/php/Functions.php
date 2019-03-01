@@ -5,6 +5,7 @@ namespace App;
 use DOMDocument;
 use DOMNode;
 use PDO;
+use App\Router;
 
 /**
  * @author Avior <florian.bouillon@delta-wings.net>

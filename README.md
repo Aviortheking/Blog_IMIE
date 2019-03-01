@@ -131,7 +131,7 @@ gere la redirection des requetes et gere le cache de certains fichiers
 - sql
 
 
-# Types de pages (pour design) :
+# Types de pages (pour design) 
 
 - / (page ou post)
 - /page/

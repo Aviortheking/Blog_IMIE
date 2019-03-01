@@ -3,19 +3,16 @@
 namespace App\Tags;
 
 use App\Tags\Tag;
+use App\DB\Post;
 
 /**
  * input <tag type="author" column="(column name)"/>
  * return text
  */
-class Author extends Tag {
+class AuthorTag extends Tag {
 	public function render() {
 
-		$post = array( //testing purpose
-			'name'=> "test",
-			'image'=> "pokemon",
-			'linkedin'=> "pouet"
-		);
+		$author = Post::get($_GET["post"])->getAuthor();
 
 
 
@@ -24,7 +21,9 @@ class Author extends Tag {
 
 		$doc = $this->getDoc();
 
-		$txt = $doc->createTextNode($post[$attr]);
+		$col = "get" . ucfirst($attr);
+
+		$txt = $doc->createTextNode($author->$col());
 
 		$pok->parentNode->insertBefore($txt, $pok);
 	}

@@ -1,5 +1,10 @@
 <?php
+
 namespace App\DB;
+
+use App\Functions;
+use PDO;
+
 
 class Tag {
 
@@ -7,51 +12,91 @@ class Tag {
 
 	private $name;
 
+	public function __construct() {}
+
+	public static function fromArray($array) {
+		$tag = new Tag();
+		$tag->setId($array["id"]);
+		$tag->setName($array["name"]);
+		return $tag;
+	}
+
 	/**
-	 * list of posts
+	 * Undocumented function
 	 *
-	 * @param boolean $recent sort by most recent or not
-	 * @param integer $limit limit the number of result
+	 * @param boolean $recent sort by most recent of less recent
+	 * @param int $limit
 	 *
-	 * @return array(Post)
+	 * @return Categorie[]
 	 */
 	public static function list($recent = true, $limit = 100) {
+		$sort = $recent ? "DESC" : "ASC";
+		$query = "SELECT * FROM tag ORDER BY " . $sort . " LIMIT " . $limit;
+
+		$pdo = Functions::connect();
+		$cats = $pdo->query($query)->fetchAll();
+
+		$res = array();
+
+		foreach ($cats as $cat) {
+			$res[] = Tag::fromArray($cat);
+		}
+
+		return $res;
 	}
 
-	/**
-	 *
-	 * get a specific Post
-	 *
-	 * @param integer $id the id
-	 *
-	 * @return Post
-	 */
 	public static function get(int $id) {
+		return Tag::fromArray(Functions::connect()->query("SELECT * FROM tag WHERE id=" . $id)->fetch());
+	}
+
+	public static function add(Tag $tag) {
+		$query = "INSERT INTO tag (id, name)
+		VALUES (NULL, ':name');";
+
+		$pdo = Functions::connect();
+		$prepared = $pdo->prepare($query);
+		$prepared->bindParam(":name", $tag->getName());
+		$prepared->execute();
+}
+
+	public static function remove(Tag $tag) {
+		Functions::connect()->prepare("DELETE FROM tag WHERE id=:id")->execute(array(":id" => $tag->getId()));
+
+	}
+
+	public static function update(Tag $tag) {
+		Functions::connect()->prepare("UPDATE tag SET name=:name WHERE id=:id")->execute(array(":name" => $tag->getName(), ":id" => $tag->getId()));
+	}
+
+
+	/**
+	 * Get the value of name
+	 */
+	public function getName()
+	{
+		return $this->name;
 	}
 
 	/**
-	 * add a post to the db
+	 * Set the value of name
 	 *
-	 * @param Post $post
-	 *
+	 * @return  self
 	 */
-	public static function add(Post $post) {
+	public function setName($name)
+	{
+		$this->name = $name;
+
+		return $this;
 	}
 
 	/**
-	 * remove the post
-	 *
-	 * @param Post $post
-	 *
+	 * Get the value of id
 	 */
-	public static function remove(Post $post) {}
-
-	/**
-	 * update the post data on the db
-	 *
-	 * @param Post $post
-	 *
-	 * @return void
-	 */
-	public static function update(Post $post) {}
+	public function getId()
+	{
+		return $this->id;
+	}
+	public function setId($id) {
+		$this->id = $id;
+	}
 }
