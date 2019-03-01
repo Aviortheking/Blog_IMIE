@@ -3,17 +3,37 @@
 namespace App\Tags;
 
 use App\Tags\Tag;
-use DomXPath;
-use App\Functions;
 use App\DB\Post;
-use App\DB\Category;
 
-/**
- * input
- * <tag type="loop" for="(table)" limit="(nombre-max g�n�r�)">
- * <loop column="element"/>
- * </tag>
- */
+class Search extends Tag {
+
+	public function render() {
+		$isRecent = isset($_GET["recent"]) && $_GET["recent"] == "false" ? false : true;
+		$category = isset($_GET["category"]) && intval($_GET["category"]) ? (int) $_GET["category"] : -1;
+		$tag = isset($_GET["tag"]) && intval($_GET["tag"]) ? (int) $_GET["tag"] : -1;
+
+		if($category != -1) {
+			$posts = Post::listByCategory($category, $isRecent, 20);
+		} else {
+			$posts = Post::list($isRecent, 10);
+		}
+		if($tag != -1) {
+			$tposts = array();
+			foreach ($posts as $post) {
+				foreach ($post->getTags() as $ptag) {
+					if($tag == $ptag->getId()) {
+						$tposts[] = $post;
+					}
+				}
+			}
+			$posts = $tposts;
+		}
+
+		var_dump($posts);
+
+	}
+}
+
 class Loop extends Tag {
 	public function render() {
 		$el = $this->getElement();

@@ -99,9 +99,12 @@ class Post {
 		return $this->dt;
 	}
 
+	/**
+	 *
+	 * @return \App\DB\Tag[]
+	 */
 	public function getTags() {
 		$temp = array();
-
 		if ($this->tags == null) return $temp;
 		foreach ($this->tags as $tag) {
 			$temp[] = Tag::get($tag);
@@ -160,7 +163,17 @@ class Post {
 		$res = array();
 
 		foreach ($posts as $post) {
-			$res[] = Post::fromArray($post);
+			$post = Post::fromArray($post);
+			$query = "SELECT * FROM post_tag WHERE post_id=". $post->getId();
+			$tagList = array();
+			$bool = $pdo->query($query);
+			// var_dump($bool->fetchAll());
+			if($bool) foreach ($pdo->query($query)->fetchAll() as $tag) {
+				$tagList[] = $tag["tag"];
+			}
+			$post->setTags($tagList);
+
+			$res[] = $post;
 		}
 
 		return $res;
