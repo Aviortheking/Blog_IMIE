@@ -20,7 +20,7 @@ class Editor extends \App\Tags\Tag {
 			case 'categories':
 				$option = $doc->createElement("option");
 				$text = $doc->createTextNode("Categorie");
-				$option->setAttribute("value", "-1");
+				$option->setAttribute("value", "0");
 				$option->setAttribute("disabled", "true");
 				$option->setAttribute("selected", "selected");
 				$option->appendChild($text);

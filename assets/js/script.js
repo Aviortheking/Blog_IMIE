@@ -41,14 +41,17 @@ var addTag = (element) => {
 
 var addingTag = (element) => {
 	var input = document.createElement("input");
-	var uuid = Math.floor(Math.random() * Math.floor(10000));
+	var uuid = Math.floor(Math.random() * Math.floor(-1000000));
+	var addtag = element.target.parentElement.querySelector(".add-tag");
 	input.setAttribute("type", "checkbox");
 	input.setAttribute("id", uuid);
+	input.setAttribute("data-text", addTag.value);
 
 	var label = document.createElement("label");
 	label.setAttribute("for", uuid);
-	var addtag = element.target.parentElement.querySelector(".add-tag");
 	label.innerText = addtag.value;
+
+	input.setAttribute("data-text", label.innerText);
 
 	element.target.parentElement.insertBefore(input, element.target);
 	element.target.parentElement.insertBefore(label, element.target);
@@ -62,3 +65,28 @@ var addingTag = (element) => {
 }
 
 document.querySelector(".addTag").addEventListener("click", addTag);
+
+
+var submit = (el) => {
+
+	var major = document.querySelector('.post.text > textarea');
+	var title = document.querySelector("h2.title > input");
+	var category = document.querySelector("span.cat > select");
+	var tags = document.querySelectorAll("input[type='checkbox']:checked");
+	console.log(title.value);
+	console.log(category.value);
+	console.log(major.value);
+	console.log(tags);
+	var tglst = "";
+	tags.forEach(element => {
+		tglst += "," + element.getAttribute("id") + (element.hasAttribute("data-text") ? ":" + element.getAttribute("data-text") : "");
+	});
+	tglst = tglst.substr(1);
+
+	window.location.search = "title="+ title.value +"&category=" + category.value + "&content=" + major.value + "&tags=" + tglst;
+
+	//?title=$title&category=$category&content=$major&
+
+}
+
+document.querySelector(".submitPost").addEventListener("click", submit);

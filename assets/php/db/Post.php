@@ -3,6 +3,8 @@
 namespace App\DB;
 
 use App\Functions;
+use DateTime;
+use PDO;
 
 class Post {
 
@@ -11,11 +13,7 @@ class Post {
 
 	private $title;
 
-	private $url;
-
 	private $content;
-
-	private $short;
 
 	private $category;
 
@@ -34,17 +32,8 @@ class Post {
 		$this->title = $title;
 	}
 
-
-	public function setUrl($url) {
-		$this->url = $url;
-	}
-
 	public function setContent($content) {
 		$this->content = $content;
-	}
-
-	public function setShort($short) {
-		$this->short = $short;
 	}
 
 	public function setCategory($category) {
@@ -75,16 +64,8 @@ class Post {
 		return $this->title;
 	}
 
-	public function getUrl() {
-		return $this->url;
-	}
-
 	public function getContent() {
 		return $this->content;
-	}
-
-	public function getShort() {
-		return $this->short;
 	}
 
 	public function getCategory() {
@@ -135,9 +116,7 @@ class Post {
 		$post = new Post();
 		$post->setId($array["id"]);
 		$post->setTitle($array["title"]);
-		$post->setUrl($array["url"]);
 		$post->setContent($array["content"]);
-		$post->setShort($array["short"]);
 		if(isset($array["category"])) $post->setCategory($array["category"]);
 		$post->setAuthor($array["author"]);
 		$post->setDateTime($array["dt"]);
@@ -240,19 +219,33 @@ class Post {
 	 *
 	 */
 	public static function add(Post $post) {
-		$query = "INSERT INTO posts (id, title, url, content, short, categorie, author, dt)
-		VALUES (NULL, ':title', ':url', ':content', ':short', ':categorie', ':author', ':dt');";
+		$query = "INSERT INTO posts (id, title, content, categorie, author, dt)
+		VALUES (NULL, ':title', ':content', ':category', ':author', ':dt');";
+
+		$title = $post->getTitle());
+		$content = $post->getContent());
+		$category = $post->getCategory()->getId(), PDO::PARAM_INT);
+		$author = $post->getAuthor()->getId(), PDO::PARAM_INT);
+		$dt = (new DateTime())->format("d/m/Y h:i:s"));
+
 
 		$pdo = Functions::connect();
 		$prepared = $pdo->prepare($query);
 		$prepared->bindParam(":title", $post->getTitle());
-		$prepared->bindParam(":url", $post->getUrl());
 		$prepared->bindParam(":content", $post->getContent());
-		$prepared->bindParam(":short", $post->getShort());
-		$prepared->bindParam(":categorie", $post->getCategory());
-		$prepared->bindParam(":author", $post->getAuthor());
-		$prepared->bindParam(":dt", $post->getDateTime());
-		$prepared->execute();
+		$prepared->bindParam(":category", $post->getCategory()->getId(), PDO::PARAM_INT);
+		$prepared->bindParam(":author", $post->getAuthor()->getId(), PDO::PARAM_INT);
+		$prepared->bindParam(":dt", (new DateTime())->format("d/m/Y h:i:s"));
+
+		var_dump($prepared->execute(array(
+			":title" => $post->getTitle(),
+			":content" => $post->getContent(),
+			":category" => $post->getCategory()->getId(),
+			":author" => $post->getAuthor()->getId(),
+			":dt" => (new DateTime())->format("d/m/Y h:i:s"),
+		)));
+		var_dump("t");
+
 	}
 
 
@@ -279,11 +272,9 @@ class Post {
 	 *
 	 */
 	public static function update(Post $post) {
-		Functions::connect()->prepare("UPDATE posts SET title=':title', url=':url', content=':content', short=':short', category=':category', author=':author', dt=':dt' WHERE id=:id")->execute(array(
+		Functions::connect()->prepare("UPDATE posts SET title=':title', content=':content', category=':category', author=':author', dt=':dt' WHERE id=:id")->execute(array(
 			":title" => $post->getTitle(),
-			":url" => $post->getUrl(),
 			":content" => $post->getContent(),
-			":short" => $post->getShort(),
 			":categorie" => $post->getCategorie(),
 			":author" => $post->getAuthor(),
 			":dt" => $post->getDt(),

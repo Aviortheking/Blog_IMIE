@@ -4,12 +4,17 @@ use App\Router;
 use App\Functions;
 use App\Tags\Tag;
 use App\Controller;
+use App\DB\Author;
+
+session_start();
 
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
 /** @var Composer\Autoload\ClassLoader $loader */
 $loader = require "../../vendor/autoload.php";
+
+$_SESSION["author"] = Author::list(true, 1)[0];
 
 define("DIR", str_replace("/php", "", __DIR__));
 

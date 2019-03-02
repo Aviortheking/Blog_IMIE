@@ -49,14 +49,24 @@ class Tag {
 		return Tag::fromArray(Functions::connect()->query("SELECT * FROM tag WHERE id=" . $id)->fetch());
 	}
 
+	/**
+	 * Undocumented function
+	 *
+	 * @param Tag $tag
+	 *
+	 * @return Tag
+	 */
 	public static function add(Tag $tag) {
 		$query = "INSERT INTO tag (id, name)
-		VALUES (NULL, ':name');";
+		VALUES (NULL, :name);";
+
+		// var_dump($tag);
 
 		$pdo = Functions::connect();
 		$prepared = $pdo->prepare($query);
-		$prepared->bindParam(":name", $tag->getName());
-		$prepared->execute();
+		$prepared->execute(array(":name" => $tag->getName()));
+
+		return Tag::list(true, 1)[0];
 }
 
 	public static function remove(Tag $tag) {
