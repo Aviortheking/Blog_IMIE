@@ -42,7 +42,7 @@ class Controller {
 						} elseif ($arr[0] === "editor" && isset($cl) && $cl == $class) {
 							if(!isset($_SESSION["author"]) || (isset($_SESSION["author"]) && $_SESSION["author"]->getRole() != "ROLE_EDITOR")) header("Location: /login/?redirect=".$_SERVER["REQUEST_URI"]);
 						} elseif($arr[0] === "admin" && isset($cl) && $cl ==$class) {
-							if(!isset($_SESSION["author"]) || (isset($_SESSION["author"]) && $_SESSION["author"]->getRole() != "ROLE_ADMIN")) header("Location: /login/?redirect=".$_SERVER["REQUEST_URI"]);
+							if(!isset($_SESSION["author"]) || (isset($_SESSION["author"]) && ($_SESSION["author"]->getRole() != "ROLE_ADMIN" || $_SESSION["author"]->getRole() != "ROLE_EDITOR"))) header("Location: /login/?redirect=".$_SERVER["REQUEST_URI"]);
 						}
 					}
 					if(isset($instance)) {
