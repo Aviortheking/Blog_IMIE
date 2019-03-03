@@ -45,7 +45,7 @@ class AddEditController extends Controller {
 	 */
 	public function postAdd() {
 
-		// var_dump($_SESSION["author"]);
+		var_dump($_GET);
 		// die;
 
 		if(isset($_GET["title"]) && isset($_GET["category"]) && isset($_GET["content"]) && isset($_GET["tags"])) {

@@ -11,7 +11,7 @@ use App\DB\Post;
 class Editor extends \App\Tags\Tag {
 	public function render() {
 		if($_GET["post"] == "new") $_GET["post"] = null;
-		else $post = Post::get($_GET["post"]);
+		elseif(isset($_GET["post"])) $post = Post::get($_GET["post"]);
 		//recuperation de la balise de base (<tag type="bold">pouet</tag>)
 		$pok = $this->getElement();
 		//recuperation du document (necessaire a la création de balises
