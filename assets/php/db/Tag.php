@@ -15,6 +15,7 @@ class Tag {
 	public function __construct() {}
 
 	public static function fromArray($array) {
+		if($array == false) return false;
 		$tag = new Tag();
 		$tag->setId($array["id"]);
 		$tag->setName($array["name"]);
@@ -27,7 +28,7 @@ class Tag {
 	 * @param boolean $recent sort by most recent of less recent
 	 * @param int $limit
 	 *
-	 * @return Categorie[]
+	 * @return Tag[]
 	 */
 	public static function list($recent = true, $limit = 100) {
 		$sort = $recent ? "DESC" : "ASC";
@@ -49,6 +50,23 @@ class Tag {
 		return Tag::fromArray(Functions::connect()->query("SELECT * FROM tag WHERE id=" . $id)->fetch());
 	}
 
+	public static function getByName(String $name) {
+		$query = "SELECT * FROM tag WHERE name=:name LIMIT 1";
+		$prepared = Functions::connect()->prepare($query);
+		$prepared->bindValue(":name", $name, PDO::PARAM_STR);
+		// $prepared->fetch();
+		// $q = Functions::connect()->query("SELECT * FROM tag WHERE name=\"" . $name . "\"");
+		// if(!$q) return false;
+		$prepared->execute();
+		$res = $prepared->fetch(PDO::FETCH_ASSOC);
+		// var_dump($res);
+		return Tag::fromArray($res);
+		// var_dump($name);
+		// var_dump($prepared->fetch());
+		// var_dump($prepared->errorCode());
+		// die;
+	}
+
 	/**
 	 * Undocumented function
 	 *
@@ -62,10 +80,11 @@ class Tag {
 
 		// var_dump($tag);
 
+		$name = $tag->getName();
+
 		$pdo = Functions::connect();
 		$prepared = $pdo->prepare($query);
-		$prepared->execute(array(":name" => $tag->getName()));
-
+		$prepared->execute(array(":name" => $name));
 		return Tag::list(true, 1)[0];
 }
 
@@ -108,5 +127,6 @@ class Tag {
 	}
 	public function setId($id) {
 		$this->id = $id;
+		return $this;
 	}
 }

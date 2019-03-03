@@ -14,6 +14,8 @@ class Author {
 
 	private $job;
 
+	private $role = "ROLE_USER";
+
 	public function __construct(){}
 
 	public function getId() {
@@ -36,6 +38,10 @@ class Author {
 		return $this->job;
 	}
 
+	public function getRole() {
+		return $this->role;
+	}
+
 	public function setId($id) {
 		$this->id = $id;
 	}
@@ -45,11 +51,19 @@ class Author {
 	}
 
 	public function setPassword($password) {
-		$this->password = \password_hash($password, PASSWORD_DEFAULT);
+		$this->password = password_hash($password, PASSWORD_DEFAULT);
+	}
+
+	public function setHashedPassword($password) {
+		$this->password = $password;
 	}
 
 	public function setJob($job) {
 		$this->job = $job;
+	}
+
+	public function setRole($role) {
+		$this->role = $role;
 	}
 
 
@@ -60,11 +74,13 @@ class Author {
 
 
 	public static function fromArray($array) {
+		if($array == false) return null;
 		$au = new Self();
 		$au->setId($array["id"]);
 		$au->setUsername($array["username"]);
-		$au->setPassword($array["password"]);
+		$au->setHashedPassword($array["password"]);
 		$au->setJob($array["job"]);
+		$au->setRole($array["role"]);
 		return $au;
 	}
 
@@ -88,16 +104,33 @@ class Author {
 		return Author::fromArray(Functions::connect()->query("SELECT * FROM users WHERE id=" . $id)->fetch());
 	}
 
+	public static function getByUsername(String $username) {
+		$query = "SELECT * FROM users WHERE username=:username";
+		$prepared = Functions::connect()->prepare($query);
+		$prepared->bindValue(":username", $username);
+		$prepared->execute();
+		return Author::fromArray($prepared->fetch());
+	}
+
 	public static function add(Author $author) {
-		$query = "INSERT INTO author (id, username, password, job)
-		VALUES (NULL, ':username', ':password', ':job');";
+		$query = "INSERT INTO users (id, username, password, job, role)
+		VALUES (NULL, :username, :password, :job, :role);";
+
+		$username = $author->getUsername();
+		$password = $author->getPassword();
+		$job = $author->getJob();
+		$role = $author->getRole();
 
 		$pdo = Functions::connect();
 		$prepared = $pdo->prepare($query);
-		$prepared->bindParam(":username", $author->getUsername());
-		$prepared->bindParam(":password", $author->getPassword());
-		$prepared->bindParam(":job", $author->getjob());
+		$prepared->bindParam(":username", $username);
+		$prepared->bindParam(":password", $password);
+		$prepared->bindParam(":job", $job);
+		$prepared->bindParam(":role", $role);
 		$prepared->execute();
+		// var_dump($prepared->errorInfo());
+		// die;
+		return Author::list(true, 1)[0];
 }
 
 	public static function remove(Author $author) {

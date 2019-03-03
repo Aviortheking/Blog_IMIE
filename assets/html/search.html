@@ -22,20 +22,24 @@
 		<!-- <tag type="search" /> -->
 		<div class="bloc-post search">
 			<tag type="loop" limit="20">
-				<div class="container-post post column-category">
-					<h2 class="title">
-						<loop column="title" />
-					</h2>
-					<div class="etiquettes">
-						<span class="cat">
-							<loop column="category" /></span>
-						<span class="date">
-							<loop column="dateTime" /></span>
+				<a class="column-link">
+					<div class="container-post post column-category">
+						<h2 class="title">
+							<loop column="title" />
+						</h2>
+						<div class="etiquettes">
+							<span class="cat">
+								<loop column="category" />
+							</span>
+							<span class="date">
+								<loop column="dateTime" />
+							</span>
+						</div>
+						<p class="post text">
+							<loop column="content" />
+						</p>
 					</div>
-					<p class="post text">
-						<loop column="content" />
-					</p>
-				</div>
+				</a>
 			</tag>
 		</div>
 

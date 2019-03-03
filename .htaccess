@@ -24,7 +24,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 # on redirige vers le fichier handler.php avec $1 qui est la page entré (ex: blog/1/2)
 # le L con connait déjà, QSA va mettre toutes les requetes a la suite
 # (ex : blog.delta-wings.net/flag?p=5 va devenir de notre coté -> blog.delta-wings.net/assets/php/handler.php?page=flag&p=5)
-RewriteRule ^(.*)$ /assets/php/handler.php?page=$1 [L,QSA]
+RewriteRule ^(.*)$ /assets/php/handler.php?page=$1 [QSA,L]
 
 # indique une redirection lorque on obtient une page d'erreur 403 (interdiction d'accès (permet de "cacher" les fichiers critiques))
 # on redirige vars note handler pour qu'il afficher la page 404

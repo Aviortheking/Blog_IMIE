@@ -69,7 +69,8 @@ class Post {
 	}
 
 	public function getCategory() {
-		return Category::get($this->category);
+		if($this->category != null) return Category::get($this->category);
+		else return null;
 	}
 
 	public function getAuthor() {
@@ -87,10 +88,14 @@ class Post {
 	public function getTags() {
 		$temp = array();
 		if ($this->tags == null) return $temp;
+		/** @var int $tag */
 		foreach ($this->tags as $tag) {
+			// var_dump($tag);
+			// die;
 			$temp[] = Tag::get($tag);
 		}
-		return $temp;
+		// die;
+		return array_unique($temp, SORT_REGULAR);
 	}
 
 
@@ -129,7 +134,7 @@ class Post {
 	 * @param boolean $recent sort by most recent or not
 	 * @param integer $limit limit the number of result
 	 *
-	 * @return array(Post)
+	 * @return Post[]
 	 */
 
 	public static function list($recent = true, $limit = 100) {
@@ -219,32 +224,42 @@ class Post {
 	 *
 	 */
 	public static function add(Post $post) {
-		$query = "INSERT INTO posts (id, title, content, categorie, author, dt)
-		VALUES (NULL, ':title', ':content', ':category', ':author', ':dt');";
+		$query = "INSERT INTO posts (id, title, content, category, author, dt)
+		VALUES (NULL, :title, :content, :category, :author, :dt);";
 
-		$title = $post->getTitle());
-		$content = $post->getContent());
-		$category = $post->getCategory()->getId(), PDO::PARAM_INT);
-		$author = $post->getAuthor()->getId(), PDO::PARAM_INT);
-		$dt = (new DateTime())->format("d/m/Y h:i:s"));
+		$title = $post->getTitle();
+		$content = $post->getContent();
+		$category = $post->getCategory()->getId();
+		$author = $post->getAuthor()->getId();
+		$dt = (new DateTime())->format("d/m/Y h:i:s");
 
 
 		$pdo = Functions::connect();
 		$prepared = $pdo->prepare($query);
-		$prepared->bindParam(":title", $post->getTitle());
-		$prepared->bindParam(":content", $post->getContent());
-		$prepared->bindParam(":category", $post->getCategory()->getId(), PDO::PARAM_INT);
-		$prepared->bindParam(":author", $post->getAuthor()->getId(), PDO::PARAM_INT);
-		$prepared->bindParam(":dt", (new DateTime())->format("d/m/Y h:i:s"));
+		$prepared->bindValue(":title", $title);
+		$prepared->bindValue(":content", $content);
+		$prepared->bindValue(":category", $category, PDO::PARAM_INT);
+		$prepared->bindValue(":author", $author, PDO::PARAM_INT);
+		$prepared->bindValue(":dt", $dt);
 
-		var_dump($prepared->execute(array(
-			":title" => $post->getTitle(),
-			":content" => $post->getContent(),
-			":category" => $post->getCategory()->getId(),
-			":author" => $post->getAuthor()->getId(),
-			":dt" => (new DateTime())->format("d/m/Y h:i:s"),
-		)));
-		var_dump("t");
+		$prepared->execute();
+
+		$p = Post::list(true, 1)[0]->getId();
+
+		$tags = $post->getTags();
+		var_dump($tags);
+		if(count($tags) >= 1) {
+			$q = "INSERT INTO post_tag (post_id, tag) VALUES ( :post , :tag )";
+			$prepared = $pdo->prepare($q);
+			$prepared->bindValue(":post", $p);
+			foreach ($tags as $tg) {
+				$id = $tg->getId();
+				$prepared->bindValue(":tag", $id);
+
+				$prepared->execute();
+			}
+		}
+		// var_dump($prepared->errorInfo());
 
 	}
 
@@ -272,14 +287,39 @@ class Post {
 	 *
 	 */
 	public static function update(Post $post) {
-		Functions::connect()->prepare("UPDATE posts SET title=':title', content=':content', category=':category', author=':author', dt=':dt' WHERE id=:id")->execute(array(
-			":title" => $post->getTitle(),
-			":content" => $post->getContent(),
-			":categorie" => $post->getCategorie(),
-			":author" => $post->getAuthor(),
-			":dt" => $post->getDt(),
-			":id" => $post->getId()
-		));
+
+		$title = $post->getTitle();
+		$content = $post->getContent();
+		$category = $post->getCategory()->getId();
+		$author = $post->getAuthor()->getId();
+		$dt = $post->getDateTime();
+		$id = $post->getid();
+
+		$pdo = Functions::connect();
+
+
+		$prepared = $pdo->prepare("UPDATE posts SET title=:title, content=:content, category=:category, author=:author, dt=:dt WHERE id=:id");
+		$prepared->bindValue(":title", $title);
+		$prepared->bindValue(":content", $content);
+		$prepared->bindValue(":category", $category, PDO::PARAM_INT);
+		$prepared->bindValue(":author", $author, PDO::PARAM_INT);
+		$prepared->bindValue(":dt", $dt);
+		$prepared->bindValue(":id", $id);
+		$prepared->execute();
+
+		$tags = $post->getTags();
+		if(count($tags) >= 1) {
+			$pdo->exec("DELETE FROM post_tag WHERE post_id=" . $id);
+			$q = "INSERT INTO post_tag (post_id, tag) VALUES ( :post , :tag )";
+			$prepared = $pdo->prepare($q);
+			$prepared->bindValue(":post", $id);
+			foreach ($tags as $tg) {
+				$id = $tg->getId();
+				$prepared->bindValue(":tag", $id);
+
+				$prepared->execute();
+			}
+		}
 	}
 
 }

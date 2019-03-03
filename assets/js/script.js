@@ -22,12 +22,7 @@ var addTag = (element) => {
 	cancelBtn.classList.add("cancelBtn");
 
 	cancelBtn.innerText = "Annuler";
-	cancelBtn.addEventListener("click", function(element) {
-		var input = element.target.parentElement.querySelector(".add-tag");
-		input.parentElement.querySelector(".addTag").innerText = "Add Tag";
-		input.parentElement.removeChild(input);
-		element.target.parentElement.removeChild(element.target);
-	});
+	cancelBtn.addEventListener("click", cancel);
 
 	btn.removeEventListener("click", addTag);
 	btn.addEventListener("click", addingTag);
@@ -37,6 +32,16 @@ var addTag = (element) => {
 
 	btn.innerText = "Ajouter le tag";
 
+}
+
+var cancel = (element) => {
+	var input = element.target.parentElement.querySelector(".add-tag");
+	var btn = input.parentElement.querySelector(".addTag");
+	btn.removeEventListener("click", addingTag);
+	btn.addEventListener("click", addTag);
+	btn.innerText = "Add Tag";
+	input.parentElement.removeChild(input);
+	element.target.parentElement.removeChild(element.target);
 }
 
 var addingTag = (element) => {
@@ -64,10 +69,7 @@ var addingTag = (element) => {
 	element.target.addEventListener("click", addTag);
 }
 
-document.querySelector(".addTag").addEventListener("click", addTag);
-
-
-var submit = (el) => {
+var submit = () => {
 
 	var major = document.querySelector('.post.text > textarea');
 	var title = document.querySelector("h2.title > input");
@@ -79,7 +81,7 @@ var submit = (el) => {
 	console.log(tags);
 	var tglst = "";
 	tags.forEach(element => {
-		tglst += "," + element.getAttribute("id") + (element.hasAttribute("data-text") ? ":" + element.getAttribute("data-text") : "");
+		tglst += "," + element.getAttribute("data-text");
 	});
 	tglst = tglst.substr(1);
 
@@ -89,4 +91,7 @@ var submit = (el) => {
 
 }
 
-document.querySelector(".submitPost").addEventListener("click", submit);
+if(document.querySelector(".addTag") != null) {
+	document.querySelector(".addTag").addEventListener("click", addTag);
+	document.querySelector(".submitPost").addEventListener("click", submit);
+}

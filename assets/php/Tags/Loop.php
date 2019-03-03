@@ -25,25 +25,22 @@ class Loop extends Tag {
 
 		$isRecent = isset($_GET["recent"]) && $_GET["recent"] == "false" ? false : true;
 		$category = isset($_GET["category"]) && intval($_GET["category"]) ? (int) $_GET["category"] : -1;
+		$category = $el->getAttribute("category") != '' ? Post::get($_GET["post"])->getCategory()->getId() : $category;
 		$tag = isset($_GET["tag"]) && intval($_GET["tag"]) ? (int) $_GET["tag"] : -1;
 
-		if($el->getAttribute("category") != '') {
-			$posts = Post::listByCategory(Post::get($_GET["post"])->getCategory()->getId(), $isRecent, 6);
-			$postsList = array();
-			foreach ($posts as $post) {
-				if($post->getId() != $_GET["post"]) $postsList[] = $post;
-			}
-			$posts = $postsList;
-		} else {
-			$posts = Post::list(true, 6);
-
-		}
-
 		if($category != -1) {
-			$posts = Post::listByCategory($category, $isRecent, 20);
+			$posts = Post::listByCategory($category, $isRecent, $limit);
+			if(isset($_GET["post"])) {
+				$postsList = array();
+				foreach ($posts as $post) {
+					if($post->getId() != $_GET["post"]) $postsList[] = $post;
+				}
+				$posts = $postsList;
+			}
 		} else {
-			$posts = Post::list($isRecent, 10);
+			$posts = Post::list($isRecent, $limit);
 		}
+
 		if($tag != -1) {
 			$tposts = array();
 			foreach ($posts as $post) {
@@ -68,9 +65,11 @@ class Loop extends Tag {
 
 			foreach ($elements as $ele) {
 				if($ele->getAttribute("column") == "content") {
-					Functions::appendHTML($ele->parentNode, $posts[$i]->getShort());
+					Functions::appendHTML($ele->parentNode, substr($posts[$i]->getContent(), 0, 255));
 				} elseif($ele->getAttribute("column") == "category") {
-					$txt = $doc->createTextNode($posts[$i]->getCategory()->getName());
+					// var_dump($posts[$i]->getCategory()->getName());
+					if($posts[$i]->getCategory() != null) $txt = $doc->createTextNode($posts[$i]->getCategory()->getName());
+					else $txt = $doc->createTextNode("no category");
 					$ele->parentNode->insertBefore($txt, $ele);
 				} else {
 					$col = 'get' . ucfirst($ele->getAttribute("column"));
@@ -80,9 +79,12 @@ class Loop extends Tag {
 			}
 
 			$finder = new DomXPath($doc);
-			$nodes = $finder->query("//*[contains(@class, 'column-cat')]");
+			$nodes = $finder->query("//*[contains(@class, 'column-category')]");
 
-			if(count($nodes) >= 1) $nodes[0]->setAttribute("class", str_replace("column-category", $posts[$i]->getCategory()->getName() , $nodes[0]->getAttribute("class")));
+			if(count($nodes) >= 1) {
+				if($posts[$i]->getCategory() != null) $nodes[0]->setAttribute("class", str_replace("column-category", $posts[$i]->getCategory()->getName() , $nodes[0]->getAttribute("class")));
+				else $nodes[0]->setAttribute("class", str_replace("column-category", "", $nodes[0]->getAttribute("class")));
+			}
 
 			$nodes = $finder->query("//*[contains(@class, 'column-link')]");
 

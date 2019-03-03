@@ -744,3 +744,15 @@ input {
 		height: 650px;
 	}
 }
+
+form.login > input {
+	text-align: center;
+	display: block;
+	margin: auto;
+}
+
+form.login >input[type="submit"] {
+	left: -46%;
+	position: relative;
+	margin-top: 10px;
+}

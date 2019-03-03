@@ -6,7 +6,6 @@ use App\Tags\Tag;
 use App\Controller;
 use App\DB\Author;
 
-session_start();
 
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
@@ -14,7 +13,17 @@ ini_set('display_errors', 'On');
 /** @var Composer\Autoload\ClassLoader $loader */
 $loader = require "../../vendor/autoload.php";
 
-$_SESSION["author"] = Author::list(true, 1)[0];
+// $_SESSION["author"] = Author::list(true, 1)[0];
+
+$auth = new Author(); //chargement de la class Author avant le début de session (pour que la classe dans la session rester complète)
+
+session_start();
+
+if(isset($_SESSION["author"])) { //wip
+	$_SESSION["author"] = Author::get($_SESSION["author"]->getId());
+}
+
+// var_dump($_SESSION["author"]);
 
 define("DIR", str_replace("/php", "", __DIR__));
 

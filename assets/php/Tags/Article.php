@@ -32,7 +32,9 @@ class Article extends Tag {
 
 			Functions::appendHTML($pok->parentNode, $post->getContent());
 		} elseif($attr == "category") {
-			$txt = $doc->createTextNode($post->getCategory()->getName());
+			if($post->getCategory() != null) $t = $post->getCategory()->getName();
+			else $t = "";
+			$txt = $doc->createTextNode($t);
 			$pok->parentNode->insertBefore($txt, $pok);
 		} else {
 			$col = "get" . ucfirst($attr);
@@ -41,9 +43,14 @@ class Article extends Tag {
 		}
 
 		$finder = new DomXPath($doc);
-		$nodes = $finder->query("//*[contains(@class, 'column-cat')]");
+		$nodes = $finder->query("//*[contains(@class, 'article-cat')]");
 
-		if(count($nodes) >= 1) $nodes[0]->setAttribute("class", str_replace("column-cat", $post->getCategory()->getName() , $nodes[0]->getAttribute("class")));
 
+
+
+		if(count($nodes) >= 1) {
+			if($post->getCategory() != null) $nodes[0]->setAttribute("class", str_replace("article-cat", $post->getCategory()->getName() , $nodes[0]->getAttribute("class")));
+			else $nodes[0]->setAttribute("class", str_replace("article-cat", "", $nodes[0]->getAttribute("class")));
+		}
 	}
 }

@@ -5,10 +5,13 @@ namespace App\Tags;
 use App\DB\Category;
 use DateTime;
 use App\DB\Tag;
+use App\DB\Post;
 
 
 class Editor extends \App\Tags\Tag {
 	public function render() {
+		if($_GET["post"] == "new") $_GET["post"] = null;
+		else $post = Post::get($_GET["post"]);
 		//recuperation de la balise de base (<tag type="bold">pouet</tag>)
 		$pok = $this->getElement();
 		//recuperation du document (necessaire a la création de balises
@@ -20,9 +23,9 @@ class Editor extends \App\Tags\Tag {
 			case 'categories':
 				$option = $doc->createElement("option");
 				$text = $doc->createTextNode("Categorie");
-				$option->setAttribute("value", "0");
+				$option->setAttribute("value", "1");
 				$option->setAttribute("disabled", "true");
-				$option->setAttribute("selected", "selected");
+				if(!isset($post)) $option->setAttribute("selected", "selected");
 				$option->appendChild($text);
 				$pok->parentNode->insertBefore($option, $pok);
 				foreach (Category::list() as $cat) {
@@ -30,15 +33,18 @@ class Editor extends \App\Tags\Tag {
 					$text = $doc->createTextNode($cat->getName());
 					$option->appendChild($text);
 					$option->setAttribute("value", $cat->getId());
+					if(isset($post) && $post->getCategory()->getId() == $cat->getId()) $option->setAttribute("selected", "selected");
 					$pok->parentNode->insertBefore($option, $pok);
 				}
 				break;
 			case 'datetime':
-				$dt = new DateTime();
-				$pok->parentNode->insertBefore($doc->createTextNode($dt->format('d/m/Y H:i:s')), $pok);
+				if(isset($post)) $txt = $post->getDateTime();
+				else $txt = (new DateTime())->format('d/m/Y H:i:s');
+				$pok->parentNode->insertBefore($doc->createTextNode($txt), $pok);
 				break;
 			case 'content':
 				$tarea = $doc->createElement("textarea");
+				if(isset($post)) $tarea->appendChild($doc->createTextNode($post->getContent()));
 				$tarea->setAttribute("style", "width: 100%; min-height: 200px");
 				$pok->parentNode->insertBefore($tarea, $pok);
 				break;
@@ -46,6 +52,7 @@ class Editor extends \App\Tags\Tag {
 				$input = $doc->createElement("input");
 				$input->setAttribute("style", "width: 100%");
 				$input->setAttribute("placeholder", "titre");
+				if(isset($post)) $input->setAttribute("value", $post->getTitle());
 				$pok->parentNode->insertBefore($input, $pok);
 				break;
 			case 'tags':
@@ -53,6 +60,10 @@ class Editor extends \App\Tags\Tag {
 					$tg = $doc->createElement("input");
 					$tg->setAttribute("id", $el->getId());
 					$tg->setAttribute("type", "checkbox");
+					$tg->setAttribute("data-text", $el->getName());
+					if(isset($post)) {
+						if(in_array($el, $post->getTags())) $tg->setAttribute("checked", "checked");
+					}
 					$txt = $doc->createElement("label");
 					$txt->appendChild($doc->createTextNode($el->getName()));
 					$txt->setAttribute("for", $el->getId());

@@ -34,15 +34,25 @@ class Controller {
 						$arr = preg_split("/ /", $annot);
 						if($arr[0] === "route") {
 							if(preg_match($arr[1], $route)) {
+								$cl = $class;
 								$instance = new $class();
 								$function = ($method->getName());
-								return $instance->$function();
+								// return $instance->$function();
 							}
+						} elseif ($arr[0] === "editor" && isset($cl) && $cl == $class) {
+							if(!isset($_SESSION["author"]) || (isset($_SESSION["author"]) && $_SESSION["author"]->getRole() != "ROLE_EDITOR")) header("Location: /login/?redirect=".$_SERVER["REQUEST_URI"]);
+						} elseif($arr[0] === "admin" && isset($cl) && $cl ==$class) {
+							if(!isset($_SESSION["author"]) || (isset($_SESSION["author"]) && $_SESSION["author"]->getRole() != "ROLE_ADMIN")) header("Location: /login/?redirect=".$_SERVER["REQUEST_URI"]);
 						}
+					}
+					if(isset($instance)) {
+						return $instance->$function();
 					}
 				}
 			}
 		}
+		header("HTTP/1.0 404 Not Found");
+		return file_get_contents(DIR."/html/404.html");
 
 	}
 }
