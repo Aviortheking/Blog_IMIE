@@ -148,8 +148,9 @@ body {
 }
 
 h2 {
-	font-weight: 600;
+	font-weight: bold;
 	font-size: 17px;
+	color: #3a3a3a;
 }
 
 h3 {
@@ -364,7 +365,18 @@ input {
 	font-family: 'Open Sans', sans-serif;
 	border-bottom: 5px solid black;
 	border-radius: 5px;
+	/* margin-bottom: 50px; */
+}
+.bounce{
+	-webkit-transition: 200ms;
+	-o-transition: 200ms;
+	transition: 200ms;
 	margin-bottom: 50px;
+}
+.bounce:hover{
+	text-decoration: none;
+	color: #007bff;
+	transform: translate3d(0,-4px,0);
 }
 
 .article.dev {
@@ -407,6 +419,7 @@ input {
 .post .cat {
 	color: white;
 	font-weight: bold;
+	text-transform: uppercase;
 }
 
 .article.ops .cat,
@@ -432,6 +445,7 @@ input {
 .article .title {
 	line-height: 24px;
 	font-weight: bold;
+    color: #3a3a3a;
 }
 
 .article .text {
@@ -455,6 +469,11 @@ input {
 }
 
 .container-post {
+	background-color: white;
+	padding: 45px;
+}
+
+.container-search {
 	margin-bottom: 20px;
 	background-color: white;
 	padding: 45px;
