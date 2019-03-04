@@ -1,11 +1,11 @@
 <div>
 	<div class="nav_imie">
+		<tag type="element" />
 		<div class="container-fluid">
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<ul>
-							<li class="item_nav_imie link"><a>Connexion</a></li>
 							<li class="item_nav_imie link"><a href="https://imie44.ymag.cloud">Accès Net-Yparéo</a></li>
 							<li class="item_nav_imie link"><a href="https://www.imie.fr">IMIE Numérique</a></li>
 							<li class="item_nav_imie social"><a href="https://twitter.com/EcoleIMIE">
@@ -13,7 +13,21 @@
 							<li class="item_nav_imie social"><a href="https://www.facebook.com/EcolesIMIE/">
 									<tag type="svg" file="facebook" style="color: white; width: 18px; height: 18px" /></a></li>
 							<li class="item_nav_imie link" style="float: left">
-								<tag type="user" />
+								<tag type="isLoggedIn">
+									<if true>
+										<tag type="user" column="username" />
+									</if>
+									<if false>
+										<a href="/login">Connection</a>
+									</if>
+								</tag>
+							</li>
+							<li class="item_nav_imie link" style="float: left">
+								<tag type="isLoggedIn" role="ROLE_ADMIN">
+									<if true>
+										<a href="/users">Utilisateurs</a>
+									</if>
+								</tag>
 							</li>
 						</ul>
 					</div>
@@ -29,8 +43,14 @@
 						<ul>
 							<li class="item_nav_blog_logo"><a href="/">
 									<tag type="svg" file="logo-imie-blog" style="color: white; width: 200px; height: 64px; margin-top: 6px;" /></a></li>
-							<li class="item_nav_blog_droite_icon"><input id="search" type="text" placeholder="Recherche"><a>
-									<tag type="svg" file="mignify" style="color: rgba(0, 0, 0, .5); width: 18px; height: 18px" /></a></li>
+							<li class="item_nav_blog_droite_icon">
+								<form method="dialog" action="/search">
+									<input name="term" id="search" class="el-search" type="text" placeholder="Recherche">
+									<button type="submit">
+										<tag type="svg" file="mignify" style="color: rgba(0, 0, 0, .5); width: 18px; height: 18px" />
+									</button>
+								</form>
+							</li>
 							<li class="item_nav_blog_droite devops"><a>DEVOPS</a></li>
 							<li class="item_nav_blog_droite ops"><a>OPS</a></li>
 							<li class="item_nav_blog_droite digi"><a>DIGI</a></li>

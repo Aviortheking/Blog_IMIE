@@ -43,6 +43,9 @@ class Controller {
 							if(!isset($_SESSION["author"]) || (isset($_SESSION["author"]) && ($_SESSION["author"]->getRole() != "ROLE_EDITOR" && $_SESSION["author"]->getRole() != "ROLE_ADMIN"))) header("Location: /login/?redirect=".$_SERVER["REQUEST_URI"]);
 						} elseif($arr[0] === "admin" && isset($cl) && $cl ==$class) {
 							if(!isset($_SESSION["author"]) || (isset($_SESSION["author"]) && $_SESSION["author"]->getRole() != "ROLE_ADMIN")) header("Location: /login/?redirect=".$_SERVER["REQUEST_URI"]);
+						} elseif($arr[0] === "title" && isset($cl) && $cl == $class) {
+							array_shift($arr);
+							$_GET['page_title'] = join(" ", $arr);
 						}
 					}
 					if(isset($instance)) {
@@ -51,6 +54,7 @@ class Controller {
 				}
 			}
 		}
+		$_GET["page_title"] = "404 error";
 		header("HTTP/1.0 404 Not Found");
 		return file_get_contents(DIR."/html/404.html");
 

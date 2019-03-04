@@ -9,9 +9,6 @@
             "email": "florian.bouillon@delta-wings.net"
         }
     ],
-    "require-dev": {
-        "phpunit/phpunit": "^8"
-    },
     "autoload": {
         "classmap": [
             "assets/php/"

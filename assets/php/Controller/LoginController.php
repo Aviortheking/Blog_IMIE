@@ -11,6 +11,7 @@ class LoginController extends Controller {
 
 	/**
 	 * @route /^\/login\/$/
+	 * @title Login
 	 */
 	public function login() {
 
@@ -38,6 +39,7 @@ class LoginController extends Controller {
 
 	/**
 	 * @route /^\/register\/$/
+	 * @title Register
 	 */
 	public function register() {
 		if(isset($_POST["password"]) && isset($_POST["username"]) && Author::getByUsername($_POST["username"]) === null) {

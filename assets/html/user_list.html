@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+</head>
+
+<body>
+	<header>
+		<tag type="includes" file="header" />
+	</header>
+	<main class="test container">
+		<div class="bloc_principal">
+			<div class="cover-black">
+				<div class="bloc_principal_titre">
+					<h1>LE BLOG DES APPRENANTS</h1>
+				</div>
+				<div class="cover-text">
+					<h2 id="titre-home">cliquez sur un utilisateur pour le modifier</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Nom d'utilisateur</th>
+								<th>Role</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tag type="users">
+								<tr>
+									<td>
+										<loop column="username" />
+									</td>
+									<td>
+										<loop column="role" />
+									</td>
+								</tr>
+							</tag>
+						</tbody>
+					</table>
+					<a href="/users/new" class="bloc-plus">Nouvel utilisateur</a>
+				</div>
+			</div>
+		</div>
+	</main>
+	<footer>
+		<tag type="includes" file="footer" />
+	</footer>
+</body>
+
+</html>
