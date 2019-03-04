@@ -455,7 +455,7 @@ input {
 }
 
 .container-post {
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	background-color: white;
 	padding: 45px;
 }
@@ -665,6 +665,27 @@ input {
 }
 
 @media screen and (max-width: 640px) {
+	.contact-footer{
+		display: none;
+	}
+	.connexion-footer{
+		display: none;
+	}
+	.bloc-post{
+		width: 100%;
+	}
+	.bloc-recent{
+		padding-top: 10px;
+		width: 100%;
+	}
+	.cover-text {
+		padding: 0px 40px;
+	}
+
+	.bloc-filter{
+		display:none;
+	}
+
 	.nav_imie {
 		height: 0;
 	}
@@ -739,6 +760,10 @@ input {
 
 	.bloc_principal {
 		height: 650px;
+	}
+
+	.cover-text {
+		padding: 0px 40px;
 	}
 }
 
