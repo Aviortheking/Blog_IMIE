@@ -137,12 +137,17 @@ class Post {
 	 * @return Post[]
 	 */
 
-	public static function list($recent = true, $limit = 100) {
+	public static function list($recent = true, $limit = 100, $term = "") {
 		$sort = $recent ? "DESC" : "ASC";
-		$query = "SELECT * FROM posts ORDER BY dt " . $sort . " LIMIT " . $limit;
+		$query = "SELECT * FROM posts WHERE title LIKE :el OR content LIKE :el ORDER BY dt " . $sort . " LIMIT " . $limit;
 
 		$pdo = Functions::connect();
-		$posts = $pdo->query($query)->fetchAll();
+
+		$prp = $pdo->prepare($query);
+		$term = "%" . $term . "%";
+		$prp->bindValue(":el", $term);
+		$prp->execute();
+		$posts = $prp->fetchAll();
 
 		$res = array();
 
@@ -163,13 +168,22 @@ class Post {
 		return $res;
 	}
 
-	public static function listByCategory($categoryId = null, $recent = true, $limit = 100) {
+	public static function listByCategory($categoryId = null, $recent = true, $limit = 100, $el = "") {
 		$sort = $recent ? "DESC" : "ASC";
-		$cat = $categoryId !== null ? "WHERE category=" . $categoryId : "";
-		$query = "SELECT * FROM posts " . $cat . " ORDER BY dt " . $sort . " LIMIT " . $limit;
+		$cat = $categoryId !== null ? "AND category=" . $categoryId : "";
+		$query = "SELECT * FROM posts WHERE (title LIKE :el OR content LIKE :el ) " . $cat . " ORDER BY dt " . $sort . " LIMIT " . $limit;
 
 		$pdo = Functions::connect();
-		$posts = $pdo->query($query)->fetchAll();
+
+		$prp = $pdo->prepare($query);
+
+		$el = "%" . $el . "%";
+
+		$prp->bindValue(":el", $el);
+		$prp->execute();
+		// var_dump($prp->errorInfo());
+		// die;
+		$posts = $prp->fetchAll();
 
 		$res = array();
 

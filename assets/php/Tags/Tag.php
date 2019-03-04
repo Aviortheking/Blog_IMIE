@@ -81,6 +81,11 @@ class Tag {
 			$head->item(0)->appendChild($t);
 		}
 
+		$title = $dom->getElementsByTagName("title");
+		if($title->count() >= 1) {
+			$title->item(0)->appendChild($dom->createTextnode($_GET["page_title"]));
+		}
+
 
 		$list = $dom->getElementsByTagName("tag");
 

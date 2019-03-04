@@ -28,8 +28,10 @@ class Loop extends Tag {
 		$category = $el->getAttribute("category") != '' ? Post::get($_GET["post"])->getCategory()->getId() : $category;
 		$tag = isset($_GET["tag"]) && intval($_GET["tag"]) ? (int) $_GET["tag"] : -1;
 
+		$term = isset($_GET["term"]) ? $_GET["term"] : "";
+
 		if($category != -1) {
-			$posts = Post::listByCategory($category, $isRecent, $limit);
+			$posts = Post::listByCategory($category, $isRecent, $limit, $term);
 			if(isset($_GET["post"])) {
 				$postsList = array();
 				foreach ($posts as $post) {
@@ -38,7 +40,7 @@ class Loop extends Tag {
 				$posts = $postsList;
 			}
 		} else {
-			$posts = Post::list($isRecent, $limit);
+			$posts = Post::list($isRecent, $limit, $term);
 		}
 
 		if($tag != -1) {

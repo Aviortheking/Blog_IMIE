@@ -20,15 +20,24 @@ class IsLoggedIn extends Tag {
 
 		$el = $this->getElement();
 
+
+		if(isset($_SESSION["author"])) {
+			if($el->hasAttribute("role") || !$_SESSION["author"]->getRole() == "ROLE_ADMIN") {
+				$loggedin = $el->getAttribute("role") == $_SESSION["author"]->getRole();
+			} else $loggedin = true;
+		} else $loggedin = false;
+
+
 		//debugging purpose
-		$loggedin = false;
+		// $loggedin = false;
+		// var_dump($loggedin);
 
 		foreach ($el->getElementsByTagName("if") as $element) {
 			if($element->hasAttribute("true") && $loggedin) {
-				$r = $element->childNodes->item(1);
+				$r = $element->childNodes->item(0);
 				$el->parentNode->insertBefore($r, $el);
-			} elseif ($element->hasAttribute("false")) {
-				$r = $element->childNodes->item(1);
+			} elseif ($element->hasAttribute("false") && !isset($_SESSION["author"])) {
+				$r = $element->childNodes->item(0);
 				$el->parentNode->insertBefore($r, $el);
 			}
 		}

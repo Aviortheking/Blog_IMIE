@@ -469,12 +469,7 @@ input {
 }
 
 .container-post {
-	background-color: white;
-	padding: 45px;
-}
-
-.container-search {
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	background-color: white;
 	padding: 45px;
 }
@@ -583,10 +578,11 @@ input {
 .filtre {
 	width: 100%;
 	padding: 6px 10px 6px 10px;
-	color: white;
+	color: #fff;
 	text-transform: uppercase;
 	font-size: 14px;
 	margin-top: 15px;
+	display: block;
 }
 
 .dev-color {
@@ -618,7 +614,7 @@ input {
 }
 
 .tag {
-	color: white;
+	color: #fff;
 	background-color: #cccccc;
 	text-transform: uppercase;
 	display: inline-block;
@@ -636,7 +632,7 @@ input {
 .phraseFooter {
 	font-size: 17px;
 	padding-top: 10px;
-	color: white;
+	color: #fff;
 	font-weight: 400;
 }
 
@@ -655,7 +651,7 @@ input {
 	background-color: transparent;
 	border: none;
 	width: 180px;
-	color: white;
+	color: #fff;
 }
 
 #glass {
@@ -669,7 +665,7 @@ input {
 }
 
 #titre-home {
-	color: white;
+	color: #fff;
 	padding-bottom: 20px;
 	font-size: 20px;
 	font-weight: bold;
@@ -684,6 +680,27 @@ input {
 }
 
 @media screen and (max-width: 640px) {
+	.contact-footer{
+		display: none;
+	}
+	.connexion-footer{
+		display: none;
+	}
+	.bloc-post{
+		width: 100%;
+	}
+	.bloc-recent{
+		padding-top: 10px;
+		width: 100%;
+	}
+	.cover-text {
+		padding: 0px 40px;
+	}
+
+	.bloc-filter{
+		display:none;
+	}
+
 	.nav_imie {
 		height: 0;
 	}
@@ -759,6 +776,10 @@ input {
 	.bloc_principal {
 		height: 650px;
 	}
+
+	.cover-text {
+		padding: 0px 40px;
+	}
 }
 
 form.login > input {
@@ -767,8 +788,31 @@ form.login > input {
 	margin: auto;
 }
 
-form.login >input[type="submit"] {
-	left: -46%;
+form.login >input[type="submit"], form.login > a {
+	left: -44%;
 	position: relative;
 	margin-top: 10px;
+	border: none;
+}
+
+form.login > a {
+	left: -28%;
+	margin-top: 65px;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #fff;
+}
+
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+	background:#fff;
+}
+
+table {
+	width: 100%;
 }

@@ -7,10 +7,11 @@ use App\DB\Post;
 use App\DB\Tag;
 
 
-class AddEditController extends Controller {
+class PostController extends Controller {
 	/**
 	 * @route /^\/post\/[0-9]+\/edit\/$/
 	 * @editor
+	 * @title Modification d'article
 	 */
 	public function postEdit() {
 		if(isset($_GET["post"]) && isset($_GET["title"]) && isset($_GET["category"]) && isset($_GET["content"]) && isset($_GET["tags"])) {
@@ -42,6 +43,7 @@ class AddEditController extends Controller {
 	/**
 	 * @route /^\/post\/new\/*$/
 	 * @editor
+	 * @title Ajout d'Article
 	 */
 	public function postAdd() {
 
@@ -74,5 +76,14 @@ class AddEditController extends Controller {
 		}
 
 		return file_get_contents(DIR."/html/post_new.html");
+	}
+
+
+	/**
+	 * @route /^\/post\/[0-9]+\/$/
+	 * @title Article
+	 */
+	public function post() {
+		return file_get_contents(DIR."/html/post.html");
 	}
 }

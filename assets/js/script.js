@@ -95,3 +95,17 @@ if(document.querySelector(".addTag") != null) {
 	document.querySelector(".addTag").addEventListener("click", addTag);
 	document.querySelector(".submitPost").addEventListener("click", submit);
 }
+
+document.querySelector("#search + a").addEventListener("click", function() {
+	window.location = window.location.pathname + "?term=" + document.querySelector("#search").value;
+});
+
+document.querySelectorAll(".int-search .filtre").forEach(function(el) {
+	el.addEventListener("click", function() {
+		var tagW = new URL(window.location).searchParams.get("tag");
+		var tag = (tagW != null ? "&tag=" + tagW : "");
+		var termW = new URL(window.location).searchParams.get("term");
+		var term = (termW != null ? "&term=" + termW : "");
+		window.location = window.location.pathname + "?category=" + this.getAttribute("data-category") + tag + term;
+	})
+})
