@@ -192,6 +192,7 @@ h3 {
 .nav_blog {
 	height: 80px;
 	background-color: #110230;
+	margin-bottom: 70px;
 }
 
 .item_nav_imie {
@@ -332,8 +333,21 @@ h3 {
 	transition: 300ms;
 
 }
-
 .bloc-plus:hover {
+	background-color: #42027e;
+	cursor: pointer;
+}
+.bloc-button{
+	margin-top: 40px;
+	background-color: #190034;
+	padding: 10px 15px;
+	color: white;
+	-webkit-transition: 300ms;
+	-o-transition: 300ms;
+	transition: 300ms;
+}
+
+.bloc-button:hover{
 	background-color: #42027e;
 	cursor: pointer;
 }
@@ -346,6 +360,14 @@ h3 {
 
 input {
 	outline: none
+}
+.icon-search{
+	color: rgba(0, 0, 0, .5); 
+	width: 18px;
+	height: 18px;
+	background: none;
+	border: none;
+	cursor: pointer;
 }
 
 /* -----------------------------------------------------
@@ -460,24 +482,32 @@ input {
  * ----------------------------------------------------- */
 .bloc-post {
 	width: 69%;
-	margin-top: 70px;
-	box-shadow: 1px 1px 30px 1px lightgrey;
+	/* margin-top: 70px; */
+	/* box-shadow: 1px 1px 30px 1px lightgrey; */
 	background-position: center;
 	background-size: cover;
 	display: inline-block;
 	border-radius: 5px;
 }
-
 .container-post {
+	background-color: white;
+	padding: 45px;
+}
+
+.container-search {
 	margin-bottom: 30px;
 	background-color: white;
 	padding: 45px;
+	box-shadow: 1px 1px 30px 1px lightgrey;
 }
 
 .author {
 	margin-top: 25px;
 	display: flex;
 	flex-flow: row wrap;
+}
+.row{
+	/* margin-bottom: 60px; */
 }
 
 .by {
@@ -496,12 +526,16 @@ input {
 
 .bloc-filter {
 	width: 25%;
-	margin-top: 70px;
+	/* margin-top: 70px; */
 	background-color: white;
 	background-size: cover;
 	box-shadow: 1px 1px 30px 1px lightgrey;
 	float: right;
 	padding: 45px;
+}
+label{
+	margin: 6px;
+	color: #3c3c3c;
 }
 
 .post .text {
@@ -561,7 +595,6 @@ input {
 }
 
 .contenue-recent-search {
-	margin-top: 20px;
 	float: right;
 	box-shadow: 1px 1px 30px 1px lightgrey;
 	padding: 6px;
@@ -569,10 +602,12 @@ input {
 	background-color: white;
 	display: inline-block;
 	height: 30px;
+	margin-bottom: 30px;
 }
 
 .next {
 	float: right;
+	margin-top: 20px;
 }
 
 .filtre {
@@ -622,6 +657,7 @@ input {
 	padding: 7px 12px;
 	border-radius: 18px;
 	margin-top: 12px;
+	margin-right: 8px;
 }
 
 .icon-recent {
@@ -783,13 +819,17 @@ input {
 }
 
 form.login > input {
-	text-align: center;
+	/* text-align: center; */
 	display: block;
 	margin: auto;
+	margin-bottom: 10px;
+	padding: 6px 16px;
+	font-size: 14px;
+	border: none;
 }
 
 form.login >input[type="submit"], form.login > a {
-	left: -44%;
+	/* left: -44%; */
 	position: relative;
 	margin-top: 10px;
 	border: none;
@@ -804,7 +844,15 @@ a:hover {
 	text-decoration: none;
 	color: #fff;
 }
-
+.submit{
+	background: none;
+	border: none;
+	cursor: pointer;
+	outline: 0;
+}
+.submit:hover{
+	outline: none;
+}
 
 td, th {
 	border: 1px solid #dddddd;
