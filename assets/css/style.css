@@ -168,6 +168,10 @@ h3 {
 	height: 285vh;
 }
 
+footer{
+	margin-top: 70px;
+}
+
 .articleHome {
 	margin: auto;
 	text-align: center;
@@ -387,9 +391,17 @@ input {
 	font-family: 'Open Sans', sans-serif;
 	border-bottom: 5px solid black;
 	border-radius: 5px;
-	/* margin-bottom: 50px; */
+	margin-bottom: 50px;
+	-webkit-transition: 200ms;
+	-o-transition: 200ms;
+	transition: 200ms;
 }
-.bounce{
+.article:hover{
+	text-decoration: none;
+	color: #007bff;
+	transform: translate3d(0,-4px,0);
+}
+/* .bounce{
 	-webkit-transition: 200ms;
 	-o-transition: 200ms;
 	transition: 200ms;
@@ -399,7 +411,7 @@ input {
 	text-decoration: none;
 	color: #007bff;
 	transform: translate3d(0,-4px,0);
-}
+} */
 
 .article.dev {
 	border-bottom-color: #f2d761;
@@ -483,7 +495,14 @@ input {
 .bloc-post {
 	width: 69%;
 	/* margin-top: 70px; */
-	/* box-shadow: 1px 1px 30px 1px lightgrey; */
+	box-shadow: 1px 1px 30px 1px lightgrey;
+	background-position: center;
+	background-size: cover;
+	display: inline-block;
+	border-radius: 5px;
+}
+.bloc-search {
+	width: 69%;
 	background-position: center;
 	background-size: cover;
 	display: inline-block;
@@ -493,12 +512,18 @@ input {
 	background-color: white;
 	padding: 45px;
 }
-
 .container-search {
 	margin-bottom: 30px;
 	background-color: white;
 	padding: 45px;
 	box-shadow: 1px 1px 30px 1px lightgrey;
+	-webkit-transition: 200ms;
+    -o-transition: 200ms;
+	transition: 200ms;
+	border-radius: 5px;
+}
+.container-search:hover{
+	transform: translate3d(0,-4px,0);
 }
 
 .author {
@@ -532,6 +557,7 @@ input {
 	box-shadow: 1px 1px 30px 1px lightgrey;
 	float: right;
 	padding: 45px;
+	border-radius: 5px;
 }
 label{
 	margin: 6px;
@@ -596,7 +622,7 @@ label{
 
 .contenue-recent-search {
 	float: right;
-	box-shadow: 1px 1px 30px 1px lightgrey;
+	/* box-shadow: 1px 1px 30px 1px lightgrey; */
 	padding: 6px;
 	padding-left: 10px;
 	background-color: white;
@@ -608,6 +634,14 @@ label{
 .next {
 	float: right;
 	margin-top: 20px;
+	-webkit-transition: 200ms;
+	-o-transition: 200ms;
+	transition: 200ms;
+	box-shadow: 1px 1px 30px 1px lightgrey;
+}
+.next:hover{
+	color: #007bff;
+	box-shadow: 1px 1px 30px 1px rgba(0,163,249,0.3);
 }
 
 .filtre {
@@ -708,7 +742,7 @@ label{
 }
 
 #titre-between {
-	margin-top: 130px;
+	margin-top: 100px;
 	margin-bottom: 30px;
 	font-family: 'Open Sans', sans-serif;
 	font-size: 22px;
