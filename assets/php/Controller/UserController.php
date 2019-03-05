@@ -18,6 +18,7 @@ class UserController extends Controller {
 			$user = new Author();
 			$user->setUsername($_POST["username"]);
 			$user->setPassword($_POST["password"]);
+			$user->setRole($_POST["role"]);
 			Author::add($user);
 			header("Location: /users/");
 		}
@@ -35,11 +36,12 @@ class UserController extends Controller {
 	}
 
 	/**
-	 * @route /^\/user\/edit\/$/
+	 * @route /\/users\/edit\/[0-9]+\/$/
 	 * @admin
 	 * @title Modifier un utilisateur
 	 */
 	public function editUser() {
+		$_GET['edit_user'] = explode("/", $_GET["page"])[3];
 		return \file_get_contents(DIR."/html/user_edit.html");
 	}
 

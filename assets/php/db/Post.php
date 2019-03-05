@@ -261,7 +261,6 @@ class Post {
 		$p = Post::list(true, 1)[0]->getId();
 
 		$tags = $post->getTags();
-		var_dump($tags);
 		if(count($tags) >= 1) {
 			$q = "INSERT INTO post_tag (post_id, tag) VALUES ( :post , :tag )";
 			$prepared = $pdo->prepare($q);
@@ -320,6 +319,7 @@ class Post {
 		$prepared->bindValue(":dt", $dt);
 		$prepared->bindValue(":id", $id);
 		$prepared->execute();
+		var_dump($prepared->errorInfo());
 
 		$tags = $post->getTags();
 		if(count($tags) >= 1) {

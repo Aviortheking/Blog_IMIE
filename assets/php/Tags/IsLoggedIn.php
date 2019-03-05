@@ -22,9 +22,13 @@ class IsLoggedIn extends Tag {
 
 
 		if(isset($_SESSION["author"])) {
-			if($el->hasAttribute("role") || !$_SESSION["author"]->getRole() == "ROLE_ADMIN") {
+			if($_SESSION["author"]->getRole() == "ROLE_ADMIN") {
+				$loggedin = true;
+			} elseif($el->hasAttribute("role")) {
 				$loggedin = $el->getAttribute("role") == $_SESSION["author"]->getRole();
-			} else $loggedin = true;
+			} else {
+				$loggedin = true;
+			}
 		} else $loggedin = false;
 
 

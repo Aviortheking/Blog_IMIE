@@ -366,7 +366,7 @@ input {
 	outline: none
 }
 .icon-search{
-	color: rgba(0, 0, 0, .5); 
+	color: rgba(0, 0, 0, .5);
 	width: 18px;
 	height: 18px;
 	background: none;
@@ -487,6 +487,12 @@ input {
 	color: #848484;
 	font-size: 15px;
 	line-height: 20px;
+	overflow: hidden;
+	height: 180px;
+}
+
+.article .text img {
+	display: none;
 }
 
 /* -----------------------------------------------------

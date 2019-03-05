@@ -6,6 +6,7 @@ use App\DB\Category;
 use DateTime;
 use App\DB\Tag;
 use App\DB\Post;
+use App\Functions;
 
 
 class Editor extends \App\Tags\Tag {
@@ -43,9 +44,11 @@ class Editor extends \App\Tags\Tag {
 				$pok->parentNode->insertBefore($doc->createTextNode($txt), $pok);
 				break;
 			case 'content':
-				$tarea = $doc->createElement("textarea");
-				if(isset($post)) $tarea->appendChild($doc->createTextNode($post->getContent()));
+				$tarea = $doc->createElement("div");
+
+				if(isset($post)) Functions::appendHTML($tarea, $post->getContent());
 				$tarea->setAttribute("style", "width: 100%; min-height: 200px");
+				$tarea->setAttribute("class", "summernote");
 				$pok->parentNode->insertBefore($tarea, $pok);
 				break;
 			case 'title':

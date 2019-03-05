@@ -20,7 +20,8 @@
 						<form name="login" id="name" method="POST" class="login" action="./edit">
 							<input name="username" id="username" type="text" placeholder="Nom d'utilisateur" />
 							<input name="password" id="password" type="password" placeholder="Mot de passe" />
-							<select>
+							<select name="ROLE_ADMIN">
+								<tag type="userEditor" el="role" />
 								<option value="ROLE_USER">Utilisateur</option>
 								<option value="ROLE_EDITOR">Editeur</option>
 								<option value="ROLE_ADMIN">Administrateur</option>

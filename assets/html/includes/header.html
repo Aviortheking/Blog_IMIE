@@ -22,13 +22,31 @@
 									</if>
 								</tag>
 							</li>
-							<li class="item_nav_imie link" style="float: left">
-								<tag type="isLoggedIn" role="ROLE_ADMIN">
-									<if true>
+							<tag type="isLoggedIn" role="ROLE_ADMIN">
+								<if true>
+									<li class="item_nav_imie link" style="float: left">
 										<a href="/users">Utilisateurs</a>
-									</if>
-								</tag>
-							</li>
+									</li>
+								</if>
+							</tag>
+							<tag type="isLoggedIn" role="ROLE_EDITOR">
+								<if true>
+									<li class="item_nav_imie link" style="float: left">
+
+										<a href="/post/new">Ajouter un article</a>
+									</li>
+
+								</if>
+							</tag>
+							<tag type="isLoggedIn" role="ROLE_EDITOR">
+								<if true>
+									<li class="item_nav_imie link" style="float: left">
+
+										<a href="/logout">Déconexion</a>
+									</li>
+
+								</if>
+							</tag>
 						</ul>
 					</div>
 				</div>
@@ -44,17 +62,17 @@
 							<li class="item_nav_blog_logo"><a href="/">
 									<tag type="svg" file="logo-imie-blog" style="color: white; width: 200px; height: 64px; margin-top: 6px;" /></a></li>
 							<li class="item_nav_blog_droite_icon">
-								<form method="dialog" action="/search">
+								<form method="GET" action="/search/">
 									<input name="term" id="search" class="el-search" type="text" placeholder="Recherche">
 									<button type="submit" class="submit">
 										<tag type="svg" file="mignify" style="color: rgba(0, 0, 0, .5); width: 18px; height: 18px;" />
 									</button>
 								</form>
 							</li>
-							<li class="item_nav_blog_droite devops"><a>DEVOPS</a></li>
-							<li class="item_nav_blog_droite ops"><a>OPS</a></li>
-							<li class="item_nav_blog_droite digi"><a>DIGI</a></li>
-							<li class="item_nav_blog_droite dev"><a>DEV</a></li>
+							<li class="item_nav_blog_droite devops"><a href="/search/?category=1">DEVOPS</a></li>
+							<li class="item_nav_blog_droite ops"><a href="/search/?category=2">OPS</a></li>
+							<li class="item_nav_blog_droite digi"><a href="/search/?category=4">DIGI</a></li>
+							<li class="item_nav_blog_droite dev"><a href="/search/?category=3">DEV</a></li>
 						</ul>
 					</div>
 				</div>

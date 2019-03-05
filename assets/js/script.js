@@ -1,10 +1,17 @@
 // Fichier des scripts (logiquement que pour les requets AJAX et pour certaines animations) (plusieurs fichiers sont possible bien sur)
 
-var processForm = () => {
+var sendImage = (file) => {
 	var request = new XMLHttpRequest();
 	var form = new FormData();
-	form.append("photo", document.querySelector("#file").files[0]);
-	request.open("POST", "/test/", true);
+	form.append("file", file[0]);
+	request.open("POST", "../upload/", true);
+	eadystatechange = function() {//Call a function when the state changes.
+		if(http.readyState == 4 && http.status == 200) {
+			alert(http.responseText);
+			// window.location = window.location.href.replace("edit/", "");
+		}
+	}
+	console.log("sending");
 	request.send(form);
 }
 
@@ -71,13 +78,13 @@ var addingTag = (element) => {
 
 var submit = () => {
 
-	var major = document.querySelector('.post.text > textarea');
+	var major = document.querySelector('.note-editing-area .note-editable');
 	var title = document.querySelector("h2.title > input");
 	var category = document.querySelector("span.cat > select");
 	var tags = document.querySelectorAll("input[type='checkbox']:checked");
 	console.log(title.value);
 	console.log(category.value);
-	console.log(major.value);
+	console.log(major.innerText);
 	console.log(tags);
 	var tglst = "";
 	tags.forEach(element => {
@@ -85,9 +92,33 @@ var submit = () => {
 	});
 	tglst = tglst.substr(1);
 
-	window.location.search = "title="+ title.value +"&category=" + category.value + "&content=" + major.value + "&tags=" + tglst;
+	var data = new FormData();
+	data.append("title", title.value);
+	data.append("category", category.value);
+	data.append("content", major.innerHTML);
+	data.append("tags", tglst);
 
-	//?title=$title&category=$category&content=$major&
+	var http = new XMLHttpRequest();
+	http.open("POST", "./", true);
+	http.onreadystatechange = function() {//Call a function when the state changes.
+		if(http.readyState == 4 && http.status == 200) {
+			document.write(http.responseText);
+			// window.location = window.location.href.replace("edit/", "");
+		}
+	}
+	http.send(data);
+	// var url = './';
+	// var params = "title="+ title.value +"&category=" + category.value + "&content=" + major.innerHTML + "&tags=" + tglst;
+	// http.open('POST', url, true);
+
+	// //Send the proper header information along with the request
+	// http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+	// console.log(major.innerHTML);
+
+
+	// http.send(params);
+
 
 }
 
@@ -96,7 +127,7 @@ if(document.querySelector(".addTag") != null) {
 	document.querySelector(".submitPost").addEventListener("click", submit);
 }
 
-document.querySelector("#search + a").addEventListener("click", function() {
+document.querySelector("#search + button").addEventListener("click", function() {
 	window.location = window.location.pathname + "?term=" + document.querySelector("#search").value;
 });
 
@@ -109,3 +140,34 @@ document.querySelectorAll(".int-search .filtre").forEach(function(el) {
 		window.location = window.location.pathname + "?category=" + this.getAttribute("data-category") + tag + term;
 	})
 })
+
+
+$(document).ready(function() {
+	$('.summernote').summernote({
+		minHeight: 300,
+		// airMode: true,
+		callbacks: {
+			onImageUpload: function(file) {
+				sendImage(file);
+				console.log(file);
+				let img = document.createElement("img");
+				window.location
+				img.setAttribute("src", "/uploads/posts/" + window.location.pathname.split("/")[2] + "/" + file[0].name);
+				img.setAttribute("style", "width: 100%");
+				$('.summernote').summernote('insertNode', img)
+			}
+		},
+		toolbar: [
+			['style', ['style']],
+			['font', ['bold', 'italic', 'underline', 'clear']],
+			['fontname', ['fontname']],
+			['color', ['color']],
+			['para', ['ul', 'ol', 'paragraph']],
+			['height', ['height']],
+			['table', ['table']],
+			['insert', ['link', 'picture', 'hr']],
+			['view', ['fullscreen', 'codeview']],
+			['help', ['help']]
+		]
+	});
+});
