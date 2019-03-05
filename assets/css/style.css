@@ -147,7 +147,7 @@ body {
 	font-family: 'Open Sans', sans-serif;
 }
 
-h2 {
+h2.title {
 	font-weight: bold;
 	font-size: 17px;
 	color: #3a3a3a;
@@ -187,6 +187,8 @@ footer{
 		padding-left: 10%;
 	}
 }
+
+.bloc_principal_titre
 
 .nav_imie {
 	height: 40px;
@@ -248,28 +250,32 @@ footer{
 	display: inline-block;
 	float: right;
 	font-weight: bold;
+}
+
+.item_nav_blog_droite a {
 	-webkit-transition: 400ms;
 	-o-transition: 400ms;
 	transition: 400ms;
+
 }
 
-.item_nav_blog_droite:hover {
+.item_nav_blog_droite a:hover {
 	cursor: pointer;
 }
 
-.item_nav_blog_droite.dev:hover {
+.item_nav_blog_droite.dev a:hover {
 	color: #ffd75f;
 }
 
-.item_nav_blog_droite.digi:hover {
+.item_nav_blog_droite.digi a:hover {
 	color: #6bb194;
 }
 
-.item_nav_blog_droite.ops:hover {
+.item_nav_blog_droite.ops a:hover {
 	color: #2ea3f2;
 }
 
-.item_nav_blog_droite.devops:hover {
+.item_nav_blog_droite.devops a:hover {
 	color: #ff1c4a;
 }
 
@@ -308,6 +314,28 @@ footer{
 	font-size: 20px;
 	color: white;
 	font-weight: 600;
+}
+
+.bloc_principal_titre h1, h4.title {
+	font-size: 20px;
+}
+
+h4.title {
+	font-size: 18px;
+}
+
+a[href]:hover {
+	color: inherit;
+	text-decoration: none;
+}
+
+.item_nav_blog_droite a[href] {
+	font-weight: 700;
+	color: white;
+}
+
+.nav_imie {
+	background: #000;
 }
 
 .cover-text {
