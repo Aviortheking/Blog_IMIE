@@ -67,7 +67,7 @@ class Loop extends Tag {
 
 			foreach ($elements as $ele) {
 				if($ele->getAttribute("column") == "content") {
-					Functions::appendHTML($ele->parentNode, substr($posts[$i]->getContent(), 0, 255));
+					Functions::appendHTML($ele->parentNode, $posts[$i]->getContent());
 				} elseif($ele->getAttribute("column") == "category") {
 					// var_dump($posts[$i]->getCategory()->getName());
 					if($posts[$i]->getCategory() != null) $txt = $doc->createTextNode($posts[$i]->getCategory()->getName());

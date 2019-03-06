@@ -322,12 +322,12 @@ a[href]:hover {
 .bloc-plus {
 	margin-top: 40px;
 	float: right;
-	background-color: #190034;
 	padding: 10px 15px;
 	color: white;
 	-webkit-transition: 300ms;
 	-o-transition: 300ms;
 	transition: 300ms;
+	background-color: #190034;
 
 }
 .bloc-plus:hover {
