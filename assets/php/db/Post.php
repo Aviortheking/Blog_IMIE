@@ -139,7 +139,7 @@ class Post {
 
 	public static function list($recent = true, $limit = 100, $term = "") {
 		$sort = $recent ? "DESC" : "ASC";
-		$query = "SELECT * FROM posts WHERE title LIKE :el OR content LIKE :el ORDER BY dt " . $sort . " LIMIT " . $limit;
+		$query = "SELECT * FROM posts WHERE title LIKE :el OR content LIKE :el ORDER BY id " . $sort . " LIMIT " . $limit;
 
 		$pdo = Functions::connect();
 
@@ -171,7 +171,7 @@ class Post {
 	public static function listByCategory($categoryId = null, $recent = true, $limit = 100, $el = "") {
 		$sort = $recent ? "DESC" : "ASC";
 		$cat = $categoryId !== null ? "AND category=" . $categoryId : "";
-		$query = "SELECT * FROM posts WHERE (title LIKE :el OR content LIKE :el ) " . $cat . " ORDER BY dt " . $sort . " LIMIT " . $limit;
+		$query = "SELECT * FROM posts WHERE (title LIKE :el OR content LIKE :el ) " . $cat . " ORDER BY id " . $sort . " LIMIT " . $limit;
 
 		$pdo = Functions::connect();
 

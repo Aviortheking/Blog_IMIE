@@ -8,6 +8,16 @@ use App\DB\Tag;
 
 
 class PostController extends Controller {
+
+	/**
+	 * @route /^\/post\/$/
+	 * @title Modification d'article
+	 */
+	public function blog() {
+		header("Location: /post/".Post::list(true, 1)[0]->getId() . "/");
+	}
+
+
 	/**
 	 * @route /^\/post\/[0-9]+\/edit\/$/
 	 * @editor
@@ -45,7 +55,7 @@ class PostController extends Controller {
 	 * @title Ajout d'Article
 	 */
 	public function postAdd() {
-
+		var_dump($_POST);
 		if(isset($_POST["title"]) && isset($_POST["category"]) && isset($_POST["content"]) && isset($_POST["tags"])) {
 			$post = new Post();
 
