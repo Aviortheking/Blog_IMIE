@@ -599,13 +599,18 @@ label{
 	color: #3c3c3c;
 }
 
-.post .text {
+.container-search .text {
 	font-size: 14px;
 	color: #737272ee;
 	line-height: 1.5;
 	margin-top: 28px;
 	height: 88px;
-    overflow: hidden;
+	overflow: hidden;
+}
+
+.container-post .text {
+	margin-top: 30px;
+	overflow-x: auto;
 }
 
 .credit {
