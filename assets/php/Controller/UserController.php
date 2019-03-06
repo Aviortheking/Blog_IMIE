@@ -14,7 +14,7 @@ class UserController extends Controller {
 	 */
 	public function addUser() {
 
-		if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["role"])) {
+		if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["role"]) && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty($_POST["role"])) {
 			$user = new Author();
 			$user->setUsername($_POST["username"]);
 			$user->setPassword($_POST["password"]);
@@ -41,7 +41,6 @@ class UserController extends Controller {
 	 * @title Modifier un utilisateur
 	 */
 	public function editUser() {
-		var_dump($_POST);
 		$_GET['edit_user'] = explode("/", $_GET["page"])[2];
 
 		if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["job"]) && isset($_POST["role"])) {
@@ -49,9 +48,9 @@ class UserController extends Controller {
 			$user->setUsername($_POST["username"]);
 			if($_POST["password"] != '') $user->setPassword($_POST["password"]);
 			$user->setRole($_POST["role"]);
-			var_dump($user);
+			$user->setJob($_POST["job"]);
 			Author::update($user);
-			// header("Location: /users/");
+			header("Location: /users/");
 		}
 		return file_get_contents(DIR."/html/user_edit.html");
 	}
@@ -59,7 +58,6 @@ class UserController extends Controller {
 	/**
 	 * @route /\/users\/[0-9]+\/delete\/$/
 	 * @admin
-	 * @title Modifier un utilisateur
 	 */
 	public function deleteUser() {
 		$_GET['edit_user'] = explode("/", $_GET["page"])[2];

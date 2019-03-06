@@ -18,8 +18,8 @@
 					<h2 id="titre-home">Créer un utilisateur</h2>
 					<div class="p-home">
 						<form name="login" id="name" method="POST" class="login" action="/users/new/">
-							<input name="username" id="username" type="text" placeholder="Nom d'utilisateur" />
-							<input name="password" id="password" type="password" placeholder="Mot de passe" />
+							<input required name="username" id="username" type="text" placeholder="Nom d'utilisateur" />
+							<input required name="password" id="password" type="password" placeholder="Mot de passe" />
 							<select name="role" id="role">
 								<option default value="ROLE_USER">Utilisateur</option>
 								<option value="ROLE_EDITOR">Editeur</option>

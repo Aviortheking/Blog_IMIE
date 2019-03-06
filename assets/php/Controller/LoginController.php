@@ -15,7 +15,7 @@ class LoginController extends Controller {
 	 */
 	public function login() {
 
-		if(isset($_POST["username"]) && isset($_POST["password"])) {
+		if(isset($_POST["username"]) && isset($_POST["password"]) && !empty($_POST["password"]) && !empty($_POST["username"])) {
 			$user = Author::getByUsername($_POST["username"]);
 			if($user->checkPassword($_POST["password"])) {
 				$_SESSION["author"] = $user;
@@ -40,7 +40,7 @@ class LoginController extends Controller {
 	 * @title Register
 	 */
 	public function register() {
-		if(isset($_POST["password"]) && isset($_POST["username"]) && Author::getByUsername($_POST["username"]) === null) {
+		if(isset($_POST["password"]) && isset($_POST["username"]) && Author::getByUsername($_POST["username"]) === null && !empty($_POST["password"]) && !empty($_POST["username"])) {
 			$user = new Author();
 			$user->setUsername($_POST["username"]);
 			$user->setPassword($_POST["password"]);
