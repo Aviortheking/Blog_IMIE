@@ -339,6 +339,9 @@ a[href]:hover {
 	-o-transition: 300ms;
 	transition: 300ms;
 	background-color: #190034;
+	outline: 0;
+    border: 0;
+
 
 }
 .bloc-plus:hover {
@@ -601,6 +604,8 @@ label{
 	color: #737272ee;
 	line-height: 1.5;
 	margin-top: 28px;
+	height: 88px;
+    overflow: hidden;
 }
 
 .credit {
