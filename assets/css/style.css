@@ -938,3 +938,24 @@ table {
 .bloc-filter label {
 	width: 80%;
 }
+
+.post u {
+	font-weight: 700;
+}
+
+.post i {
+	font-style: italic;
+}
+
+.post ol {
+	list-style: decimal-leading-zero;
+}
+
+.post ul {
+	list-style: disc;
+}
+
+.bloc-search a {
+	color: inherit;
+	text-decoration: inherit;
+}

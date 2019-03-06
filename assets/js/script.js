@@ -102,8 +102,10 @@ var submit = () => {
 	http.open("POST", "./", true);
 	http.onreadystatechange = function() {//Call a function when the state changes.
 		if(http.readyState == 4 && http.status == 200) {
-			document.write(http.responseText);
-			// window.location = window.location.href.replace("edit/", "");
+			// document.write(http.responseText);
+			let href = window.location.href.replace("edit/", "");
+			href.replace("new/", "");
+			window.location = href;
 		}
 	}
 	http.send(data);
@@ -124,7 +126,23 @@ document.querySelectorAll(".filtre").forEach(function(el) {
 		var tag = (tagW != null ? "&tag=" + tagW : "");
 		var termW = new URL(window.location).searchParams.get("term");
 		var term = (termW != null ? "&term=" + termW : "");
-		window.location = "/search/?category=" + this.getAttribute("data-category") + tag + term;
+		var recentW = new URL(window.location).searchParams.get("recent");
+		var recent = (recentW != null ? "&recent=" + recentW : "");
+		window.location = "/search/?category=" + this.getAttribute("data-category") + tag + term + recent;
+	})
+})
+
+document.querySelectorAll(".recent").forEach(function(el) {
+	el.addEventListener("click", function() {
+		var tagW = new URL(window.location).searchParams.get("tag");
+		var tag = (tagW != null ? "&tag=" + tagW : "");
+		var termW = new URL(window.location).searchParams.get("term");
+		var term = (termW != null ? "&term=" + termW : "");
+		var recentW = new URL(window.location).searchParams.get("recent");
+		var recent = "?recent=" + (recentW != null && recentW == "false" ? "true" : "false");
+		var categoryW = new URL(window.location).searchParams.get("category");
+		var cetagory = (categoryW != null ? "&category=" + categoryW : "");
+		window.location = "/search/" + recent + tag + term + cetagory;
 	})
 })
 
@@ -145,15 +163,13 @@ $(document).ready(function() {
 			}
 		},
 		toolbar: [
-			['style', ['style']],
 			['font', ['bold', 'italic', 'underline', 'clear']],
-			['fontname', ['fontname']],
 			['color', ['color']],
 			['para', ['ul', 'ol', 'paragraph']],
 			['height', ['height']],
 			['table', ['table']],
 			['insert', ['link', 'picture', 'hr']],
-			['view', ['fullscreen', 'codeview']],
+			['view', ['codeview']],
 			['help', ['help']]
 		]
 	});

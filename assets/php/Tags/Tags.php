@@ -20,6 +20,7 @@ class Tags extends Tag {
 			$url = "?tag=" . $tag->getId();
 			if(isset($_GET["term"])) $url .= "&term=" . $_GET["term"];
 			if(isset($_GET["category"])) $url .= "&category=" . $_GET["category"];
+			if(isset($_GET["recent"])) $url .= "&recent=" . $_GET["recent"];
 			$res->setAttribute("href", "/search/" . $url);
 			$classes = "tag";
 			if(isset($_GET["tag"]) && $tag->getId() == $_GET["tag"]) $classes .= " active";

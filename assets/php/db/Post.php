@@ -245,7 +245,7 @@ class Post {
 		$content = $post->getContent();
 		$category = $post->getCategory()->getId();
 		$author = $post->getAuthor()->getId();
-		$dt = (new DateTime())->format("d/m/Y h:i:s");
+		$dt = (new DateTime())->format("d/m/Y");
 
 
 		$pdo = Functions::connect();
