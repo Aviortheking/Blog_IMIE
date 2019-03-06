@@ -171,6 +171,16 @@ h3 {
 footer{
 	margin-top: 70px;
 }
+a{
+	color: white;
+}
+
+.post * {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+    color: #737272ee;
+    line-height: 1.5;
+}
 
 .articleHome {
 	margin: auto;
@@ -341,7 +351,8 @@ a[href]:hover {
 
 .cover-text {
 	padding: 0px 90px;
-	margin-top: 100px;
+	margin-top: 130px;
+    margin-bottom: 120px;
 	text-align: center;
 }
 
@@ -525,6 +536,11 @@ input {
 .article .text img, .container-search img {
 	display: none;
 }
+.container-align{
+	display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
 
 /* -----------------------------------------------------
  * 						Posts
@@ -548,6 +564,7 @@ input {
 .container-post {
 	background-color: white;
 	padding: 45px;
+	/* border-radius: 5px; */
 }
 .container-search {
 	margin-bottom: 30px;
@@ -596,6 +613,20 @@ input {
 	padding: 45px;
 	border-radius: 5px;
 }
+.bloc-filter a{
+	color: white;
+	}
+a:not([href]):not([tabindex]){
+	color: white;
+	}
+a:not([href]):not([tabindex]):hover{
+	color: white;
+	}
+
+a{
+	cursor: pointer;
+}
+
 label{
 	margin: 6px;
 	color: #3c3c3c;
@@ -656,26 +687,40 @@ label{
 	background-color: white;
 	display: inline-block;
 }
+.contenue-recent {
+	color: white;
+}
 
 .contenue-recent-search {
 	float: right;
-	/* box-shadow: 1px 1px 30px 1px lightgrey; */
-	padding: 6px;
-	padding-left: 10px;
+	box-shadow: 1px 1px 30px 1px lightgrey;
+	padding: 11px 19px 27px;
 	background-color: white;
 	display: inline-block;
 	height: 30px;
 	margin-bottom: 30px;
+	color: #484848;
+	-webkit-transition: 200ms;
+    -o-transition: 200ms;
+	transition: 200ms;
+	cursor: pointer;
+}
+.contenue-recent-search:hover {
+	box-shadow: 1px 1px 50px 8px #cecece;
 }
 
 .next {
 	float: right;
 	margin-top: 20px;
-	-webkit-transition: 200ms;
-	-o-transition: 200ms;
-	transition: 200ms;
+	-webkit-transition: 400ms;
+	-o-transition: 400ms;
+	transition: 400ms;
 	box-shadow: 1px 1px 30px 1px lightgrey;
-	color:#000;
+	color: #150032;
+}
+.next:hover{
+	background-color: #150032;
+	color: white;
 }
 
 .filtre {
@@ -690,18 +735,46 @@ label{
 
 .dev-color {
 	background-color: #fccb3a;
+	-webkit-transition: 200ms;
+    -o-transition: 200ms;
+	transition: 200ms;
+	border: none;
+}
+.dev-color:hover{
+	background-color: #fcdb3a;
 }
 
 .digi-color {
 	background-color: #6bb194;
+	-webkit-transition: 200ms;
+    -o-transition: 200ms;
+	transition: 200ms;
+	border: none;
+}
+.digi-color:hover{
+    background-color: #6bcea5;
 }
 
 .ops-color {
 	background-color: #2ea3f2;
+	-webkit-transition: 200ms;
+    -o-transition: 200ms;
+	transition: 200ms;
+	border: none;
+}
+.ops-color:hover{
+	background-color: #5dbaf9;
 }
 
 .devops-color {
 	background-color: #ff1c4a;
+	-webkit-transition: 200ms;
+    -o-transition: 200ms;
+	transition: 200ms;
+	border: none;
+}
+.devops-color:hover{
+    background-color: #ff6b89;
 }
 
 .bloc-recent {
@@ -726,6 +799,14 @@ label{
 	border-radius: 18px;
 	margin-top: 12px;
 	margin-right: 8px;
+	/* margin-top: 20px; */
+	-webkit-transition: 300ms;
+	-o-transition: 300ms;
+	transition: 300ms;
+}
+.tag:hover{
+	background-color: #a5a5a5;
+	color: white;
 }
 
 .icon-recent {
@@ -905,6 +986,9 @@ form.login >input[type="submit"], form.login > a {
 
 form.login a {
 	width: 106px;
+}
+.login{
+	float: initial;
 }
 
 a:hover {
