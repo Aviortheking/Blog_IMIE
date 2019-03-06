@@ -103,8 +103,11 @@ var submit = () => {
 	http.onreadystatechange = function() {//Call a function when the state changes.
 		if(http.readyState == 4 && http.status == 200) {
 			// document.write(http.responseText);
-			let href = window.location.href.replace("edit/", "");
-			href.replace("new/", "");
+			let href = window.location.href;
+			href = href.split("/");
+			href.pop();
+			href.pop();
+			href = href.join("/");
 			window.location = href;
 		}
 	}
