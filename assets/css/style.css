@@ -128,6 +128,15 @@ h3 {
 	margin-top: 30px;
 }
 
+.title-edit {
+	font-weight: 200;
+	font-size: 15px;
+	margin-bottom: 12px;
+}
+.addTag{
+	margin-top: 20px;
+}
+
 .contenue {
 	height: 285vh;
 }
@@ -440,6 +449,7 @@ input {
 .article .etiquettes,
 .post .etiquettes {
 	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .article .date,
@@ -533,6 +543,10 @@ input {
 	padding: 45px;
 	/* border-radius: 5px; */
 }
+.container-edit{
+	background-color: white;
+	padding: 45px 45px 115px 45px;
+}
 .container-search {
 	margin-bottom: 30px;
 	background-color: white;
@@ -578,7 +592,7 @@ input {
 	box-shadow: 1px 1px 30px 1px lightgrey;
 	float: right;
 	padding: 45px;
-	border-radius: 5px;
+	/* border-radius: 5px; */
 }
 .bloc-filter a{
 	color: white;
