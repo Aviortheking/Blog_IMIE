@@ -17,16 +17,15 @@
 				<div class="cover-text">
 					<h2 id="titre-home">Créer un utilisateur</h2>
 					<div class="p-home">
-						<form name="login" id="name" method="POST" class="login" action="./edit">
-							<input name="username" id="username" type="text" placeholder="Nom d'utilisateur" />
+						<form name="login" id="name" method="POST" class="login" action="./">
+							<tag type="userEditor" element="username" />
 							<input name="password" id="password" type="password" placeholder="Mot de passe" />
-							<select name="ROLE_ADMIN">
-								<tag type="userEditor" el="role" />
-								<option value="ROLE_USER">Utilisateur</option>
-								<option value="ROLE_EDITOR">Editeur</option>
-								<option value="ROLE_ADMIN">Administrateur</option>
+							<input name="job" id="job" type="text" placeholder="apprenant" />
+							<select name="role">
+								<tag type="userEditor" element="role" />
 							</select>
 							<input type="submit" class="bloc-button" value="Créer"/>
+							<a style="border: none" class="bloc-button" href="../delete/">Supprimmer</a>
 						</form>
 					</div>
 				</div>

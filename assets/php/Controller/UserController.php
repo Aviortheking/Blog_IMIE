@@ -36,13 +36,35 @@ class UserController extends Controller {
 	}
 
 	/**
-	 * @route /\/users\/edit\/[0-9]+\/$/
+	 * @route /\/users\/[0-9]+\/edit\/$/
 	 * @admin
 	 * @title Modifier un utilisateur
 	 */
 	public function editUser() {
-		$_GET['edit_user'] = explode("/", $_GET["page"])[3];
-		return \file_get_contents(DIR."/html/user_edit.html");
+		var_dump($_POST);
+		$_GET['edit_user'] = explode("/", $_GET["page"])[2];
+
+		if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["job"]) && isset($_POST["role"])) {
+			$user = Author::get($_GET["edit_user"]);
+			$user->setUsername($_POST["username"]);
+			if($_POST["password"] != '') $user->setPassword($_POST["password"]);
+			$user->setRole($_POST["role"]);
+			var_dump($user);
+			Author::update($user);
+			// header("Location: /users/");
+		}
+		return file_get_contents(DIR."/html/user_edit.html");
+	}
+
+	/**
+	 * @route /\/users\/[0-9]+\/delete\/$/
+	 * @admin
+	 * @title Modifier un utilisateur
+	 */
+	public function deleteUser() {
+		$_GET['edit_user'] = explode("/", $_GET["page"])[2];
+		Author::remove(Author::get($_GET["edit_user"]));
+		header("Location: /users/");
 	}
 
 

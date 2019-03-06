@@ -107,19 +107,6 @@ var submit = () => {
 		}
 	}
 	http.send(data);
-	// var url = './';
-	// var params = "title="+ title.value +"&category=" + category.value + "&content=" + major.innerHTML + "&tags=" + tglst;
-	// http.open('POST', url, true);
-
-	// //Send the proper header information along with the request
-	// http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-	// console.log(major.innerHTML);
-
-
-	// http.send(params);
-
-
 }
 
 if(document.querySelector(".addTag") != null) {
@@ -131,13 +118,13 @@ document.querySelector("#search + button").addEventListener("click", function() 
 	window.location = window.location.pathname + "?term=" + document.querySelector("#search").value;
 });
 
-document.querySelectorAll(".int-search .filtre").forEach(function(el) {
+document.querySelectorAll(".filtre").forEach(function(el) {
 	el.addEventListener("click", function() {
 		var tagW = new URL(window.location).searchParams.get("tag");
 		var tag = (tagW != null ? "&tag=" + tagW : "");
 		var termW = new URL(window.location).searchParams.get("term");
 		var term = (termW != null ? "&term=" + termW : "");
-		window.location = window.location.pathname + "?category=" + this.getAttribute("data-category") + tag + term;
+		window.location = "/search/?category=" + this.getAttribute("data-category") + tag + term;
 	})
 })
 

@@ -286,7 +286,16 @@ class Post {
 	 *
 	 */
 	public static function remove(Post $post) {
-		Functions::connect()->prepare("DELETE FROM posts WHERE id=:id")->execute(array(":id" => $post->getId()));
+
+		$id = $post->getId();
+
+		$prepared = Functions::connect()->prepare("DELETE FROM post_tag WHERE post_id=:id");
+		$prepared->bindValue(":id", $id, PDO::PARAM_INT);
+		$prepared->execute();
+
+		$prepared = Functions::connect()->prepare("DELETE FROM posts WHERE id=:id");
+		$prepared->bindValue(":id", $id, PDO::PARAM_INT);
+		$prepared->execute();
 
 	}
 

@@ -507,7 +507,7 @@ input {
 .article .title {
 	line-height: 24px;
 	font-weight: bold;
-    color: #3a3a3a;
+	color: #3a3a3a;
 }
 
 .article .text {
@@ -519,7 +519,7 @@ input {
 	height: 180px;
 }
 
-.article .text img {
+.article .text img, .container-search img {
 	display: none;
 }
 
@@ -672,10 +672,7 @@ label{
 	-o-transition: 200ms;
 	transition: 200ms;
 	box-shadow: 1px 1px 30px 1px lightgrey;
-}
-.next:hover{
-	color: #007bff;
-	box-shadow: 1px 1px 30px 1px rgba(0,163,249,0.3);
+	color:#000;
 }
 
 .filtre {
@@ -886,7 +883,7 @@ label{
 	}
 }
 
-form.login > input {
+form.login > input, form.login > a {
 	/* text-align: center; */
 	display: block;
 	margin: auto;
@@ -903,9 +900,8 @@ form.login >input[type="submit"], form.login > a {
 	border: none;
 }
 
-form.login > a {
-	left: -28%;
-	margin-top: 65px;
+form.login a {
+	width: 106px;
 }
 
 a:hover {

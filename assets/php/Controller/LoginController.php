@@ -19,7 +19,6 @@ class LoginController extends Controller {
 			$user = Author::getByUsername($_POST["username"]);
 			if($user->checkPassword($_POST["password"])) {
 				$_SESSION["author"] = $user;
-				if(isset($_GET["redirect"])) header("Location: " . $_GET["redirect"]);
 				header("Location: /");
 			}
 			else var_dump("login incorreect");

@@ -82,6 +82,15 @@ class PostController extends Controller {
 	}
 
 	/**
+	 * @route /^\/post\/[0-9]+\/delete\/$/
+	 * @title Article
+	 */
+	public function delete() {
+		Post::remove(Post::get($_GET["post"]));
+		header("Location: /");
+	}
+
+	/**
 	 * @route /^\/post\/[0-9]+\/upload\/$/
 	 */
 	public function upload() {

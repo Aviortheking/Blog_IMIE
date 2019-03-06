@@ -12,6 +12,7 @@ class Users extends Tag {
 		$parent = $el->parentNode;
 		foreach (Author::list(true, 1000) as $user) {
 			$pok = $el->childNodes->item(0)->cloneNode(true);
+			$pok->setAttribute("onclick", "window.location = window.location + '" . $user->getId() . "/edit/'");
 
 			$parent->insertBefore($pok, $el);
 

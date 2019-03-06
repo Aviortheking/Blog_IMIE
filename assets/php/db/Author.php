@@ -12,7 +12,7 @@ class Author {
 
 	private $password;
 
-	private $job;
+	private $job = "Aprenant";
 
 	private $role = "ROLE_USER";
 
@@ -134,15 +134,16 @@ class Author {
 }
 
 	public static function remove(Author $author) {
-		Functions::connect()->prepare("DELETE FROM author WHERE id=:id")->execute(array(":id" => $author->getId()));
+		Functions::connect()->prepare("DELETE FROM users WHERE id=:id")->execute(array(":id" => $author->getId()));
 
 	}
 
 	public static function update(Author $author) {
-		Functions::connect()->prepare("UPDATE author SET name=':name', password=':password', job=':job' WHERE id=:id")->execute(array(
+		Functions::connect()->prepare("UPDATE users SET username=:username, password=:password, job=:job, role=:role WHERE id=:id")->execute(array(
 			":username" => $author->getUsername(),
 			":password" => $author->getPassword(),
 			":job" => $author->getJob(),
+			":role" => $author->getRole(),
 			":id" => $author->getId()
 		));
 	}
