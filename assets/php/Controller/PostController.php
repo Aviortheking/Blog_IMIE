@@ -88,7 +88,7 @@ class PostController extends Controller {
 			$newfolder = ROOT."/uploads/posts/" . $post->getId() . "/";
 
 			if(!file_exists($newfolder)) {
-				mkdir($newfolder, 0666, true);
+				mkdir($newfolder, 0700, true);
 			}
 
 			foreach($files as $fname) {
@@ -141,7 +141,7 @@ class PostController extends Controller {
 			var_dump($post);
 
 			if(!file_exists($uploadFolder)) {
-				mkdir($uploadFolder, 0666, true);
+				mkdir($uploadFolder, 0700, true);
 			}
 
 			if(isset($_FILES["file"]) && !empty($_FILES["file"])) {
