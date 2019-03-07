@@ -5,13 +5,6 @@ var sendImage = (file) => {
 	var form = new FormData();
 	form.append("file", file[0]);
 	request.open("POST", "../upload/", true);
-	eadystatechange = function() {//Call a function when the state changes.
-		if(http.readyState == 4 && http.status == 200) {
-			alert(http.responseText);
-			// window.location = window.location.href.replace("edit/", "");
-		}
-	}
-	console.log("sending");
 	request.send(form);
 }
 

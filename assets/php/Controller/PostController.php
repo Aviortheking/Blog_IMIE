@@ -77,6 +77,21 @@ class PostController extends Controller {
 			$post->setTags($tgs);
 			$post->setAuthor($_SESSION["author"]->getId());
 			Post::add($post);
+
+			//move images
+			$post = Post::list(true, 1)[0];
+			$oldfolder = DIR."/../uploads/posts/new/";
+			$files = scandir($oldfolder);
+			$newfolder = DIR."/../uploads/posts/" . $post->getId() . "/";;
+			foreach($files as $fname) {
+				if($fname != '.' && $fname != '..') {
+					rename($oldfolder.$fname, $newfolder.$fname);
+				}
+			}
+			$post->setContent(str_replace("/uploads/posts/new/", "/uploads/posts/" . $post->getId() . "/",$post->getContent()));
+			Post::update($post);
+
+
 		}
 
 		return file_get_contents(DIR."/html/post_new.html");
@@ -111,19 +126,15 @@ class PostController extends Controller {
 			if($post == "new") $post = "temp";
 
 
-			$uploadFolder = DIR."/../uploads/posts/".$_GET["post"]."/";
+			$uploadFolder = DIR."/../uploads/posts/".$post."/";
 
 			if(!file_exists($uploadFolder)) {
-				mkdir($uploadFolder, 0660, true);
+				mkdir($uploadFolder, 0666, true);
 			}
 
 			if(isset($_FILES["file"]) && !empty($_FILES["file"])) {
 				var_dump($_FILES["file"]);
 				move_uploaded_file($_FILES["file"]["tmp_name"], $uploadFolder.$_FILES["file"]["name"]);
-				// require_once "functions.php";
-				// file_put_contents($uploadFolder."/pouet.jpg", base64_decode($_POST["image"]));
-				// base64_to_jpeg($_POST["image"], $uploadFolder."/pouet.jpg");
-				// file_put_content($uploadFolder."/pouet.jpg", base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $_POST["image"])));
 			}
 		}
 	}
