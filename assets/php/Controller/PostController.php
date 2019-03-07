@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Controller;
 use App\DB\Post;
 use App\DB\Tag;
+use App\Functions;
 
 
 class PostController extends Controller {
@@ -80,14 +81,23 @@ class PostController extends Controller {
 
 			//move images
 			$post = Post::list(true, 1)[0];
-			$oldfolder = DIR."/../uploads/posts/new/";
+			$oldfolder = ROOT."/uploads/posts/new/";
 			$files = scandir($oldfolder);
-			$newfolder = DIR."/../uploads/posts/" . $post->getId() . "/";;
+			var_dump($files);
+			// die;
+			$newfolder = ROOT."/uploads/posts/" . $post->getId() . "/";
+
+			if(!file_exists($newfolder)) {
+				mkdir($newfolder, 0666, true);
+			}
+
 			foreach($files as $fname) {
 				if($fname != '.' && $fname != '..') {
+					var_dump($fname);
 					rename($oldfolder.$fname, $newfolder.$fname);
 				}
 			}
+			var_dump($newfolder);
 			$post->setContent(str_replace("/uploads/posts/new/", "/uploads/posts/" . $post->getId() . "/",$post->getContent()));
 			Post::update($post);
 
@@ -112,21 +122,23 @@ class PostController extends Controller {
 	 */
 	public function delete() {
 		Post::remove(Post::get($_GET["post"]));
+		Functions::deleteDir(ROOT."/uploads/posts/" . $_GET["post"] . "/");
 		header("Location: /");
 	}
 
 	/**
-	 * @route /^\/post\/[0-9]+\/upload\/$/
+	 * @route /^\/post\/([0-9]+\/)*upload\/$/
 	 */
 	public function upload() {
 		if($_GET["post"] && $_FILES["file"]) {
 
 			$post = $_GET['post'];
 
-			if($post == "new") $post = "temp";
+			if($post == "upload") $post = "new";
 
 
 			$uploadFolder = DIR."/../uploads/posts/".$post."/";
+			var_dump($post);
 
 			if(!file_exists($uploadFolder)) {
 				mkdir($uploadFolder, 0666, true);

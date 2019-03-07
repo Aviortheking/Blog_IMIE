@@ -26,6 +26,7 @@ if(isset($_SESSION["author"])) { //wip
 // var_dump($_SESSION["author"]);
 
 define("DIR", str_replace("/php", "", __DIR__));
+define("ROOT", str_replace("/assets/php", "", __DIR__));
 
 //renvoie vers le fichier css si il est demandé
 if(Functions::endsWith($_GET["page"], ".css")) {
