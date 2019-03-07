@@ -164,12 +164,13 @@ a{
 	padding-right: 2%;
 }
 
-@media only screen and (min-width: 992px) {
+@media (min-width: 992px) {
 	.articleHome {
 		padding-right: 10%;
 		padding-left: 10%;
 	}
 }
+
 
 .bloc_principal_titre
 
@@ -178,7 +179,7 @@ a{
 	background-color: #1c1c1c;
 }
 
-.nav_blog {
+.nav_blog .container-fluid {
 	height: 80px;
 	background-color: #110230;
 	margin-bottom: 70px;
@@ -853,6 +854,9 @@ label{
 }
 
 @media screen and (max-width: 640px) {
+	.item_nav_imie.right {
+		display: none;
+	}
 	.contact-footer{
 		display: none;
 	}
@@ -872,10 +876,6 @@ label{
 
 	.bloc-filter{
 		display:none;
-	}
-
-	.nav_imie {
-		height: 0;
 	}
 
 	#twi {
@@ -1030,4 +1030,11 @@ table {
 .bloc-search a {
 	color: inherit;
 	text-decoration: inherit;
+}
+
+
+@media (max-width: 992px) {
+	.item_nav_imie.right, .item_nav_blog_droite {
+		display: none;
+	}
 }

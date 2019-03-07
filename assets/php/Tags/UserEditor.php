@@ -36,6 +36,13 @@ class UserEditor extends \App\Tags\Tag {
 				$input->setAttribute("placeholder", "Nom d'utilisateur");
 				$el->parentNode->insertBefore($input, $el);
 				break;
+			case 'linkedin':
+				$input = $doc->createElement("input");
+				$input->setAttribute("value", $user->getLinkedin());
+				$input->setAttribute("name", "linkedin");
+				$input->setAttribute("placeholder", "https://www.linkedin.com/in/ton_nom_dutilisateur/");
+				$el->parentNode->insertBefore($input, $el);
+				break;
 			case 'job':
 				$input = $doc->createElement("input");
 				$input->setAttribute("value", $user->getJob());

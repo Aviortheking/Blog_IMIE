@@ -131,6 +131,7 @@ CREATE TABLE `users` (
   `username` varchar(128) DEFAULT NULL,
   `job` varchar(560) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
+  `linkedin` varchar(100) DEFAULT NULL,
   `role` varchar(100) NOT NULL DEFAULT 'ROLE_USER'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

@@ -6,11 +6,11 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<ul>
-							<li class="item_nav_imie link"><a href="https://imie44.ymag.cloud" target="_blank">Accès Net-Yparéo</a></li>
-							<li class="item_nav_imie link"><a href="https://www.imie.fr" target="_blank">IMIE Numérique</a></li>
-							<li class="item_nav_imie social"><a href="https://twitter.com/EcoleIMIE" target="_blank">
+							<li class="item_nav_imie link right"><a href="https://imie44.ymag.cloud" target="_blank">Accès Net-Yparéo</a></li>
+							<li class="item_nav_imie link right"><a href="https://www.imie.fr" target="_blank">IMIE Numérique</a></li>
+							<li class="item_nav_imie social right"><a href="https://twitter.com/EcoleIMIE" target="_blank">
 									<tag type="svg" file="twitter" style="color: white; width: 18px; height: 18px" /></a></li>
-							<li class="item_nav_imie social"><a href="https://www.facebook.com/EcolesIMIE/" target="_blank">
+							<li class="item_nav_imie social right"><a href="https://www.facebook.com/EcolesIMIE/" target="_blank">
 									<tag type="svg" file="facebook" style="color: white; width: 18px; height: 18px" /></a></li>
 							<li class="item_nav_imie link" style="float: left;color: #ff004c;">
 								<tag type="isLoggedIn">
@@ -25,7 +25,7 @@
 							<tag type="isLoggedIn" role="ROLE_ADMIN">
 								<if true>
 									<li class="item_nav_imie link" style="float: left">
-										<a href="/users">Utilisateurs</a>
+										<a href="/users/">Utilisateurs</a>
 									</li>
 								</if>
 							</tag>
@@ -33,11 +33,19 @@
 								<if true>
 									<li class="item_nav_imie link" style="float: left">
 
-										<a href="/post/new">Ajouter un article</a>
+										<a href="/post/new/">Ajouter un article</a>
 									</li>
-
 								</if>
 							</tag>
+							<tag type="isLoggedIn" role="ROLE_EDITOR">
+								<if true>
+									<li class="item_nav_imie link" style="float: left">
+
+										<a href="/user/edit/">Editer son utilisateur</a>
+									</li>
+								</if>
+							</tag>
+
 							<tag type="isLoggedIn" role="ROLE_EDITOR">
 								<if true>
 									<li class="item_nav_imie link" style="float: left">

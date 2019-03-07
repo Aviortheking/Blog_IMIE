@@ -21,9 +21,18 @@ class AuthorTag extends Tag {
 
 		$doc = $this->getDoc();
 
-		$col = "get" . ucfirst($attr);
+		if($attr == "username") {
+			$txt = $doc->createElement("a");
+			$txt->setAttribute("href", "https://www.linkedin.com/in/".$author->getLinkedin() . "/");
+			$txt->setAttribute("target", "_blank");
+			$txt->appendChild($doc->createTextNode($author->getUsername()));
+		} else {
+			$col = "get" . ucfirst($attr);
 
-		$txt = $doc->createTextNode($author->$col());
+			$txt = $doc->createTextNode($author->$col());
+
+		}
+
 
 		$pok->parentNode->insertBefore($txt, $pok);
 	}

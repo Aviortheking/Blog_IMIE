@@ -16,6 +16,8 @@ class Author {
 
 	private $role = "ROLE_USER";
 
+	private $linkedin;
+
 	public function __construct(){}
 
 	public function getId() {
@@ -42,6 +44,10 @@ class Author {
 		return $this->role;
 	}
 
+	public function getLinkedin() {
+		return $this->linkedin;
+	}
+
 	public function setId($id) {
 		$this->id = $id;
 	}
@@ -66,6 +72,10 @@ class Author {
 		$this->role = $role;
 	}
 
+	public function setLinkedin($linkedin) {
+		$this->linkedin = $linkedin;
+	}
+
 
 
 
@@ -80,6 +90,7 @@ class Author {
 		$au->setUsername($array["username"]);
 		$au->setHashedPassword($array["password"]);
 		$au->setJob($array["job"]);
+		$au->setLinkedin($array["linkedin"]);
 		$au->setRole($array["role"]);
 		return $au;
 	}
@@ -113,13 +124,14 @@ class Author {
 	}
 
 	public static function add(Author $author) {
-		$query = "INSERT INTO users (id, username, password, job, role)
-		VALUES (NULL, :username, :password, :job, :role);";
+		$query = "INSERT INTO users (id, username, password, job, role, linkedin)
+		VALUES (NULL, :username, :password, :job, :role, :linkedin);";
 
 		$username = $author->getUsername();
 		$password = $author->getPassword();
 		$job = $author->getJob();
 		$role = $author->getRole();
+		$linkedin = $author->getLinkedin();
 
 		$pdo = Functions::connect();
 		$prepared = $pdo->prepare($query);
@@ -127,6 +139,7 @@ class Author {
 		$prepared->bindParam(":password", $password);
 		$prepared->bindParam(":job", $job);
 		$prepared->bindParam(":role", $role);
+		$prepared->bindParam(":linkedin", $linkedin);
 		$prepared->execute();
 		// var_dump($prepared->errorInfo());
 		// die;
@@ -139,11 +152,12 @@ class Author {
 	}
 
 	public static function update(Author $author) {
-		Functions::connect()->prepare("UPDATE users SET username=:username, password=:password, job=:job, role=:role WHERE id=:id")->execute(array(
+		Functions::connect()->prepare("UPDATE users SET username=:username, password=:password, job=:job, role=:role, linkedin=:linkedin WHERE id=:id")->execute(array(
 			":username" => $author->getUsername(),
 			":password" => $author->getPassword(),
 			":job" => $author->getJob(),
 			":role" => $author->getRole(),
+			":linkedin" => $author->getLinkedin(),
 			":id" => $author->getId()
 		));
 	}
