@@ -1,14 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Mar 04, 2019 at 10:47 AM
--- Server version: 5.7.23
--- PHP Version: 7.2.10
+-- Host: localhost:3306
+-- Generation Time: Mar 08, 2019 at 09:45 AM
+-- Server version: 5.7.25-0ubuntu0.18.04.2
+-- PHP Version: 7.2.15-0ubuntu0.18.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `blog`
@@ -92,7 +98,7 @@ INSERT INTO `post_tag` (`post_id`, `tag`) VALUES
 (6, 6),
 (7, 6),
 (7, 1),
-(7, 3),
+(7, 3);
 
 -- --------------------------------------------------------
 
@@ -128,16 +134,16 @@ CREATE TABLE `users` (
   `username` varchar(128) DEFAULT NULL,
   `job` varchar(560) DEFAULT NULL,
   `password` varchar(60) DEFAULT NULL,
-  `linkedin` varchar(100) DEFAULT NULL,
-  `role` varchar(100) NOT NULL DEFAULT 'ROLE_USER'
+  `role` varchar(100) NOT NULL DEFAULT 'ROLE_USER',
+  `linkedin` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `job`, `password`, `role`) VALUES
-(1, 'Admin', 'administrateur du site', '$2y$10$wpGMI29A7zpfO/eehMIzeepsud8PROZXhjXk15MgPmkl/fGb9.PI6', 'ROLE_ADMIN');
+INSERT INTO `users` (`id`, `username`, `job`, `password`, `role`, `linkedin`) VALUES
+(1, 'Admin', 'administrateur du site', '$2y$10$wpGMI29A7zpfO/eehMIzeepsud8PROZXhjXk15MgPmkl/fGb9.PI6', 'ROLE_ADMIN', 'florian-bouillon');
 
 --
 -- Indexes for dumped tables
@@ -186,25 +192,21 @@ ALTER TABLE `users`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- Constraints for dumped tables
 --
@@ -222,3 +224,7 @@ ALTER TABLE `posts`
 ALTER TABLE `post_tag`
   ADD CONSTRAINT `post_tag_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`),
   ADD CONSTRAINT `post_tag_ibfk_2` FOREIGN KEY (`tag`) REFERENCES `tag` (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
